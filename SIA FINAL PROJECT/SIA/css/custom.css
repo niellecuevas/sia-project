@@ -1,0 +1,144 @@
+/********** common setting **********/
+*::-webkit-scrollbar {
+    display: none;
+}
+
+h2 {
+    font-size: 2.8rem !important;
+    font-weight: 700;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+a,
+button {
+    cursor: pointer;
+}
+
+.jumbotron {
+    margin-bottom: 0 !important;
+}
+
+.scms-cta {
+    border-radius: 22px !important;
+    padding: 12px 30px !important;
+    font-weight: 700;
+    transition: .3s ease-in-out !important;
+}
+
+.scms-cta:hover {
+    text-decoration: none;
+    transform: translateY(-5px);
+}
+
+.scms-cta-wide {
+    width: 100%;
+}
+
+.cta-white {
+    background: white;
+    color: black;
+}
+
+.cta-black:hover {
+    color: #ffffff;
+    background: black;
+}
+
+.cta-ghost {
+    border: 2px solid black !important;
+    color: black;
+}
+
+.cta-ghost:hover {
+    color: #ffffff;
+    background: black;
+}
+
+.justify {
+    text-align: justify;
+}
+
+#banner {
+    background-size: cover;
+}
+
+/********** banner **********/
+#banner header {
+    overflow: hidden;
+}
+
+#banner header img {
+    max-width: 80px;
+}
+
+/********** feature (skew background) **********/
+.feature img {
+    width: 100%;
+    max-width: 480px;
+}
+
+#feature-first {
+    background: linear-gradient(168deg, #ffffff 55%, #a50113 0);
+}
+
+#feature-last {
+    background: #a50113;
+}
+
+/********** contact **********/
+#contact {
+    background-size: cover;
+}
+
+#contact ul li {
+    padding: 3px 0;
+}
+
+#contact form {
+    color: black;
+}
+
+#contact form input,
+#contact form textarea {
+    background: transparent;
+    border: 1px solid black;
+    color: black;
+}
+
+/********** copyright **********/
+#copyright {
+    background: black;
+    padding: 2rem 3rem;
+}
+
+#copyright #social-media a {
+    width: 40px;
+    height: 40px;
+    border-radius: 99%;
+    background: black;
+    transition: .4s ease;
+}
+
+#copyright #social-media a i {
+    color: black;
+    font-size: 1.2rem;
+    line-height: 40px;
+}
+
+#copyright #social-media a:hover {
+    background: black;
+}
+
+#copyright #social-media a:hover i {
+    color: #ffffff;
+}
+
+/********** RWD **********/
+@media (max-width: 575px) {
+    #banner h1 {
+        font-size: 3.6rem;
+    }
+}
