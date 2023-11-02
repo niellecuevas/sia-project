@@ -8,9 +8,9 @@
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
-	<link rel="stylesheet" href="newDashboard.css">
+	<link rel="stylesheet" href="css/newDashboard.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-	<link rel="stylesheet" href="app.css">
+	<link rel="stylesheet" href="css/app.css">
 	<title>BatStateU</title>
 	<link rel="icon" href="img/BSULogo.png" sizes="32x32" type="image/png">
 </head>
@@ -120,7 +120,7 @@
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
-	<script src="newDashboard.js"></script>
-	<script src="app.js"></script>
+	<script src="css/newDashboard.js"></script>
+	<script src="js/app.js"></script>
 </body>
 </html>
