@@ -14,15 +14,15 @@
 
 		<!-- Main Login Form -->
 		<div class="form-container log-in-container">
-			<form action="#">
+			<form action="./php/actlogin.php" method="POST">
 				<img src="img/BSULogo.png" id="BSULogo" alt="logo">
                 <div class="School">
                 <h3 class="red-text"> Welcome Red Spartans!</h3>
                 <h6> Please login your G-suite account</h6>
                 </div>
-				<input type="email" placeholder="Email" />
-				<input type="password" placeholder="Password" />
-				<a href="dashboard.html" data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true" class="button">Login</a>
+				<input type="text" placeholder="Staff Id or SR Code" name="id"/>
+				<input type="password" placeholder="Password" name="password"/>
+				<button type="submit" class="button">Log In</button>
 			</form>
 		</div>
 
