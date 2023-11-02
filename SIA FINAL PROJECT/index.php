@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv='cache-control' content='no-cache'> 
+    <meta http-equiv='expires' content='0'> 
+    <meta http-equiv='pragma' content='no-cache'>
     <title>BSU_TNEU-Student Conduct Management System</title>
     <meta name="description" content="Student Conduct Management System">
     <link rel="icon" href="img/BSULogo.png" sizes="32x32" type="image/png">
@@ -40,7 +43,7 @@
                 A student conduct management system for the Office of the Student Discipline
                 <br> of Batangas State University The National Engineering University. 
             </p>
-            <a href="login.html" data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true" class="btn my-4 font-weight-bold scms-cta cta-white">Get Started</a>
+            <a href="login.php" data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true" class="btn my-4 font-weight-bold scms-cta cta-white"><html>Get Started</a>
         </div>
     </div>
     <!-- about -->
