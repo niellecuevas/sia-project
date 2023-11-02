@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>BSU_TNEU-Student Conduct Information</title>
-        <link rel="icon" href="img/BSULogo.png" sizes="32x32" type="image/png">
+        <link rel="icon" href="./img/BSULogo.png" sizes="32x32" type="image/png">
         <!--studhome.css -->
         <link rel="stylesheet" href="css/studhome.css">
         <!-- Link Swiper's CSS -->
@@ -24,7 +24,7 @@
       <!---------------TOP NAVIGATION STARTS----------------->
       <header id="myHeader">
         <div class="navbar" >
-          <div class="logo"><a href=""><img src="img/BSULogo.png">BatStateU</a></div>
+          <div class="logo"><a href=""><img src="./img/BSULogo.png">BatStateU</a></div>
           <div class="nav-btns">
           <a href="callSlip" id="callslip" class="action-btn" >Call Slip</a>
           <a href="logout" class="action-btn">Logout</a>
@@ -74,19 +74,19 @@
 
         <div class="mySlides fade">
           <div class="numbertext">1 / 3</div>
-          <img src="studHomeImg/announcementBanner1.png" style="width:100%">
+          <img src="./img/studHomeImg/announcementBanner1.png" style="width:100%">
           
         </div>
         
         <div class="mySlides fade">
           <div class="numbertext">2 / 3</div>
-          <img src="studHomeImg/announcementBanner2.png" style="width:100%">
+          <img src="./img/studHomeImg/announcementBanner2.png" style="width:100%">
           
         </div>
         
         <div class="mySlides fade">
           <div class="numbertext">3 / 3</div>
-          <img src="studHomeImg/announcementBanner3.png" style="width:100%">
+          <img src="./img/studHomeImg/announcementBanner3.png" style="width:100%">
           
         </div>
         
@@ -133,7 +133,7 @@
           <label for="remarks" class="lbl" id="remarks">Remarks:</label>
           <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Remarks here"><br><br>
           <label for="attachment" class="lbl" id="attachment">Attachment:</label>
-        <input type="image" src="studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
+        <input type="image" src="./img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
         </div>
     </form>
     </div>
@@ -152,7 +152,7 @@
           <label for="remarks" class="lbl" id="remarks">Remarks:</label>
           <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Remarks here"><br><br>
           <label for="attachment" class="lbl" id="attachment">Attachment:</label>
-        <input type="image" src="studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
+        <input type="image" src="./img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
           </div>
       </form>
       </div>
@@ -171,7 +171,7 @@
             <label for="remarks" class="lbl" id="remarks">Remarks:</label>
             <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Remarks here"><br><br>
             <label for="attachment" class="lbl" id="attachment">Attachment:</label>
-          <input type="image" src="studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
+          <input type="image" src="./img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
             </div>
           </form>
         </div>
@@ -190,7 +190,7 @@
               <label for="remarks" class="lbl" id="remarks">Remarks:</label>
               <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Remarks here"><br><br>
               <label for="attachment" class="lbl" id="attachment">Attachment:</label>
-            <input type="image" src="studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
+            <input type="image" src="./img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
               </div>
             </form>
           </div>
