@@ -1,3 +1,5 @@
+<?php require "./php/authenticatestudent.php"?>
+
 <!DOCTYPE html>
 <html>
     <head lang="en" dir="ltr">

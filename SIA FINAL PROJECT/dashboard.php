@@ -1,20 +1,4 @@
-<?php
-    // Start or resume the session
-    session_start();
-
-    // Check if the user is authenticated
-    if (!isset($_SESSION['StaffID'])) {
-        header("Location: login.php");
-        exit();
-    }
-
-    // Access user information from the session
-    //$user_id = $_SESSION['user_id'];
-    //$user_name = $_SESSION['user_name'];
-
-    // Include necessary files and configurations
-    require "./php/dbconnection.php"; // Database connection
-?>
+<?php require "./php/authenticateadmin.php"?>
 
     <!DOCTYPE html>
         <html>
