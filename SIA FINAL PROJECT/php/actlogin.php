@@ -56,7 +56,7 @@ if (isset($_POST['id']) && isset($_POST['password']) && isset($_GET['role'])) {
                 $_SESSION['Position'] = $user['Position'];
                 $_SESSION['PasswordEncrypted'] = $user['PasswordEncrypted'];
 
-                header("Location: ../newDashboard.php");
+                header("Location: ../adminDashboard.php");
                 exit();
             } else {
                 header("Location: login.php?error=Invalid_ID_or_Password");
