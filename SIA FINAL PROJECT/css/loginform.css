@@ -191,3 +191,25 @@ input {
 	height: 40px;
 	width: 40px;
 }
+
+.radio-container {
+	display: flex;
+	align-items:center;
+}
+
+.radio-container input[type="radio"] {
+	margin-right: 5px;
+}
+
+.radio-container label {
+	margin-right: 10px;
+}
+
+.radio {
+	border: 1px solid #a50113;
+	background-color: #a50113;
+}
+
+.radio :hover {
+	background: #a50113;
+}
