@@ -14,19 +14,41 @@
 
 		<!-- Main Login Form -->
 		<div class="form-container log-in-container">
-			<form action="#">
+
+            <!-- Connect to actlogin which will handle connection and action with database -->
+			<form action="./php/actlogin.php" method="post">
+
+                <!-- Check for Errors -->
+                <?php if (isset($_GET['error'])) { ?>
+                    <p class="error"> <?php echo $_GET['error']; ?></p>
+                <?php } ?>
 
 				<!-- Login Header -->
 				<img src="img/BSULogo.png" id="BSULogo" alt="logo">
                 <div class="School">
                 <h3 class="red-text"> Welcome Red Spartans!</h3>
-                <span> Please login your G-suite account</span>
+                <p> Please login your G-suite account</p>
                 </div>
 
 				<!-- Login Textboxes -->
-				<input type="email" placeholder="Email" />
-				<input type="password" placeholder="Password" />
-				<a href="dashboard.html" data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true" class="button">Login</a>
+				<input type="text" placeholder="Staff Id or SR Code" name="id" />
+				<input type="password" placeholder="Password" name="password" />
+
+                <!-- Radio Buttons For Selecting Student or Admin -->
+                <label class="radio-button">
+					<input type="radio" name="example-radio" value="option1">
+					<span class="radio"></span>
+					Student
+				  </label>
+				  
+				  <label class="radio-button">
+					<input type="radio" name="example-radio" value="option2">
+					<span class="radio"></span>
+					Admin
+				  </label>
+
+                  
+                <button type="submit" class="button">Login</button>
 			</form>
 		</div>
 
