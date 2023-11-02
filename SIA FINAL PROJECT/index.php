@@ -3,9 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv='cache-control' content='no-cache'> 
-    <meta http-equiv='expires' content='0'> 
-    <meta http-equiv='pragma' content='no-cache'>
     <title>BSU_TNEU-Student Conduct Management System</title>
     <meta name="description" content="Student Conduct Management System">
     <link rel="icon" href="img/BSULogo.png" sizes="32x32" type="image/png">
