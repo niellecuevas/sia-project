@@ -15,10 +15,10 @@
 		<!-- Main Login Form -->
 		<div class="form-container log-in-container">
 			<form action="./php/actlogin.php" method="POST">
-				<img src="img/BSULogo.png" id="BSULogo" alt="logo">
+				<img src="img/BSULogo.png" id="BSULogo" alt="logo" class="logo">
                 <div class="School">
                 <h3 class="red-text"> Welcome Red Spartans!</h3>
-                <h6> Please login your G-suite account</h6>
+                <p> Please login your G-suite account</p>
                 </div>
 				<input type="text" placeholder="Staff Id or SR Code" name="id"/>
 				<input type="password" placeholder="Password" name="password"/>
