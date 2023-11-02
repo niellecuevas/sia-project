@@ -2,7 +2,7 @@
 <html>
 <head>
 	<!-- Test -->
-	<link rel="stylesheet" href="css/loginform.css">
+	<link rel="stylesheet" href="loginform.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title>Login Student Management System</title>
 </head>
@@ -17,7 +17,19 @@
                 </div>
 				<input type="email" placeholder="Email" />
 				<input type="password" placeholder="Password" />
-				<a href="dashboard.html" data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true" class="button">Login</a>
+				<label class="radio-button">
+					<input type="radio" name="example-radio" value="option1">
+					<span class="radio"></span>
+					Student
+				  </label>
+				  
+				  <label class="radio-button">
+					<input type="radio" name="example-radio" value="option2">
+					<span class="radio"></span>
+					Admin
+				  </label>
+				  
+				<a href="dashboard.html" data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true" class="button">Login</a>			  
 			</form>
 		</div>
 		<div class="overlay-container">
