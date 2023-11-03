@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 02, 2023 at 03:08 PM
+-- Generation Time: Nov 03, 2023 at 10:44 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -25,11 +25,30 @@ DELIMITER $$
 --
 -- Procedures
 --
+DROP PROCEDURE IF EXISTS `SP_CreateStaff`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CreateStaff` (IN `id` VARCHAR(30), IN `fname` VARCHAR(50), IN `mname` VARCHAR(50), IN `lname` VARCHAR(50), IN `number` VARCHAR(13), IN `position` VARCHAR(100))   INSERT INTO tbl_staff (StaffID, FirstName, MiddleName, LastName, ContactNumber, Position)
+VALUES (id, fname, mname, lname, number, position)$$
+
 DROP PROCEDURE IF EXISTS `SP_GetAdminAccount`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetAdminAccount` (IN `id` INT, IN `password` VARCHAR(255))   SELECT AdminID, tbl_adminaccount.StaffID, PermissionLevel, tbl_staff.FirstName, tbl_staff.MiddleName, tbl_staff.LastName, tbl_staff.ContactNumber, tbl_staff.Position, PasswordEncrypted FROM tbl_adminaccount INNER JOIN tbl_staff ON tbl_adminaccount.StaffID = tbl_staff.StaffID WHERE tbl_adminaccount.StaffId = id AND PasswordEncrypted = password$$
 
 DROP PROCEDURE IF EXISTS `SP_GetStudentAccount`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetStudentAccount` (IN `id` INT, IN `password` VARCHAR(255))   SELECT UserID, tbl_studentaccount.SRCode, PasswordEncrypted, tbl_students.FirstName, tbl_students.MiddleName, tbl_students.LastName,  tbl_course.CourseName, tbl_course.Department FROM tbl_studentaccount INNER JOIN tbl_students ON tbl_studentaccount.SRCode = tbl_students.SRCode INNER JOIN tbl_course ON tbl_students.CourseID = tbl_course.CourseID WHERE tbl_studentaccount.SRCode = id AND PasswordEncrypted = password$$
+
+DROP PROCEDURE IF EXISTS `SP_Student`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_Student` (IN `sr` VARCHAR(30))   SELECT 
+    CONCAT(FirstName, ' ', IF(LENGTH(MiddleName) > 0, CONCAT(SUBSTRING(MiddleName, 1, 1), '.'), ''), ' ', LastName) AS `FullName`,
+    tbl_students.SRCode
+FROM tbl_students
+WHERE tbl_students.SRCode = sr$$
+
+DROP PROCEDURE IF EXISTS `SP_StudHomepage`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_StudHomepage` (IN `sr` VARCHAR(30))   SELECT 
+    CONCAT(FirstName, ' ', IF(LENGTH(MiddleName) > 0, CONCAT(SUBSTRING(MiddleName, 1, 1), '.'), ''), ' ', LastName) AS `FullName`,
+    tbl_students.SRCode, tbl_course.CourseName, tbl_course.Department
+FROM tbl_students
+INNER JOIN tbl_course ON tbl_students.CourseID = tbl_course.CourseID
+WHERE tbl_students.SRCode = sr$$
 
 DELIMITER ;
 
@@ -144,7 +163,8 @@ INSERT INTO `tbl_staff` (`StaffID`, `FirstName`, `MiddleName`, `LastName`, `Cont
 ('s2-22', 'Bianca', 'Solares', 'Bustamante', '09126576871', 'Lecturer'),
 ('s3-22', 'Rick', 'Lopez', 'Mentoy', '09675455211', 'Lecturer'),
 ('s4-21', 'Juan', 'Dela Cruz', 'Cruz', '09099292131', 'Lecturer'),
-('s5-28', 'Melissa', 'Escueta', 'Tapalla', '09080706051', 'Lecturer');
+('s5-28', 'Melissa', 'Escueta', 'Tapalla', '09080706051', 'Lecturer'),
+('s6-20', 'John', 'Doe', 'Morgan', '09090807123', 'Dean');
 
 -- --------------------------------------------------------
 
