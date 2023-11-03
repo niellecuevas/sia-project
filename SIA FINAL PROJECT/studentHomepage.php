@@ -36,7 +36,7 @@
         
         <div class="dropdown_menu">
           <li><a href="callSlip" id="callslip" class="action-btn" >Call Slip</a></li>
-         <li><a href="logout" class="action-btn">Logout</a></li>
+         <li><a href="./php/actlogout.php" class="action-btn">Logout</a></li>
         </div>
       </header>
       <!---------------TOP NAVIGATION END----------------->
