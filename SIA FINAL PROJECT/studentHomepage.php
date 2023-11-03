@@ -9,6 +9,8 @@
         <link rel="icon" href="img/BSULogo.png" sizes="32x32" type="image/png">
         <!--studhome.css -->
         <link rel="stylesheet" href="../css/studhome.css">
+        <!--generate report.css -->
+        <link rel="stylesheet" href="../css/generatereport.css">
         <!-- Link Swiper's CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
         <!-- font-awesome -->
@@ -42,26 +44,25 @@
       <!---------------TOP NAVIGATION END----------------->
 
       <!------------- STUDENT INFORMATON STARTS ------------------> 
-       <div class="container">
         <div class="banner">
-          <div class="banner-text">
+          <div class="overview">
             <h1>Student Information</h1>
           </div>
           <div class="studInfo" >
           <div class="nameNsrcode">
             <form>
               <label for="name">Name:</label>
-              <input type="text" class="info" id="name" name="name" placeholder="Juan De Los Santos"><br><br>
-              <label for="srcode" id="adjustSrcode">Sr-Code:</label>
-              <input type="text"  class="info" id="srcode" name="srcode" placeholder="21-201290"><br><br>
+              <input type="text" class="info" id="name" name="name" placeholder="Juan De Los Santos" readonly><br><br>
+              <label for="srcode" id="adjustSrcode">SR-Code:</label>
+              <input type="text"  class="info" id="srcode" name="srcode" placeholder="21-201290" readonly><br><br>
             </form>
             </div>  
           <div class="courseNdept">
              <form>
             <label for="course">Course:</label>
-            <input type="text" class="info" id="course" name="course" placeholder="Information Technology"><br><br>
+            <input type="text" class="info" id="course" name="course" placeholder="Information Technology" readonly><br><br>
             <label for="department" id="adjustDept">Department:</label>
-            <input type="text" class="info" id="department" name="department" placeholder="CICS"><br><br>
+            <input type="text" class="info" id="department" name="department" placeholder="CICS" readonly><br><br>
              </form>
           </div>
         </div>
@@ -103,7 +104,8 @@
         <!----------- STUDENT CONDUCT INFORMATION START----------------->
   <div class="openingText">
         <h1 id="titleVio" data-aos="fade-up">STUDENT CONDUCT INFORMATION</h1>
-        <h3 id="secondTitle" data-aos="fade-up">Student conduct information is use for data and documentation related to the behavior, actions, and disciplinary matters of the students within Batangas State University Lipa Campus.</h3>
+        <h3 id="secondTitle" data-aos="fade-up">Student conduct information is use for data and documentation related to the behavior, actions, and disciplinary matters of the students within Batangas State University Lipa Campus. <br>
+        It encompasses a wide range of information that helps institutions monitor and manage student behavior, enforce disciplinary policies, and maintain a safe and conducive learning environment.</h3>
   </div>
 
 <section>
@@ -123,17 +125,17 @@
     <form>
       <div class="violationInfo">
           <label for="violation" class="lbl">Violation:</label>
-          <input type="text" class="conductInfo" id="violation" name="violation" placeholder="Violation Name"><br><br>
+          <input type="text" class="conductInfo" id="violation" name="violation" placeholder="Cross Dressing" readonly><br><br>
           <label for="action" id="adjustSrcode" class="lbl">Action:</label>
-          <input type="text" class="conductInfo" id="action" name="action" placeholder="Action Here"><br><br>
+          <input type="text" class="conductInfo" id="action" name="action" placeholder="3 days Suspension" readonly><br><br>
           <label for="date" class="lbl">Date:</label>
-          <input type="date" class="conductInfo" id="date" name="date" placeholder="mm-dd-yyyy"><br><br>
+          <input type="text" class="conductInfo" id="date" name="date" placeholder="10-20-2023" readonly><br><br>
           <label for="time" class="lbl" id="time">Time:</label>
-          <input type="time" class="conductInfo" id="time" name="time" placeholder="00:00:00"><br><br>
+          <input type="text" class="conductInfo" id="time" name="time" placeholder="02:30 PM" readonly><br><br>
           <label for="remarks" class="lbl" id="remarks">Remarks:</label>
-          <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Remarks here"><br><br>
-          <label for="attachment" class="lbl" id="attachment">Attachment:</label>
-        <input type="image" src="studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
+          <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Kung ano gusto mo" readonly><br><br>
+          <label for="attachment" class="lbl" id="attachment">Attachment: </label>
+        <input type="image" src="../img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100" readonly>
         </div>
     </form>
     </div>
@@ -142,17 +144,17 @@
       <form>
         <div class="violationInfo">
           <label for="violation" class="lbl">Violation:</label>
-          <input type="text" class="conductInfo" id="violation" name="violation" placeholder="Violation Name"><br><br>
+          <input type="text" class="conductInfo" id="violation" name="violation" placeholder="Cutting Class" readonly><br><br>
           <label for="action" id="adjustSrcode" class="lbl">Action:</label>
-          <input type="text" class="conductInfo" id="action" name="action" placeholder="Action Here"><br><br>
+          <input type="text" class="conductInfo" id="action" name="action" placeholder="1 day suspension"readonly><br><br>
           <label for="date" class="lbl">Date:</label>
-          <input type="date" class="conductInfo" id="date" name="date" placeholder="mm-dd-yyyy"><br><br>
+          <input type="text" class="conductInfo" id="date" name="date" placeholder="11-29-2023"readonly><br><br>
           <label for="time" class="lbl" id="time">Time:</label>
-          <input type="time" class="conductInfo" id="time" name="time" placeholder="00:00:00"><br><br>
+          <input type="text" class="conductInfo" id="time" name="time" placeholder="11:00 PM"readonly><br><br>
           <label for="remarks" class="lbl" id="remarks">Remarks:</label>
-          <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Remarks here"><br><br>
+          <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Okay sige"readonly><br><br>
           <label for="attachment" class="lbl" id="attachment">Attachment:</label>
-        <input type="image" src="studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
+        <input type="image" src="../img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100" readonly>
           </div>
       </form>
       </div>
@@ -161,17 +163,17 @@
         <form>
           <div class="violationInfo">
             <label for="violation" class="lbl">Violation:</label>
-            <input type="text" class="conductInfo" id="violation" name="violation" placeholder="Violation Name"><br><br>
+            <input type="text" class="conductInfo" id="violation" name="violation" placeholder="Hair Cut" readonly><br><br>
             <label for="action" id="adjustSrcode" class="lbl">Action:</label>
-            <input type="text" class="conductInfo" id="action" name="action" placeholder="Action Here"><br><br>
+            <input type="text" class="conductInfo" id="action" name="action" placeholder="5 days Suspension" readonly><br><br>
             <label for="date" class="lbl">Date:</label>
-            <input type="date" class="conductInfo" id="date" name="date" placeholder="mm-dd-yyyy"><br><br>
+            <input type="text" class="conductInfo" id="date" name="date" placeholder="05-09-2023" readonly><br><br>
             <label for="time" class="lbl" id="time">Time:</label>
-            <input type="time" class="conductInfo" id="time" name="time" placeholder="00:00:00"><br><br>
+            <input type="text" class="conductInfo" id="time" name="time" placeholder="8:00 PM" readonly><br><br>
             <label for="remarks" class="lbl" id="remarks">Remarks:</label>
-            <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Remarks here"><br><br>
+            <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Kaya mo yan" readonly><br><br>
             <label for="attachment" class="lbl" id="attachment">Attachment:</label>
-          <input type="image" src="studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
+          <input type="image" src="../img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100" readonly>
             </div>
           </form>
         </div>
@@ -180,23 +182,23 @@
           <form>
             <div class="violationInfo">
               <label for="violation" class="lbl">Violation:</label>
-              <input type="text" class="conductInfo" id="violation" name="violation" placeholder="Violation Name"><br><br>
+              <input type="text" class="conductInfo" id="violation" name="violation" placeholder="Piercings/Tattoos" readonly><br><br>
               <label for="action" id="adjustSrcode" class="lbl">Action:</label>
-              <input type="text" class="conductInfo" id="action" name="action" placeholder="Action Here"><br><br>
+              <input type="text" class="conductInfo" id="action" name="action" placeholder="1 day suspension" readonly><br><br>
               <label for="date" class="lbl">Date:</label>
-              <input type="date" class="conductInfo" id="date" name="date" placeholder="mm-dd-yyyy"><br><br>
+              <input type="text" class="conductInfo" id="date" name="date" placeholder="12-25-2023" readonly><br><br>
               <label for="time" class="lbl" id="time">Time:</label>
-              <input type="time" class="conductInfo" id="time" name="time" placeholder="00:00:00"><br><br>
+              <input type="text" class="conductInfo" id="time" name="time" placeholder="09:23 AM" readonly><br><br>
               <label for="remarks" class="lbl" id="remarks">Remarks:</label>
-              <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Remarks here"><br><br>
+              <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Ayaw ko na" readonly><br><br>
               <label for="attachment" class="lbl" id="attachment">Attachment:</label>
-            <input type="image" src="studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
+            <input type="image" src="../img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100" readonly>
               </div>
             </form>
           </div>
   </div>
-  <div class="swiper-button-next" style="color:#fffbf2;"></div>
-  <div class="swiper-button-prev" style="color:#fffbf2;"></div>
+  <div class="swiper-button-next" style="color:#a50113;"></div>
+  <div class="swiper-button-prev" style="color:#a50113;"></div>
   <div class="swiper-pagination" ></div>
   </div>
 </section>
@@ -206,8 +208,11 @@
 <!---------------FOOTER STARTS--------------------->
 <footer>
   <div class="footer-content">
-      <h3>BATSTATEU - LIPA</h3>
-      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo iste corrupti doloribus odio sed!</p>
+      <h3><b>Contact Us</b></h3>
+      <p>If you have other question, you can contact us to the following websites<br>
+        <b>Email :</b> osd.lipa@g.batstate-u.edu.ph<br>
+        <b>Facebook : </b> OSD BatStateULipa<br>
+        <b>Address : </b> A. Tanco Drive, Marawoy, Lipa, Batangas</p>
       <ul class="socials">
           <li><a href="https://www.facebook.com/BatStateUTheNEU" target="_blank"><i class="fa-brands fa-facebook"></i></a></li>
           <li><a href="https://twitter.com/BatStateUTheNEU" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
@@ -217,13 +222,11 @@
       </ul>
   </div>
   <div class="footer-bottom">
-      <p>copyright &copy;2023 Batangas State University. designed by <span>SIAGTHREE</span></p>
+      <p>copyright &copy;2023 Batangas State University. designed by <span>Group 3</span></p>
   </div>
 </footer>
 
 <!-----------------FOOTER ENDS--------------------->
-
-
 
 
       <script>
@@ -302,4 +305,5 @@
               
     </body>
 </html>
+
 

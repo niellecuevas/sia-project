@@ -10,7 +10,7 @@
 	<title>Generate Report Student Conduct Management System</title>
 </head>
 <body>
-<!-- Generate Report Form  -->
+<!-- Change Password -->
     <section class="container">
         <div class="overview">
             <h1>Change Password</h1>

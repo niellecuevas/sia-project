@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="css/newDashboard.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 	<link rel="stylesheet" href="css/app.css">
-	<title>BatStateU</title>
+	<title>Student Conduct Management System Admin Dashboard</title>
 	<link rel="icon" href="img/BSULogo.png" sizes="32x32" type="image/png">
 </head>
 <body>
