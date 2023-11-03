@@ -13,15 +13,15 @@ function validate($data) {
     return $data;
 }
 
-if (isset($_POST['id']) && isset($_POST['password']) && isset($_GET['role'])) {
+if (isset($_POST['id']) && isset($_POST['password']) && isset($_POST['role'])) {
     // Validate user input
     $id = validate($_POST['id']);
     $password = validate($_POST['password']);
-    $role = $_GET['role']; // Get the role from the URL parameter
+    $role = $_POST['role']; // Get the role from the POST data
 
     // Check if data is empty
     if (empty($id) || empty($password)) {
-        header("Location: login.php?error=ID and Password are required");
+        header("Location: ../login.php?error=ID and Password are required");
         exit();
     }
 
@@ -58,15 +58,8 @@ if (isset($_POST['id']) && isset($_POST['password']) && isset($_GET['role'])) {
 
                 header("Location: ../adminDashboard.php");
                 exit();
-            } else {
-                header("Location: login.php?error=Invalid_ID_or_Password");
-                exit();
             }
-        } else {
-            // Handle the database query error
-            die("Database_Error: " . mysqli_error($conn));
         }
-
     } else {
         $sqlQuery = "SELECT * FROM tbl_studentaccount INNER JOIN tbl_students ON tbl_studentaccount.SRCode = tbl_students.SRCode INNER JOIN tbl_course ON tbl_students.CourseID = tbl_course.CourseID WHERE tbl_studentaccount.SRCode='$id' AND PasswordEncrypted='$password'";
         
@@ -95,14 +88,12 @@ if (isset($_POST['id']) && isset($_POST['password']) && isset($_GET['role'])) {
 
                 header("Location: ../studentHomepage.php");
                 exit();
-            } else {
-                header("Location: login.php?error=Invalid_ID_or_Password");
-                exit();
             }
-        } else {
-            // Handle the database query error
-            die("Database_Error: " . mysqli_error($conn));
         }
-        }
+    }
+
+    // If none of the above conditions are met (login failed), redirect to login.php with an error message
+    header("Location: ../login.php?error=Invalid Id or Password");
+    exit();
 }
 ?>

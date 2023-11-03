@@ -14,12 +14,20 @@
 
         <!-- Main Login Form -->
         <div class="form-container log-in-container">
+            
             <form action="./php/actlogin.php" method="POST" id="loginForm">
+                
                 <img src="img/BSULogo.png" id="BSULogo" alt="logo" class="logo">
                 <div class="School">
                     <h3 class="red-text"> Welcome Red Spartans!</h3>
                     <p> Please login to your G-suite account</p>
                 </div>
+
+                <!-- Error Message -->
+                <?php if(isset($_GET['error'])) {?>
+                    <span><?php echo $_GET['error']; ?></span>
+                <?php } ?>
+
 
                 <!-- Form TextBoxes -->
                 <input type="text" placeholder="Staff Id or SR Code" name="id" id="idInput" required/>
