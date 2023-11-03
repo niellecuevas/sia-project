@@ -90,6 +90,12 @@ if (isset($_POST['id']) && isset($_POST['password']) && isset($_POST['role'])) {
                 $_SESSION['CourseName'] = $user['CourseName'];
                 $_SESSION['Department'] = $user['Department'];
 
+                $middleInitial = !empty($user['MiddleName']) ? strtoupper(substr($user['MiddleName'], 0, 1) . '.') : '';
+                $fullName = $user['FirstName'] . ' ' . $middleInitial . ' ' . $user['LastName'];
+
+                // Store the combined FullName in the session
+                $_SESSION['FullName'] = $fullName;
+
                 header("Location: ../studentHomepage.php");
                 exit();
             }

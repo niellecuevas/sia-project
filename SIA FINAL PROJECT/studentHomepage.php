@@ -49,20 +49,20 @@
           </div>
           <div class="studInfo" >
           <div class="nameNsrcode">
-            <form>
-              <label for="name">Name:</label>
-              <input type="text" class="info" id="name" name="name" placeholder="Juan De Los Santos"><br><br>
-              <label for="srcode" id="adjustSrcode">Sr-Code:</label>
-              <input type="text"  class="info" id="srcode" name="srcode" placeholder="21-201290"><br><br>
-            </form>
-            </div>  
+          <form>
+          <label for="name">Name:</label>
+          <input type="text" class="info" id="name" name="name" value="<?php echo $_SESSION['FullName']; ?>"><br><br>
+          <label for="srcode" id="adjustSrcode">Sr-Code:</label>
+          <input type="text" class="info" id="srcode" name="srcode" value="<?php echo $_SESSION['SRCode']; ?>"><br><br>
+      </form>
+      </div>
           <div class="courseNdept">
-             <form>
-            <label for="course">Course:</label>
-            <input type="text" class="info" id="course" name="course" placeholder="Information Technology"><br><br>
-            <label for="department" id="adjustDept">Department:</label>
-            <input type="text" class="info" id="department" name="department" placeholder="CICS"><br><br>
-             </form>
+      <form>
+        <label for="course">Course:</label>
+        <input type="text" class="info" id="course" name="course" value="<?php echo $_SESSION['CourseName']; ?>"><br><br>
+        <label for="department" id="adjustDept">Department:</label>
+        <input type="text" class="info" id="department" name="department" value="<?php echo $_SESSION['Department']; ?>"><br><br>
+      </form>
           </div>
         </div>
         </div>
