@@ -30,13 +30,15 @@ if (isset($_POST['id']) && isset($_POST['password']) && isset($_POST['role'])) {
 
     // SQL Query based on the role
     if ($role === 'admin') {
-        $sqlQuery = "SELECT * FROM tbl_adminaccount INNER JOIN tbl_staff ON tbl_adminaccount.StaffID = tbl_staff.StaffID WHERE tbl_adminaccount.StaffId='$id' AND PasswordEncrypted='$password'";
-        
+
         /*
         =========================================================================================================
                                                         Admin Role
         =========================================================================================================
         */
+
+        //Query
+        $sqlQuery = "CALL SP_GetAdminAccount('$id', '$password')";
 
         // Execute Query
         $result = mysqli_query($conn, $sqlQuery);
@@ -61,13 +63,15 @@ if (isset($_POST['id']) && isset($_POST['password']) && isset($_POST['role'])) {
             }
         }
     } else {
-        $sqlQuery = "SELECT * FROM tbl_studentaccount INNER JOIN tbl_students ON tbl_studentaccount.SRCode = tbl_students.SRCode INNER JOIN tbl_course ON tbl_students.CourseID = tbl_course.CourseID WHERE tbl_studentaccount.SRCode='$id' AND PasswordEncrypted='$password'";
-        
+
         /*
         =========================================================================================================
                                                         Student Role
         =========================================================================================================
         */
+
+        // Query
+        $sqlQuery = "CALL SP_GetStudentAccount('$id', '$password')";
 
         // Execute Query
         $result = mysqli_query($conn, $sqlQuery);
