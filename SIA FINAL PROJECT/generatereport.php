@@ -13,7 +13,7 @@
 <!-- Generate Report Form  -->
     <section class="container">
         <div class="overview">
-            <h1>Generate Report</h1>
+            <h1>Create Violation Report</h1>
         </div>
         <form action="#" class="form">
           <div class="input-box">
