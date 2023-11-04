@@ -1,5 +1,5 @@
 /*container*/
-.container {
+.mngreport-container {
     position: relative;
     max-width: 90%;
     width: 100%;
@@ -13,11 +13,11 @@
     margin-bottom: 25px;
   }
   
-  .container::-webkit-scrollbar {
+  .mngreport-container::-webkit-scrollbar {
     display: none;
   }
   
-  .container header {
+  .mngreport-container header {
     font-size: 1.5rem;
     color: #333;
     font-weight: 500;
@@ -49,6 +49,31 @@
     padding: 5px 10px;
     cursor: pointer;
   } 
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    cursor: pointer;
+}
+#confirm-change {
+  height: 55px;
+  width: 100%;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgb(187, 15, 15);
+}
  /*dropdown*/
 .dropdown {
     position: absolute; 
@@ -93,3 +118,17 @@ table {
   #callslipReqList {
     display:none;
   }
+
+  /*popup*/
+  .container {
+    display: none; 
+    position: fixed;
+    z-index: 1;
+}
+.modal {
+    background: white;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+}

@@ -5,3 +5,4 @@ function switchTable(tableId) {
     }
     document.getElementById(tableId).style.display = 'block';
 }
+
