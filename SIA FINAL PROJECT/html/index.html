@@ -5,26 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>BSU_TNEU-Student Conduct Management System</title>
     <meta name="description" content="Student Conduct Management System">
-    <link rel="icon" href="img/BSULogo.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="../img/BSULogo.png" sizes="32x32" type="image/png">
     <!-- custom.css -->
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="../css/custom.css">
+    <!-- spinskit.css -->
+    <link rel="stylesheet" href="../css/spinskit.css">
     <!-- bootstrap.min.css -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
 	<!-- font-awesome -->
-    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css">
     
     <!-- AOS -->
-    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="../css/aos.css">
 </head>
 
 <body>
+    <!--PreLoader-->
+    <div id="sk-folding-cube"></div>
+
     <!-- banner -->
     <div class="jumbotron jumbotron-fluid" id="banner" style="background-image: url(img/Banner.png);">
         <div class="container text-center text-md-left">
             <header>
                 <div class="row justify-content-between">
                     <div class="col-2">
-                        <img src="img/BSULogo.png" alt="logo">
+                        <img src="../img/BSULogo.png" alt="logo">
                     </div>
                     <div class="col-md-4 align-self-center text-md-right">
                     <a class="text-white lead">Batangas State University <br> The National Engineering University</a>
@@ -40,7 +45,7 @@
                 A student conduct management system for the Office of the Student Discipline
                 <br> of Batangas State University The National Engineering University. 
             </p>
-            <a href="login.html" data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true" class="btn my-4 font-weight-bold scms-cta cta-white">Get Started</a>
+            <a href="../login.html" data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true" class="btn my-4 font-weight-bold scms-cta cta-white">Get Started</a>
         </div>
     </div>
     <!-- about -->
@@ -48,7 +53,7 @@
         <h2 class="text-center font-weight-bold my-5">About </h2>
         <div class="row">
             <div data-aos="fade-up" data-aos-delay="0" data-aos-duration="1000" data-aos-once="true" class="col-md-4 text-center">
-                <img src="img/OSD  Icon.png" alt="Phishing Detect" class="mx-auto">
+                <img src="../img/OSD  Icon.png" alt="Phishing Detect" class="mx-auto">
                 <h4>Student Discipline Office</h4>
                 <p class = 'justify'> The Office of Student Discipline is anchored on the principle of self-respect, 
                     acceptance of legitimate authority, and respect for the rights of others and nurtures a 
@@ -56,7 +61,7 @@
                     cooperation necessary in a healthy school environment.</p>
             </div>
             <div data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000" data-aos-once="true" class="col-md-4 text-center">
-                <img src="img/Handbook Icon.png" alt="Phishing Detect" class="mx-auto">
+                <img src="../img/Handbook Icon.png" alt="Phishing Detect" class="mx-auto">
                 <h4>Student Handbook</h4>
                 <p class="justify">A student handbook is a written document or guide provided by educational institutions, 
                    such as schools, colleges, or universities, to inform students about their rights, responsibilities,
@@ -64,7 +69,7 @@
                     <a href="https://batstate-u.edu.ph/sites/files/osas/manuals/OSD%20manual%20FINAL.pdf" target="_blank">BSU_TNEUHandbook.com</a></p>
             </div>
             <div data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000" data-aos-once="true" class="col-md-4 text-center">
-                <img src="img/OSD Goal Icon.png" alt="Smart Scan" class="mx-auto">
+                <img src="../img/OSD Goal Icon.png" alt="Smart Scan" class="mx-auto">
                 <h4>OSD Goals</h4>
                 <p class="justify">the Office of the Student Discipline (OSD) aims to cultivate a strong sense of self-discipline 
                     within the students in a health university environment through disciplinary procedures which 
@@ -88,7 +93,7 @@
                           disciplinary process.</p>
                 </div>
                 <div data-aos="fade-left" data-aos-duration="1000" data-aos-once="true" class="col-md-6 align-self-center">
-                    <img src="img/Head of OSD.png" alt="Take a look inside" class="mx-auto d-block">
+                    <img src="../img/Head of OSD.png" alt="Take a look inside" class="mx-auto d-block">
                 </div>
             </div>
         </div>
@@ -110,7 +115,7 @@
                              safety and security of the organization and its assets.</p>
                 </div>
                 <div data-aos="fade-right" data-aos-duration="1000" data-aos-once="true" class="col-md-6 align-self-center flex-md-first">
-                    <img src="img/Head of Security.png" alt="Safe and reliable" class="mx-auto d-block">
+                    <img src="../img/Head of Security.png" alt="Safe and reliable" class="mx-auto d-block">
                 </div>
             </div>
         </div>
@@ -183,6 +188,14 @@
     <script>
       AOS.init({
       });
+    </script>
+
+    <script>
+        var loader = document.getElementById("sk-folding-cube");
+
+        window.addEventListener("load",function(){
+            loader.style.display = "none";
+        })
     </script>
 </body>
 
