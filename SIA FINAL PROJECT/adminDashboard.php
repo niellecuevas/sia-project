@@ -23,21 +23,21 @@
 		<main>
 			<ul class="box-info">
 				<li>
-					<i class='bx bxs-calendar-check' ></i>
+				<i class="bx"><img src="img/group.png" style=></i>
 					<span class="text">
 						<h3>4289</h3>
 						<p>Number of Students</p>
 					</span>
 				</li>
 				<li>
-					<i class='bx bxs-group' ></i>
+					<i class="bx"><img src="img/minor.png" style=></i>
 					<span class="text">
 						<h3>2834</h3>
 						<p>Minor Violations</p>
 					</span>
 				</li>
 				<li>
-					<i class='bx bxs-dollar-circle' ></i>
+				<i class="bx"><img src="img/major.png" style=></i>
 					<span class="text">
 						<h3>1223</h3>
 						<p>Major Violations</p>
