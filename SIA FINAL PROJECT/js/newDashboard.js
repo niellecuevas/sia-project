@@ -11,8 +11,28 @@ allSideMenu.forEach(item=> {
 	})
 });
 
+const pathName = window.location.pathname;
+const pageName = pathName.split("/").pop();
 
+if(pageName === "adminDashboard.php"){
+	document.querySelector(".page1").classList.add("active");
+}
 
+if(pageName === "createviolationreport.php"){
+	document.querySelector(".page2").classList.add("active");
+}
+
+if(pageName === "generatecallslip.php"){
+	document.querySelector(".page3").classList.add("active");
+}
+
+if(pageName === "managereport.php"){
+	document.querySelector(".page4").classList.add("active");
+}
+
+if(pageName === "accontmanager.php"){
+	document.querySelector(".page5").classList.add("active");
+}
 
 // TOGGLE SIDEBAR
 const menuBar = document.querySelector('#content nav .bx.bx-menu');
