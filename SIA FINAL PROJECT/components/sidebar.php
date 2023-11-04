@@ -19,44 +19,39 @@
 			<span class="text">BatStateU</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="active">
-				<a href="#">
+			<li class="active page1" >
+				<a href="adminDashboard.php">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
-			<li>
-				<a href="#">
+			<li class="page2">
+				<a href="createviolationreport.php">
 					<i class='bx bxs-report'></i>
 					<span class="text">Create Violation Report</span>
 				</a>
 			</li>
-			<li>
-				<a href="#">
+			<li class="page3">
+				<a href="generatecallslip.php">
 					<i class='bx bxs-bar-chart-alt-2'></i>
 					<span class="text">Generate Call Slip</span>
 				</a>
 			</li>
-			<li>
-				<a href="#">
+			<li class="page4">
+				<a href="generatereport.php">
 					<i class='bx bxs-notepad'></i>
-					<span class="text">Report Overview</span>
+					<span class="text">Generate Report</span>
 				</a>
 			</li>
-			<li>
-				<a href="#">
+			<li class="page5">
+				<a href="accountmanager.php">
 					<i class='bx bxs-group' ></i>
 					<span class="text">Account Manager</span>
 				</a>
 			</li>
 		</ul>
 		<ul class="side-menu">
-			<li>
-				<a href="#">
-					<i class='bx bxs-cog' ></i>
-					<span class="text">Settings</span>
-				</a>
-			</li>
+			
 			<li>
 				<a href="./php/actlogout.php" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>
