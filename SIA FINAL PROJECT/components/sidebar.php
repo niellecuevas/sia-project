@@ -72,7 +72,7 @@
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link">Overview</a>
+			<a href="#" class="nav-link">Admin</a>
 			<form action="#">
 				<div class="form-input">
 					<input type="search" placeholder="Search...">
