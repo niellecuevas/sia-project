@@ -89,3 +89,7 @@ table {
   .centered-cell {
     text-align: center;
   }
+
+  #callslipReqList {
+    display:none;
+  }
