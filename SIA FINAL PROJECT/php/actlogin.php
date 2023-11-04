@@ -13,15 +13,15 @@ function validate($data) {
     return $data;
 }
 
-if (isset($_POST['id']) && isset($_POST['password']) && isset($_GET['role'])) {
+if (isset($_POST['id']) && isset($_POST['password']) && isset($_POST['role'])) {
     // Validate user input
     $id = validate($_POST['id']);
     $password = validate($_POST['password']);
-    $role = $_GET['role']; // Get the role from the URL parameter
+    $role = $_POST['role']; // Get the role from the POST data
 
     // Check if data is empty
     if (empty($id) || empty($password)) {
-        header("Location: login.php?error=ID and Password are required");
+        header("Location: ../login.php?error=ID and Password are required");
         exit();
     }
 
@@ -30,13 +30,15 @@ if (isset($_POST['id']) && isset($_POST['password']) && isset($_GET['role'])) {
 
     // SQL Query based on the role
     if ($role === 'admin') {
-        $sqlQuery = "SELECT * FROM tbl_adminaccount INNER JOIN tbl_staff ON tbl_adminaccount.StaffID = tbl_staff.StaffID WHERE tbl_adminaccount.StaffId='$id' AND PasswordEncrypted='$password'";
-        
+
         /*
         =========================================================================================================
                                                         Admin Role
         =========================================================================================================
         */
+
+        //Query
+        $sqlQuery = "CALL SP_GetAdminAccount('$id', '$password')";
 
         // Execute Query
         $result = mysqli_query($conn, $sqlQuery);
@@ -58,23 +60,18 @@ if (isset($_POST['id']) && isset($_POST['password']) && isset($_GET['role'])) {
 
                 header("Location: ../adminDashboard.php");
                 exit();
-            } else {
-                header("Location: login.php?error=Invalid_ID_or_Password");
-                exit();
             }
-        } else {
-            // Handle the database query error
-            die("Database_Error: " . mysqli_error($conn));
         }
-
     } else {
-        $sqlQuery = "SELECT * FROM tbl_studentaccount INNER JOIN tbl_students ON tbl_studentaccount.SRCode = tbl_students.SRCode INNER JOIN tbl_course ON tbl_students.CourseID = tbl_course.CourseID WHERE tbl_studentaccount.SRCode='$id' AND PasswordEncrypted='$password'";
-        
+
         /*
         =========================================================================================================
                                                         Student Role
         =========================================================================================================
         */
+
+        // Query
+        $sqlQuery = "CALL SP_GetStudentAccount('$id', '$password')";
 
         // Execute Query
         $result = mysqli_query($conn, $sqlQuery);
@@ -93,16 +90,20 @@ if (isset($_POST['id']) && isset($_POST['password']) && isset($_GET['role'])) {
                 $_SESSION['CourseName'] = $user['CourseName'];
                 $_SESSION['Department'] = $user['Department'];
 
+                $middleInitial = !empty($user['MiddleName']) ? strtoupper(substr($user['MiddleName'], 0, 1) . '.') : '';
+                $fullName = $user['FirstName'] . ' ' . $middleInitial . ' ' . $user['LastName'];
+
+                // Store the combined FullName in the session
+                $_SESSION['FullName'] = $fullName;
+
                 header("Location: ../studentHomepage.php");
                 exit();
-            } else {
-                header("Location: login.php?error=Invalid_ID_or_Password");
-                exit();
             }
-        } else {
-            // Handle the database query error
-            die("Database_Error: " . mysqli_error($conn));
         }
-        }
+    }
+
+    // If none of the above conditions are met (login failed), redirect to login.php with an error message
+    header("Location: ../login.php?error=Invalid Id or Password");
+    exit();
 }
 ?>

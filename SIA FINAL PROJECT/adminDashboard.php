@@ -1,5 +1,6 @@
 <?php require "./php/authenticateadmin.php"?>
-<?php include "sidebar.php" ?>
+<?php include "./components/sidebar.php" ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

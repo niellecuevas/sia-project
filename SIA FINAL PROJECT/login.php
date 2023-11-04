@@ -14,23 +14,31 @@
 
         <!-- Main Login Form -->
         <div class="form-container log-in-container">
+            
             <form action="./php/actlogin.php" method="POST" id="loginForm">
+                
                 <img src="img/BSULogo.png" id="BSULogo" alt="logo" class="logo">
                 <div class="School">
                     <h3 class="red-text"> Welcome Red Spartans!</h3>
                     <p> Please login to your G-suite account</p>
                 </div>
 
+                <!-- Error Message -->
+                <?php if(isset($_GET['error'])) {?>
+                    <span><?php echo $_GET['error']; ?></span>
+                <?php } ?>
+
+
                 <!-- Form TextBoxes -->
-                <input type="text" placeholder="Staff Id or SR Code" name="id" id="idInput" required/>
+                <input type="text" placeholder="SR Code" name="id" id="idInput" required/>
                 <input type="password" placeholder="Password" name="password" required/>
 
                 <!-- Radio Buttons for admin and student -->
                 <div class="radio-container">
-                    <input type="radio" id="admin" name="role" value="admin" class="radio">
-                    <label for="admin">Admin</label>
-                    <input type="radio" id="user" name="role" value="student" class="radio" checked>
-                    <label for="user">Student</label>
+                    <input type="radio" id="admin" name="role" value="student" class="radio" checked>
+                    <label for="admin">Student</label>
+                    <input type="radio" id="user" name="role" value="admin" class="radio">
+                    <label for="user">Staff</label>
                 </div>
 
                 <!-- Submit Button -->

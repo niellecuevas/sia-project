@@ -6,8 +6,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>BSU_TNEU-Student Conduct Information</title>
-        <link rel="icon" href="img/BSULogo.png" sizes="32x32" type="image/png">
+        <link rel="icon" href="./img/BSULogo.png" sizes="32x32" type="image/png">
         <!--studhome.css -->
+        <link rel="stylesheet" href="./css/studhome.css">
         <link rel="stylesheet" href="../css/studhome.css">
         <!--generate report.css -->
         <link rel="stylesheet" href="../css/generatereport.css">
@@ -25,11 +26,11 @@
     <body>
       <!---------------TOP NAVIGATION STARTS----------------->
       <header id="myHeader">
-        <div class="navbar" >
-          <div class="logo"><a href=""><img src="../img/BSULogo.png">Batangas State University The NEU</a></div>
+        <div class="navbar">
+          <div class="logo"><a href=""><img src="./img/BSULogo.png">Batangas State University The NEU</a></div>
           <div class="nav-btns">
           <a href="callSlip" id="callslip" class="action-btn" >Call Slip</a>
-          <a href="logout" class="action-btn">Logout</a>
+          <a href="./php/actlogout.php" class="action-btn">Logout</a>
           </div>
           <div class="toggle-btn">
             <i class="fa-solid fa-bars"></i>
@@ -38,7 +39,7 @@
         
         <div class="dropdown_menu">
           <li><a href="callSlip" id="callslip" class="action-btn" >Call Slip</a></li>
-         <li><a href="logout" class="action-btn">Logout</a></li>
+         <li><a href="./php/actlogout.php" class="action-btn">Logout</a></li>
         </div>
       </header>
       <!---------------TOP NAVIGATION END----------------->
@@ -50,20 +51,20 @@
           </div>
           <div class="studInfo" >
           <div class="nameNsrcode">
-            <form>
-              <label for="name">Name:</label>
-              <input type="text" class="info" id="name" name="name" placeholder="Juan De Los Santos" readonly><br><br>
-              <label for="srcode" id="adjustSrcode">SR-Code:</label>
-              <input type="text"  class="info" id="srcode" name="srcode" placeholder="21-201290" readonly><br><br>
-            </form>
-            </div>  
+          <form>
+          <label for="name">Name:</label>
+          <input type="text" class="info" id="name" name="name" value="<?php echo $_SESSION['FullName']; ?>"><br><br>
+          <label for="srcode" id="adjustSrcode">Sr-Code:</label>
+          <input type="text" class="info" id="srcode" name="srcode" value="<?php echo $_SESSION['SRCode']; ?>"><br><br>
+      </form>
+      </div>
           <div class="courseNdept">
-             <form>
-            <label for="course">Course:</label>
-            <input type="text" class="info" id="course" name="course" placeholder="Information Technology" readonly><br><br>
-            <label for="department" id="adjustDept">Department:</label>
-            <input type="text" class="info" id="department" name="department" placeholder="CICS" readonly><br><br>
-             </form>
+      <form>
+        <label for="course">Course:</label>
+        <input type="text" class="info" id="course" name="course" value="<?php echo $_SESSION['CourseName']; ?>"><br><br>
+        <label for="department" id="adjustDept">Department:</label>
+        <input type="text" class="info" id="department" name="department" value="<?php echo $_SESSION['Department']; ?>"><br><br>
+      </form>
           </div>
         </div>
         </div>
@@ -75,19 +76,19 @@
 
         <div class="mySlides fade">
           <div class="numbertext">1 / 3</div>
-          <img src="../img/studHomeImg/announcementBanner1.png" style="width:100%">
+          <img src="./img/studHomeImg/announcementBanner1.png" style="width:100%">
           
         </div>
         
         <div class="mySlides fade">
           <div class="numbertext">2 / 3</div>
-          <img src="../img/studHomeImg/announcementBanner2.png" style="width:100%">
+          <img src="./img/studHomeImg/announcementBanner2.png" style="width:100%">
           
         </div>
         
         <div class="mySlides fade">
           <div class="numbertext">3 / 3</div>
-          <img src="../img/studHomeImg/announcementBanner3.png" style="width:100%">
+          <img src="./img/studHomeImg/announcementBanner3.png" style="width:100%">
           
         </div>
         
@@ -133,9 +134,9 @@
           <label for="time" class="lbl" id="time">Time:</label>
           <input type="text" class="conductInfo" id="time" name="time" placeholder="02:30 PM" readonly><br><br>
           <label for="remarks" class="lbl" id="remarks">Remarks:</label>
-          <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Kung ano gusto mo" readonly><br><br>
-          <label for="attachment" class="lbl" id="attachment">Attachment: </label>
-        <input type="image" src="../img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100" readonly>
+          <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Remarks here"><br><br>
+          <label for="attachment" class="lbl" id="attachment">Attachment:</label>
+        <input type="image" src="./img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
         </div>
     </form>
     </div>
@@ -154,7 +155,7 @@
           <label for="remarks" class="lbl" id="remarks">Remarks:</label>
           <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Okay sige"readonly><br><br>
           <label for="attachment" class="lbl" id="attachment">Attachment:</label>
-        <input type="image" src="../img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100" readonly>
+        <input type="image" src="./img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
           </div>
       </form>
       </div>
@@ -173,7 +174,7 @@
             <label for="remarks" class="lbl" id="remarks">Remarks:</label>
             <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Kaya mo yan" readonly><br><br>
             <label for="attachment" class="lbl" id="attachment">Attachment:</label>
-          <input type="image" src="../img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100" readonly>
+          <input type="image" src="./img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
             </div>
           </form>
         </div>
@@ -192,7 +193,7 @@
               <label for="remarks" class="lbl" id="remarks">Remarks:</label>
               <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Ayaw ko na" readonly><br><br>
               <label for="attachment" class="lbl" id="attachment">Attachment:</label>
-            <input type="image" src="../img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100" readonly>
+            <input type="image" src="./img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
               </div>
             </form>
           </div>
@@ -227,79 +228,7 @@
 </footer>
 
 <!-----------------FOOTER ENDS--------------------->
-
-
-      <script>
-        // ----------- DROPDOWN NAVIGATION JS ------------
-        const toggleBtn = document.querySelector('.toggle-btn')
-        const toggleBtnIcon = document.querySelector('.toggle-btn i')
-        const dropDownMenu = document.querySelector('.dropdown_menu')
-
-        toggleBtn.onclick = function() {
-          dropDownMenu.classList.toggle('open')
-          const isOpen = dropDownMenu.classList.contains('open')
-
-          toggleBtnIcon.classList = isOpen
-          ? 'fa-solid fa-xmark'
-          : 'fa-solid fa-bars'
-        }
-
-      // ----------- ANNOUNCEMENT BANNER SLIDESHOW JS ------------
-
-        let slideIndex = 0;
-        showSlides();
-
-        function showSlides() {
-          let i;
-          let slides = document.getElementsByClassName("mySlides");
-          let dots = document.getElementsByClassName("dot");
-          for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";  
-          }
-          slideIndex++;
-          if (slideIndex > slides.length) {slideIndex = 1}    
-          for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-          }
-          slides[slideIndex-1].style.display = "block";  
-          dots[slideIndex-1].className += " active";
-          setTimeout(showSlides, 5000); // Change image every 2 seconds
-        }
-
-        // ------ STICKY HEADER ----------
-
-        window.onscroll = function() {myFunction()};
-
-        var header = document.getElementById("myHeader");
-        var sticky = header.offsetTop;
-
-        function myFunction() {
-          if (window.pageYOffset > sticky) {
-            header.classList.add("sticky");
-          } else {
-            header.classList.remove("sticky");
-          }
-        }
-       // ----------- TRANSITION DATA AOS JS ------------
-                AOS.init({
-                duration : 1200,
-              })
-
-      // ----------- SWIPER VIOLATION AREA JS ------------
-      var swiper = new Swiper(".mySwiper", {
-      cssMode: true,
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      pagination: {
-        el: ".swiper-pagination",
-      },
-      mousewheel: true,
-      keyboard: true,
-    });
-        
-      </script>
+<script src="./js/studHomepage.js"></script>
 
 
               
