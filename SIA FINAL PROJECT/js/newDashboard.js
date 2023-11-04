@@ -1,16 +1,21 @@
-const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
+const pathName = window.location.pathname;
+const pageName = pathName.split("/").pop();
 
-allSideMenu.forEach(item=> {
-	const li = item.parentElement;
-
-	item.addEventListener('click', function () {
-		allSideMenu.forEach(i=> {
-			i.parentElement.classList.remove('active');
-		})
-		li.classList.add('active');
-	})
-});
-
+if( pageName === adminDashboard.php ){
+	document.querySelector(".page1").classList.add("active");
+}
+if( pageName === createviolationreport.php ){
+	document.querySelector(".page2").classList.add("active");
+}
+if( pageName === generatecallslip.php ){
+	document.querySelector(".page3").classList.add("active");
+}
+if( pageName === generatereport.php ){
+	document.querySelector(".page4").classList.add("active");
+}
+if( pageName === accountmanager.php ){
+	document.querySelector(".page5").classList.add("active");
+}
 
 
 
