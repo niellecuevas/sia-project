@@ -38,9 +38,9 @@
 				</a>
 			</li>
 			<li class="page4">
-				<a href="generatereport.php">
+				<a href="managereport.php">
 					<i class='bx bxs-notepad'></i>
-					<span class="text">Generate Report</span>
+					<span class="text">Manage Report</span>
 				</a>
 			</li>
 			<li class="page5">
