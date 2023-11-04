@@ -34,8 +34,14 @@
     border-top-right-radius: 6px;
     border-top-left-radius: 6px;
     margin-top: 20px;
-
   } 
+  .tab-button:hover {
+    background-color: #eee;
+  }
+  .tab-button:active {
+    background-color: #a50113;
+    color: #fff;
+  }
   .btncss {
      background-color: #a50113;
     color: white;
