@@ -18,6 +18,9 @@
 </head>
 
 <body>
+    <!--PreLoader-->
+    <div id="preloader"></div>
+
     <!-- banner -->
     <div class="jumbotron jumbotron-fluid" id="banner" style="background-image: url(img/Banner.png);">
         <div class="container text-center text-md-left">
@@ -184,6 +187,14 @@
       AOS.init({
       });
     </script>
+
+<script>
+        var loader = document.getElementById("preloader");
+
+        window.addEventListener("load",function(){
+            loader.style.display = "none";
+        })
+</script>
 </body>
 
 </html>

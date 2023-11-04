@@ -27,6 +27,16 @@
         <div class="sk-cube4 sk-cube"></div>
         <div class="sk-cube3 sk-cube"></div>
       </div>
+
+<script>
+    window.addEventListener('load', function () {
+        // When the page is fully loaded, hide the loading screen and navigate to the next page
+        document.querySelector('sk-folding-cube').style.display = 'block';
+        setTimeout(function() {
+            window.location.href = 'index.php'; // Will go to landing page
+        }, 2000); // Adjust the delay (in milliseconds) before transitioning to the next page
+    });
+</script>
 </body>
 
 </html>
