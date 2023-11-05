@@ -4,7 +4,7 @@
     <head>
 
     <link rel="stylesheet" href="css/managereport.css">
-    <link rel="stylesheet" href="css/generatereport.css">
+    <link rel="stylesheet" href="css/updatepopup.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -14,8 +14,8 @@
 <body>
     <section class="mngreport-container">
                 <h1 class="">Report Manager</h1>
-                <button class="tab-button" id="vio-list" onclick="switchTable('violationList')">Violation List</button>
-                <button class="tab-button" id="call-slip-req" onclick="switchTable('callslipReqList')">Call Slip Required List</button>
+                <button class="tab-button" id="vio-list" onclick="switchTable('violationList', 'vio-list')">Violation List</button>
+                <button class="tab-button" id="call-slip-req" onclick="switchTable('callslipReqList', 'call-slip-req')">Call Slip Required List</button>
                     <div class="dropdown">
                     <select id="sortDropdown">
                         <option value="" disabled selected>Sort</option>
@@ -85,7 +85,7 @@
 
     <section class="container">
         <div class="overview">
-            <h1>Create Violation Report</h1>
+            <h1>Edit Violation Report</h1>
         </div>
         <button class="close-button" onclick="closeForm()">&times;</button>
         <form action="#" class="form">
@@ -142,7 +142,7 @@
             </div>
             </div>
           </div>
-          <button>Register Violation</button>
+          <button>Confirm Changes</button>
         </form>
       </section>
     
