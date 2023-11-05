@@ -42,7 +42,7 @@
                             <td>Multiple piercings</td>
                             <td>10/10/10</td>
                             <td class="centered-cell">
-                                <button class="btncss" id="openForm">
+                                <button class="btncss" id="openEditForm">
                                     Update
                                 </button>
                             </td>
@@ -73,7 +73,7 @@
                             <td>10</td>
                             <td>10</td>
                             <td class="centered-cell">
-                            <button class="btncss" onclick="SubmitEvent">
+                            <button class="btncss" id="openCallSlipForm">
                                     Call Slip
                                 </button>
                             </td>
@@ -82,16 +82,20 @@
                 </div>
             </div>
     </section>
-
-    <section class="container">
-        <div class="overview">
+    <!--edit violation report-->
+    <section class="containerEditVio">
+        <div class="edit-vio">
             <h1>Edit Violation Report</h1>
         </div>
-        <button class="close-button" onclick="closeForm()">&times;</button>
+        <button class="close-button" onclick="closeEditVio()">&times;</button>
         <form action="#" class="form">
           <div class="input-box">
-            <label>Department</label>
-            <input type="text" placeholder="Enter department" required />
+            <label>SR Code</label>
+            <input type="text" placeholder="Enter SR Code" required />
+          </div>
+          <div class="input-box">
+            <label>Name</label>
+            <input type="text" placeholder="Enter Name" required />
           </div>
           <div class="column">
             <div class="input-box">
@@ -104,14 +108,10 @@
             </div>
           </div>
 
-          <div class="input-box">
-            <label>Name</label>
-            <input type="text" placeholder="Enter Name" required />
-          </div>
           <div class="column">
             <div class="input-box">
-              <label>SR Code</label>
-              <input type="text" placeholder="Enter SR-Code" required />
+              <label>Department</label>
+              <input type="text" placeholder="Enter Department" required />
             </div>
             <div class="input-box">
               <label>Program</label>
@@ -145,14 +145,82 @@
           <button>Confirm Changes</button>
         </form>
       </section>
+
+      <!--generate callslip-->
+      <section class="containerCallSlipForm">
+        <div class="generate-callslip">
+            <h1>Generate Call Slip</h1>
+        </div>
+        <button class="close-button" onclick="closeCallSlipForm()">&times;</button>
+        <form action="#" class="form">
+        <div class="input-box">
+            <label>SR Code</label>
+            <input type="text" placeholder="Enter SR Code" required />
+          </div>
+          <div class="input-box">
+            <label>Student</label>
+            <input type="text" placeholder="Enter Student's Full Name" required />
+          </div>
+          <div class="input-box">
+            <label>Date</label>
+            <input type="date" placeholder="Enter date" required />
+          </div>
+          <div class="column">
+            <div class="input-box">
+              <label>Program</label>
+              <input type="text" placeholder="Enter program" required />
+            </div>
+            <div class="input-box">
+              <label>Section</label>
+              <input type="text" placeholder="Enter section
+              " required />
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="input-box">
+              <label>Call Date</label>
+              <input type="date" placeholder="Enter date" required />
+            </div>
+            <div class="input-box">
+              <label>Call Time</label>
+              <input type="time" placeholder="Enter time" required />
+            </div>
+          </div>
+          <div class="input-box address">
+            <label>Action</label>
+              <div class="select-box">
+                <select>
+                  <option hidden>Action</option>
+                  <option>Option1</option>
+                  <option>Option2</option>
+                  <option>Option3</option>
+                  <option>Option4</option>
+                </select>
+              </div>
+              <label>Remarks</label>
+              <input type="text" placeholder="Enter remarks" required />
+            </div>
+            </div>
+          </div>
+          <button>Notify</button>
+        </form>
+      </section>
     
     <script src="js/managereport.js"></script>
     <script>
-        document.getElementById("openForm").addEventListener("click", function() {
-            document.querySelector(".container").style.display = "block";
+        document.getElementById("openEditForm").addEventListener("click", function() {
+            document.querySelector(".containerEditVio").style.display = "block";
         });
-         function closeForm() {
-            document.querySelector(".container").style.display = "none";
+         function closeEditVio() {
+            document.querySelector(".containerEditVio").style.display = "none";
+        }
+
+        document.getElementById("openCallSlipForm").addEventListener("click", function() {
+            document.querySelector(".containerCallSlipForm").style.display = "block";
+        });
+         function closeCallSlipForm() {
+            document.querySelector(".containerCallSlipForm").style.display = "none";
         }
     </script>
 </body>
