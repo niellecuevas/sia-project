@@ -1,4 +1,5 @@
 <?php include "./components/sidebar.php" ?>
+<?php require "./php/dbconnection.php" ?>
 
 <!DOCTYPE html>
 <html>
@@ -16,7 +17,7 @@
         <div class="overview">
             <h1>Create Violation Report</h1>
         </div>
-        <form action="./php/actcreateviolation.php" method="POST" class="form">
+        <form action="./php/actcreateviolation.php" method="POST" class="form" enctype="multipart/form-data">
         <div class="input-box">
               <label>SR Code</label>
               <input type="text" placeholder="Enter SR-Code" name="srcode" required />
@@ -53,19 +54,12 @@
           <div class="input-box address">
             <label>Violation</label>
               <div class="select-box">
-                <select name="violationtype">
-                  <option value="Violation" hidden>Violation</option>
-                  <option value="1">Hair cut</option>
-                  <option value="2">Hair color</option>
-                  <option value="3">Improper Unifrom</option>
-                  <option value="4">Bullying</option>
-                </select>
+                <?php include "./php/readviolations.php"; // Include the readviolations.php file ?>
               </div>
               <input type="text" placeholder="Enter Remarks" name="remarks" />
             </div>
             <div class="column">
                 <div class="input-box">
-                <form action="/upload_image" method="post" enctype="multipart/form-data">
                 <input type="file" name="image" accept="image/*">
             </div>
             </div>

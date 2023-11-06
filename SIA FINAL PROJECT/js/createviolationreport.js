@@ -57,16 +57,16 @@ else if (operationStatus === 'Missing') {
     // Display a SweetAlert2 missing message
     Swal.fire({
         icon: 'error',
-        title: 'Missing Files Ddetected',
+        title: 'Missing Files Detected',
         text: 'Missing Fields, please fill out all fields and try again.',
         showConfirmButton: false,
         timer: 3000 // Automatically close after 2 seconds
     });
 
-    // Redirect to another page after the alert
-    setTimeout(() => {
-        window.location.href = './createviolationreport.php';
-    }, 3000); // Redirect after 2 seconds
+        // Redirect to another page after the alert
+        setTimeout(() => {
+            window.location.href = './createviolationreport.php';
+        }, 3000); // Redirect after 2 seconds
 }
     
     
