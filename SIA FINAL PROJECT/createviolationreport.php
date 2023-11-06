@@ -16,10 +16,10 @@
             <h1>Create Violation Report</h1>
         </div>
         <form action="#" class="form">
-          <div class="input-box">
-            <label>Department</label>
-            <input type="text" placeholder="Enter department" required />
-          </div>
+        <div class="input-box">
+              <label>SR Code</label>
+              <input type="text" placeholder="Enter SR-Code" required />
+            </div>
           <div class="column">
             <div class="input-box">
               <label>Date</label>
@@ -37,7 +37,7 @@
           </div>
           <div class="column">
             <div class="input-box">
-              <label>SR Code</label>
+              <label>Department</label>
               <input type="text" placeholder="Enter SR-Code" required />
             </div>
             <div class="input-box">
