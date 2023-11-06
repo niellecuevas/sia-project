@@ -105,20 +105,20 @@
         <!----------- STUDENT CONDUCT INFORMATION START----------------->
   <div class="openingText">
         <h1 id="titleVio" data-aos="fade-up">STUDENT CONDUCT INFORMATION</h1>
-        <h3 id="secondTitle" data-aos="fade-up">Student conduct information is use for data and documentation related to the behavior, actions, and disciplinary matters of the students within Batangas State University Lipa Campus. <br>
+        <h3 id="secondTitle" data-aos="fade-up">Student conduct information is use for data and documentation related to the behavior, actions, and disciplinary matters of the students within Batangas State University Lipa Campus.
         It encompasses a wide range of information that helps institutions monitor and manage student behavior, enforce disciplinary policies, and maintain a safe and conducive learning environment.</h3>
   </div>
 
 <section>
-  <div class="offenses-container"   data-aos="fade-right">
-  <div class="offense-container" >
-  <div class="offense">Minor Offense <p class="num">10</p></div>
-  </div>
+<div class="offenses-container" data-aos="fade-right">
+    <div class="offense-container">
+        <div class="offense">Minor Offense <p class="num"><?= $_SESSION['MinorOffenses'] ?></p></div>
+    </div>
 
-  <div class="offense-container" id="majorOffense">
-    <div class="offense">Major Offense <p class="num">4</p> </div> 
-  </div>
-  </div>
+    <div class="offense-container" id="majorOffense">
+        <div class="offense">Major Offense <p class="num"><?= $_SESSION['MajorOffenses'] ?></p></div>
+    </div>
+</div>  
 
   <div class="swiper mySwiper"  data-aos="fade-left">
     <div class="swiper-wrapper" >

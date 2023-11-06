@@ -77,6 +77,7 @@ header{
 .navbar .nav-btns {
    display: flex;
    flex-direction: row;
+   justify-content: flex-end;
    gap: 20px; 
 
 }
@@ -367,7 +368,7 @@ img {vertical-align: middle;}
   color: #fffbf2;
   width: 200px;
   height: 200px;
-  margin: 10px;
+  margin: 20px;
   text-align: center;
   line-height: 50px;
   font-size: 30px;
@@ -379,10 +380,10 @@ img {vertical-align: middle;}
 }
 
 .num {
-  font-size: 60px;
+  font-size: 90px;
   text-align: center;
   font-weight: bolder;
-  padding-top: 20px;
+  padding-top: 50px;
 }
 
 .openingText {

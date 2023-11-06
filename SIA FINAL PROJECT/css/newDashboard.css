@@ -40,8 +40,8 @@ html {
 }
 
 body.dark {
-	--light: #0C0C1E;
-	--grey: #060714;
+	--light: #202225;
+	--grey: #292b2f;
 	--dark: #FBFBFB;
 }
 
@@ -161,6 +161,10 @@ body {
 	min-width: calc(60px  - ((4px + 6px) * 2));
 	display: flex;
 	justify-content: center;
+}
+
+#sidebar a.logout {
+	margin-top: 170px;
 }
 /* SIDEBAR */
 
