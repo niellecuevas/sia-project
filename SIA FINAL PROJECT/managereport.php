@@ -163,7 +163,7 @@
           </div>
           <div class="input-box">
             <label>Date</label>
-            <input type="date" placeholder="Enter date" required />
+            <input type="date" id="generateId" placeholder="Enter date" required />
           </div>
           <div class="column">
             <div class="input-box">
@@ -207,6 +207,7 @@
         </form>
       </section>
     
+    <script src="./js/managereporttime.js"></script>
     <script src="js/managereport.js"></script>
     <script>
         document.getElementById("openEditForm").addEventListener("click", function() {
