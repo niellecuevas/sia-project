@@ -71,7 +71,7 @@ if (isset($_POST['id']) && isset($_POST['password']) && isset($_POST['role'])) {
         */
 
         // Query
-        $sqlQuery = "CALL SP_GetStudentAccount('$id', '$password')";
+        $sqlQuery = "CALL SP_GetStudentwithViolation('$id', '$password')";
 
         // Execute Query
         $result = mysqli_query($conn, $sqlQuery);
@@ -89,6 +89,7 @@ if (isset($_POST['id']) && isset($_POST['password']) && isset($_POST['role'])) {
                 $_SESSION['LastName'] = $user['LastName'];
                 $_SESSION['CourseName'] = $user['CourseName'];
                 $_SESSION['Department'] = $user['Department'];
+                $_SESSION['ViolationLevel'] = $user['ViolationLevel'];
 
                 // Count the Minor and Major Offenses without additional queries
                 $minorOffensesCount = 0;
