@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 03, 2023 at 02:34 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: 127.0.0.1:3306
+-- Generation Time: Nov 06, 2023 at 01:03 AM
+-- Server version: 8.0.31
+-- PHP Version: 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,26 +18,57 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sia`
+-- Database: `db1_ba3102`
 --
 
 DELIMITER $$
 --
 -- Procedures
 --
+DROP PROCEDURE IF EXISTS `SP_CreateStaff`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CreateStaff` (IN `id` VARCHAR(30), IN `fname` VARCHAR(50), IN `mname` VARCHAR(50), IN `lname` VARCHAR(50), IN `number` VARCHAR(13), IN `position` VARCHAR(100))   INSERT INTO tbl_staff (StaffID, FirstName, MiddleName, LastName, ContactNumber, Position)
 VALUES (id, fname, mname, lname, number, position)$$
 
+DROP PROCEDURE IF EXISTS `SP_GetAdminAccount`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetAdminAccount` (IN `id` INT, IN `password` VARCHAR(255))   SELECT AdminID, tbl_adminaccount.StaffID, PermissionLevel, tbl_staff.FirstName, tbl_staff.MiddleName, tbl_staff.LastName, tbl_staff.ContactNumber, tbl_staff.Position, PasswordEncrypted FROM tbl_adminaccount INNER JOIN tbl_staff ON tbl_adminaccount.StaffID = tbl_staff.StaffID WHERE tbl_adminaccount.StaffId = id AND PasswordEncrypted = password$$
 
+DROP PROCEDURE IF EXISTS `SP_GetStudentAccount`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetStudentAccount` (IN `id` INT, IN `password` VARCHAR(255))   SELECT UserID, tbl_studentaccount.SRCode, PasswordEncrypted, tbl_students.FirstName, tbl_students.MiddleName, tbl_students.LastName,  tbl_course.CourseName, tbl_course.Department FROM tbl_studentaccount INNER JOIN tbl_students ON tbl_studentaccount.SRCode = tbl_students.SRCode INNER JOIN tbl_course ON tbl_students.CourseID = tbl_course.CourseID WHERE tbl_studentaccount.SRCode = id AND PasswordEncrypted = password$$
 
+DROP PROCEDURE IF EXISTS `SP_GetStudentwithViolation`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetStudentwithViolation` (IN `id` VARCHAR(30), IN `password` VARCHAR(255))   SELECT 
+    tbl_studentaccount.UserID, 
+    tbl_studentaccount.SRCode, 
+    tbl_studentaccount.PasswordEncrypted, 
+    tbl_students.FirstName, 
+    tbl_students.MiddleName, 
+    tbl_students.LastName, 
+    tbl_course.CourseName, 
+    tbl_course.Department, 
+    tbl_violationtypes.ViolationLevel 
+FROM 
+    tbl_studentaccount 
+INNER JOIN 
+    tbl_students ON tbl_studentaccount.SRCode = tbl_students.SRCode 
+INNER JOIN 
+    tbl_course ON tbl_students.CourseID = tbl_course.CourseID 
+INNER JOIN 
+    tbl_violationreport ON tbl_students.SRCode = tbl_violationreport.SRCode 
+INNER JOIN 
+    tbl_violationtypes ON tbl_violationreport.ViolationTypeID = tbl_violationtypes.ViolationTypeID 
+WHERE 
+    tbl_studentaccount.SRCode = id 
+AND 
+    tbl_studentaccount.PasswordEncrypted = password$$
+
+DROP PROCEDURE IF EXISTS `SP_Student`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_Student` (IN `sr` VARCHAR(30))   SELECT 
     CONCAT(FirstName, ' ', IF(LENGTH(MiddleName) > 0, CONCAT(SUBSTRING(MiddleName, 1, 1), '.'), ''), ' ', LastName) AS `FullName`,
     tbl_students.SRCode
 FROM tbl_students
 WHERE tbl_students.SRCode = sr$$
 
+DROP PROCEDURE IF EXISTS `SP_StudHomepage`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_StudHomepage` (IN `sr` VARCHAR(30))   SELECT 
     CONCAT(FirstName, ' ', IF(LENGTH(MiddleName) > 0, CONCAT(SUBSTRING(MiddleName, 1, 1), '.'), ''), ' ', LastName) AS `FullName`,
     tbl_students.SRCode, tbl_course.CourseName, tbl_course.Department
@@ -53,12 +84,15 @@ DELIMITER ;
 -- Table structure for table `tbl_adminaccount`
 --
 
-CREATE TABLE `tbl_adminaccount` (
-  `AdminID` int(11) NOT NULL,
-  `StaffID` varchar(30) NOT NULL,
-  `PasswordEncrypted` varchar(255) NOT NULL,
-  `PermissionLevel` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `tbl_adminaccount`;
+CREATE TABLE IF NOT EXISTS `tbl_adminaccount` (
+  `AdminID` int NOT NULL AUTO_INCREMENT,
+  `StaffID` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `PasswordEncrypted` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `PermissionLevel` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`AdminID`),
+  KEY `StaffID_fk_AdminAccount` (`StaffID`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_adminaccount`
@@ -78,16 +112,20 @@ INSERT INTO `tbl_adminaccount` (`AdminID`, `StaffID`, `PasswordEncrypted`, `Perm
 -- Table structure for table `tbl_callslip`
 --
 
-CREATE TABLE `tbl_callslip` (
-  `CallSlipID` int(11) NOT NULL,
-  `SRCode` varchar(30) NOT NULL,
-  `StaffID` varchar(30) NOT NULL,
+DROP TABLE IF EXISTS `tbl_callslip`;
+CREATE TABLE IF NOT EXISTS `tbl_callslip` (
+  `CallSlipID` int NOT NULL AUTO_INCREMENT,
+  `SRCode` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `StaffID` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `CreationDate` date NOT NULL,
   `CallDate` date NOT NULL,
   `CallTime` time NOT NULL,
-  `Action` varchar(255) NOT NULL,
-  `Remarks` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `Action` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Remarks` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`CallSlipID`),
+  KEY `SRCode_fk_CallSlip` (`SRCode`),
+  KEY `StaffID_fk_CallSlip` (`StaffID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_callslip`
@@ -106,11 +144,13 @@ INSERT INTO `tbl_callslip` (`CallSlipID`, `SRCode`, `StaffID`, `CreationDate`, `
 -- Table structure for table `tbl_course`
 --
 
-CREATE TABLE `tbl_course` (
-  `CourseID` int(11) NOT NULL,
-  `CourseName` varchar(255) NOT NULL,
-  `Department` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `tbl_course`;
+CREATE TABLE IF NOT EXISTS `tbl_course` (
+  `CourseID` int NOT NULL AUTO_INCREMENT,
+  `CourseName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Department` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`CourseID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_course`
@@ -129,13 +169,15 @@ INSERT INTO `tbl_course` (`CourseID`, `CourseName`, `Department`) VALUES
 -- Table structure for table `tbl_staff`
 --
 
-CREATE TABLE `tbl_staff` (
-  `StaffID` varchar(30) NOT NULL,
-  `FirstName` varchar(50) NOT NULL,
-  `MiddleName` varchar(50) NOT NULL,
-  `LastName` varchar(50) NOT NULL,
-  `ContactNumber` varchar(13) NOT NULL,
-  `Position` varchar(100) NOT NULL
+DROP TABLE IF EXISTS `tbl_staff`;
+CREATE TABLE IF NOT EXISTS `tbl_staff` (
+  `StaffID` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `FirstName` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MiddleName` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `LastName` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ContactNumber` varchar(13) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Position` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`StaffID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -156,11 +198,14 @@ INSERT INTO `tbl_staff` (`StaffID`, `FirstName`, `MiddleName`, `LastName`, `Cont
 -- Table structure for table `tbl_studentaccount`
 --
 
-CREATE TABLE `tbl_studentaccount` (
-  `UserID` int(11) NOT NULL,
-  `SRCode` varchar(30) NOT NULL,
-  `PasswordEncrypted` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `tbl_studentaccount`;
+CREATE TABLE IF NOT EXISTS `tbl_studentaccount` (
+  `UserID` int NOT NULL AUTO_INCREMENT,
+  `SRCode` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `PasswordEncrypted` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`UserID`),
+  KEY `SRCode_fk_User` (`SRCode`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_studentaccount`
@@ -180,12 +225,15 @@ INSERT INTO `tbl_studentaccount` (`UserID`, `SRCode`, `PasswordEncrypted`) VALUE
 -- Table structure for table `tbl_students`
 --
 
-CREATE TABLE `tbl_students` (
-  `SRCode` varchar(30) NOT NULL,
-  `FirstName` varchar(50) NOT NULL,
-  `MiddleName` varchar(50) NOT NULL,
-  `LastName` varchar(50) NOT NULL,
-  `CourseID` int(11) NOT NULL
+DROP TABLE IF EXISTS `tbl_students`;
+CREATE TABLE IF NOT EXISTS `tbl_students` (
+  `SRCode` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `FirstName` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MiddleName` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `LastName` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `CourseID` int NOT NULL,
+  PRIMARY KEY (`SRCode`),
+  KEY `CourseID_fk_Students` (`CourseID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -205,16 +253,21 @@ INSERT INTO `tbl_students` (`SRCode`, `FirstName`, `MiddleName`, `LastName`, `Co
 -- Table structure for table `tbl_violationreport`
 --
 
-CREATE TABLE `tbl_violationreport` (
-  `ViolationID` int(11) NOT NULL,
-  `SRCode` varchar(30) NOT NULL,
-  `StaffID` varchar(30) NOT NULL,
-  `ViolationTypeID` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_violationreport`;
+CREATE TABLE IF NOT EXISTS `tbl_violationreport` (
+  `ViolationID` int NOT NULL AUTO_INCREMENT,
+  `SRCode` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `StaffID` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ViolationTypeID` int NOT NULL,
   `ViolationDate` date NOT NULL,
   `ViolationTime` time NOT NULL,
-  `Remarks` varchar(255) NOT NULL,
-  `Evidence` blob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `Remarks` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Evidence` blob NOT NULL,
+  PRIMARY KEY (`ViolationID`),
+  KEY `ViolationTypeID_fk_ViolationReport` (`ViolationTypeID`),
+  KEY `StaffID_fk_ViolationReport` (`StaffID`),
+  KEY `SRCode_fk_ViolationReport` (`SRCode`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_violationreport`
@@ -233,12 +286,14 @@ INSERT INTO `tbl_violationreport` (`ViolationID`, `SRCode`, `StaffID`, `Violatio
 -- Table structure for table `tbl_violationtypes`
 --
 
-CREATE TABLE `tbl_violationtypes` (
-  `ViolationTypeID` int(11) NOT NULL,
-  `ViolationName` varchar(100) NOT NULL,
-  `ViolationLevel` varchar(10) NOT NULL,
-  `Description` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `tbl_violationtypes`;
+CREATE TABLE IF NOT EXISTS `tbl_violationtypes` (
+  `ViolationTypeID` int NOT NULL AUTO_INCREMENT,
+  `ViolationName` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ViolationLevel` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`ViolationTypeID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_violationtypes`
@@ -250,106 +305,6 @@ INSERT INTO `tbl_violationtypes` (`ViolationTypeID`, `ViolationName`, `Violation
 (3, 'Gambling', 'Major', 'Possession of any gambling paraphernalia and/or\r\nengaging in any form of gambling within University\r\npremises or outside within a 50-meter radius from the campus perimeter or during any off-campus University sponsored activities.'),
 (4, 'Cutting Class', 'Minor', 'Violation of the usual classroom rules and regulations, such as cutting of classes set by the instructor.'),
 (5, 'Public Display of Affection', 'Minor', 'Something such as a kiss or loving touch that is conducted in the school premise.');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `tbl_adminaccount`
---
-ALTER TABLE `tbl_adminaccount`
-  ADD PRIMARY KEY (`AdminID`),
-  ADD KEY `StaffID_fk_AdminAccount` (`StaffID`);
-
---
--- Indexes for table `tbl_callslip`
---
-ALTER TABLE `tbl_callslip`
-  ADD PRIMARY KEY (`CallSlipID`),
-  ADD KEY `SRCode_fk_CallSlip` (`SRCode`),
-  ADD KEY `StaffID_fk_CallSlip` (`StaffID`);
-
---
--- Indexes for table `tbl_course`
---
-ALTER TABLE `tbl_course`
-  ADD PRIMARY KEY (`CourseID`);
-
---
--- Indexes for table `tbl_staff`
---
-ALTER TABLE `tbl_staff`
-  ADD PRIMARY KEY (`StaffID`);
-
---
--- Indexes for table `tbl_studentaccount`
---
-ALTER TABLE `tbl_studentaccount`
-  ADD PRIMARY KEY (`UserID`),
-  ADD KEY `SRCode_fk_User` (`SRCode`);
-
---
--- Indexes for table `tbl_students`
---
-ALTER TABLE `tbl_students`
-  ADD PRIMARY KEY (`SRCode`),
-  ADD KEY `CourseID_fk_Students` (`CourseID`);
-
---
--- Indexes for table `tbl_violationreport`
---
-ALTER TABLE `tbl_violationreport`
-  ADD PRIMARY KEY (`ViolationID`),
-  ADD KEY `ViolationTypeID_fk_ViolationReport` (`ViolationTypeID`),
-  ADD KEY `StaffID_fk_ViolationReport` (`StaffID`),
-  ADD KEY `SRCode_fk_ViolationReport` (`SRCode`);
-
---
--- Indexes for table `tbl_violationtypes`
---
-ALTER TABLE `tbl_violationtypes`
-  ADD PRIMARY KEY (`ViolationTypeID`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `tbl_adminaccount`
---
-ALTER TABLE `tbl_adminaccount`
-  MODIFY `AdminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `tbl_callslip`
---
-ALTER TABLE `tbl_callslip`
-  MODIFY `CallSlipID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `tbl_course`
---
-ALTER TABLE `tbl_course`
-  MODIFY `CourseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `tbl_studentaccount`
---
-ALTER TABLE `tbl_studentaccount`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `tbl_violationreport`
---
-ALTER TABLE `tbl_violationreport`
-  MODIFY `ViolationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `tbl_violationtypes`
---
-ALTER TABLE `tbl_violationtypes`
-  MODIFY `ViolationTypeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

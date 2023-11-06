@@ -30,16 +30,8 @@
 
 
                 <!-- Form TextBoxes -->
-                <input type="text" placeholder="SR Code" name="id" id="idInput" required/>
+                <input type="text" placeholder="SR-Code" name="id" id="idInput" required/>
                 <input type="password" placeholder="Password" name="password" required/>
-
-                <!-- Radio Buttons for admin and student -->
-                <div class="radio-container">
-                    <input type="radio" id="admin" name="role" value="student" class="radio" checked>
-                    <label for="admin">Student</label>
-                    <input type="radio" id="user" name="role" value="admin" class="radio">
-                    <label for="user">Staff</label>
-                </div>
 
                 <!-- Submit Button -->
                 <button type="submit" class="button">Log In</button>

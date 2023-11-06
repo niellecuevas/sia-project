@@ -1,4 +1,4 @@
-
+<?php require "./php/authenticateadmin.php"?>
 
 <!DOCTYPE html>
 <html>

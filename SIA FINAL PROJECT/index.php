@@ -75,49 +75,6 @@
             </div>
         </div>
     </div>
-    <!-- OSD -->
-    <div class="jumbotron jumbotron-fluid feature" id="feature-first">
-        <div class="container my-5">
-            <div class="row justify-content-between text-center text-md-left">
-                <div data-aos="fade-right" data-aos-duration="1000" data-aos-once="true" class="col-md-6">
-                    <h2 class="font-weight-bold">Assistant Professor <br> Ronie A. Mendoza</h2>
-                    <h4 class="my-4">Head, Student Discipline </h4>
-                    <p class="justify"> The head of OSD is an administrative role within an educational institution
-                         responsible for overseeing and enforcing disciplinary policies and procedures related to 
-                         student behavior. They investigate violations, conduct hearings, impose sanctions when 
-                         necessary, educate students about the institution's code of conduct, and maintain records
-                          to ensure a safe and conducive learning environment. This role helps uphold the institution's 
-                          rules and standards, promoting responsible behavior and ensuring a fair and consistent 
-                          disciplinary process.</p>
-                </div>
-                <div data-aos="fade-left" data-aos-duration="1000" data-aos-once="true" class="col-md-6 align-self-center">
-                    <img src="img/Head of OSD.png" alt="Take a look inside" class="mx-auto d-block">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- OSS -->
-    <div class="jumbotron jumbotron-fluid feature" id="feature-last">
-        <div class="container">
-            <div class="row justify-content-between text-center text-md-left">
-                <div data-aos="fade-left" data-aos-duration="1000" data-aos-once="true" class="col-md-6 flex-md-last">
-                    <h2 class="font-weight-bold">Mr. Joey Leuterio</h2>
-                    <h4 class="my-4">
-                        Head, Security Service </h4>
-                        <p class="justify"> The head of security services is a leadership role responsible 
-                            for overseeing and managing all aspects of security within an organization. This
-                             includes planning security strategies, managing security personnel, assessing 
-                             and mitigating risks, responding to security incidents, implementing security 
-                             technology, developing and enforcing security policies, collaborating with relevant 
-                             parties, and managing crises effectively. Their primary objective is to ensure the 
-                             safety and security of the organization and its assets.</p>
-                </div>
-                <div data-aos="fade-right" data-aos-duration="1000" data-aos-once="true" class="col-md-6 align-self-center flex-md-first">
-                    <img src="img/Head of Security.png" alt="Safe and reliable" class="mx-auto d-block">
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- contact -->
     <div class="jumbotron jumbotron-fluid" id="contact" style="background-image: url(img/footer.png);">
         <div class="container my-5">
@@ -132,25 +89,6 @@
                         <li>Facebook : OSD BatStateULipa</li>
                         <li>Address : A. Tanco Drive, Marawoy, Lipa, Batangas</li>
                     </ul>
-                </div>
-                <div class="col-md-6">
-                    <form>
-                    	<div class="row">
-	                        <div class="form-group col-md-6">
-	                            <label for="name">Your Name</label>
-	                            <input type="name" class="form-control" id="name">
-	                        </div>
-	                        <div class="form-group col-md-6">
-	                            <label for="Email">Your Email</label>
-	                            <input type="email" class="form-control" id="Email">
-	                        </div>
-	                    </div>
-	                    <div class="form-group">
-	                        <label for="message">Message</label>
-	                        <textarea class="form-control" id="message" rows="3"></textarea>
-	                    </div>
-                        <button type="submit" class="btn font-weight-bold scms-cta scms-cta-wide cta-white my-3">Submit</button>
-                    </form>
                 </div>
             </div>
         </div>
