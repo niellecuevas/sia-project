@@ -22,10 +22,6 @@ if(pageName === "createviolationreport.php"){
 	document.querySelector(".page2").classList.add("active");
 }
 
-if(pageName === "generatecallslip.php"){
-	document.querySelector(".page3").classList.add("active");
-}
-
 if(pageName === "managereport.php"){
 	document.querySelector(".page4").classList.add("active");
 }

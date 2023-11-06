@@ -31,12 +31,6 @@
 					<span class="text">Create Violation Report</span>
 				</a>
 			</li>
-			<li class="page3">
-				<a href="generatecallslip.php">
-					<i class='bx bxs-bar-chart-alt-2'></i>
-					<span class="text">Generate Call Slip</span>
-				</a>
-			</li>
 			<li class="page4">
 				<a href="managereport.php">
 					<i class='bx bxs-notepad'></i>
