@@ -25,7 +25,7 @@
 				<li>
 				<i class="bx"><img src="img/group.png" style=></i>
 					<span class="text">
-						<h3>4289</h3>
+						<h3 class="studentNumber">4289</h3>
 						<p>Number of Students</p>
 					</span>
 				</li>
