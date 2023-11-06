@@ -1,4 +1,4 @@
-<?php require "./php/authenticatestudent.php"?>
+
 
 <!DOCTYPE html>
 <html>
@@ -105,7 +105,7 @@
         <!----------- STUDENT CONDUCT INFORMATION START----------------->
   <div class="openingText">
         <h1 id="titleVio" data-aos="fade-up">STUDENT CONDUCT INFORMATION</h1>
-        <h3 id="secondTitle" data-aos="fade-up">Student conduct information is use for data and documentation related to the behavior, actions, and disciplinary matters of the students within Batangas State University Lipa Campus. <br>
+        <h3 id="secondTitle" data-aos="fade-up">Student conduct information is use for data and documentation related to the behavior, actions, and disciplinary matters of the students within Batangas State University Lipa Campus.
         It encompasses a wide range of information that helps institutions monitor and manage student behavior, enforce disciplinary policies, and maintain a safe and conducive learning environment.</h3>
   </div>
 
