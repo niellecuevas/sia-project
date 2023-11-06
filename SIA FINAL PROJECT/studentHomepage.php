@@ -110,15 +110,15 @@
   </div>
 
 <section>
-  <div class="offenses-container"   data-aos="fade-right">
-  <div class="offense-container" >
-  <div class="offense">Minor Offense <p class="num">10</p></div>
-  </div>
+<div class="offenses-container" data-aos="fade-right">
+    <div class="offense-container">
+        <div class="offense">Minor Offense <p class="num"><?= $_SESSION['MinorOffenses'] ?></p></div>
+    </div>
 
-  <div class="offense-container" id="majorOffense">
-    <div class="offense">Major Offense <p class="num">4</p> </div> 
-  </div>
-  </div>
+    <div class="offense-container" id="majorOffense">
+        <div class="offense">Major Offense <p class="num"><?= $_SESSION['MajorOffenses'] ?></p></div>
+    </div>
+</div>
 
   <div class="swiper mySwiper"  data-aos="fade-left">
     <div class="swiper-wrapper" >
