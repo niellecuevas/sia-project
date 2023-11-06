@@ -72,14 +72,9 @@ if (isset($_POST['submit'])) {
             }
         }
 
-        /*  ENABLE IF MERON NANG SP
         // Call the stored procedure to insert data
         $query = $conn->prepare("CALL InsertViolationReport(?, ?, ?, ?, ?, ?, ?)");
-        $query->bind_param("siiisss", $srCode, $staffId, $violationType, $violationDate, $violationTime, $remarks, $newImageName); */
-
-        // Build and execute the SQL query to insert data into the database
-        $query = $conn->prepare("INSERT INTO tbl_violationreport (SRCode, StaffID, ViolationTypeID, ViolationDate, ViolationTime, Remarks, Evidence) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $query->bind_param("ssissss", $srCode, $staffId, $violationType, $violationDate, $violationTime, $remarks, $newImageName);
+        $query->bind_param("siiisss", $srCode, $staffId, $violationType, $violationDate, $violationTime, $remarks, $newImageName);
 
         if ($query->execute()) {
             // If the query is successful, set a session variable and redirect with "InsertSuccess" status
