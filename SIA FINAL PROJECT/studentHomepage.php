@@ -1,4 +1,4 @@
-
+<?php require "./php/authenticatestudent.php"?>
 
 <!DOCTYPE html>
 <html>
@@ -109,8 +109,6 @@
         It encompasses a wide range of information that helps institutions monitor and manage student behavior, enforce disciplinary policies, and maintain a safe and conducive learning environment.</h3>
   </div>
 
-
-
 <section>
 <div class="offenses-container" data-aos="fade-right">
     <div class="offense-container">
@@ -121,7 +119,6 @@
         <div class="offense">Major Offense <p class="num"><?= $_SESSION['MajorOffenses'] ?></p></div>
     </div>
 </div>  
-
 
   <div class="swiper mySwiper"  data-aos="fade-left">
     <div class="swiper-wrapper" >
