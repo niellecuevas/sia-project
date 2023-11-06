@@ -74,7 +74,7 @@ if (isset($_POST['submit'])) {
 
         // Call the stored procedure to insert data
         $query = $conn->prepare("CALL InsertViolationReport(?, ?, ?, ?, ?, ?, ?)");
-        $query->bind_param("siiisss", $srCode, $staffId, $violationType, $violationDate, $violationTime, $remarks, $newImageName);
+        $query->bind_param("ssissss", $srCode, $staffId, $violationType, $violationDate, $violationTime, $remarks, $newImageName);
 
         if ($query->execute()) {
             // If the query is successful, set a session variable and redirect with "InsertSuccess" status
