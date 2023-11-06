@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 06, 2023 at 01:03 AM
+-- Generation Time: Nov 06, 2023 at 08:50 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -61,11 +61,37 @@ WHERE
 AND 
     tbl_studentaccount.PasswordEncrypted = password$$
 
+DROP PROCEDURE IF EXISTS `SP_GetViolationTypes`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetViolationTypes` ()   BEGIN
+    SELECT ViolationTypeID, ViolationName FROM tbl_violationtypes;
+END$$
+
+DROP PROCEDURE IF EXISTS `SP_InsertViolationReport`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertViolationReport` (IN `p_SRCode` VARCHAR(255), IN `p_StaffID` INT, IN `p_ViolationTypeID` INT, IN `p_ViolationDate` DATE, IN `p_ViolationTime` TIME, IN `p_Remarks` VARCHAR(255), IN `p_Evidence` VARCHAR(255))   BEGIN
+    INSERT INTO tbl_violationreport (SRCode, StaffID, ViolationTypeID, ViolationDate, ViolationTime, Remarks, Evidence)
+    VALUES (p_SRCode, p_StaffID, p_ViolationTypeID, p_ViolationDate, p_ViolationTime, p_Remarks, p_Evidence);
+END$$
+
 DROP PROCEDURE IF EXISTS `SP_Student`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_Student` (IN `sr` VARCHAR(30))   SELECT 
     CONCAT(FirstName, ' ', IF(LENGTH(MiddleName) > 0, CONCAT(SUBSTRING(MiddleName, 1, 1), '.'), ''), ' ', LastName) AS `FullName`,
     tbl_students.SRCode
 FROM tbl_students
+WHERE tbl_students.SRCode = sr$$
+
+DROP PROCEDURE IF EXISTS `SP_StudentViolationCarousel`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_StudentViolationCarousel` (IN `sr` VARCHAR(30))   SELECT 
+    tbl_violationtypes.ViolationName,
+    tbl_violationtypes.ViolationLevel,
+    tbl_callslip.Action, 
+    tbl_violationreport.ViolationDate, 
+    tbl_violationreport.ViolationTime, 
+    tbl_violationreport.Remarks, 
+    tbl_violationreport.Evidence 
+FROM tbl_callslip
+INNER JOIN tbl_violationreport ON tbl_callslip.ViolationID = tbl_violationreport.ViolationID
+INNER JOIN tbl_students ON tbl_students.SRCode = tbl_violationreport.SRCode
+INNER JOIN tbl_violationtypes ON tbl_violationreport.ViolationTypeID = tbl_violationtypes.ViolationTypeID
 WHERE tbl_students.SRCode = sr$$
 
 DROP PROCEDURE IF EXISTS `SP_StudHomepage`$$
@@ -87,9 +113,9 @@ DELIMITER ;
 DROP TABLE IF EXISTS `tbl_adminaccount`;
 CREATE TABLE IF NOT EXISTS `tbl_adminaccount` (
   `AdminID` int NOT NULL AUTO_INCREMENT,
-  `StaffID` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `PasswordEncrypted` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `PermissionLevel` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `StaffID` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `PasswordEncrypted` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `PermissionLevel` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`AdminID`),
   KEY `StaffID_fk_AdminAccount` (`StaffID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -109,34 +135,55 @@ INSERT INTO `tbl_adminaccount` (`AdminID`, `StaffID`, `PasswordEncrypted`, `Perm
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_appeal`
+--
+
+DROP TABLE IF EXISTS `tbl_appeal`;
+CREATE TABLE IF NOT EXISTS `tbl_appeal` (
+  `AppealID` int NOT NULL AUTO_INCREMENT,
+  `ViolationID` int NOT NULL,
+  `Appeal` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Status` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`AppealID`),
+  KEY `ViolationID_fk_Appeal` (`ViolationID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbl_appeal`
+--
+
+INSERT INTO `tbl_appeal` (`AppealID`, `ViolationID`, `Appeal`, `Status`) VALUES
+(1, 1, 'I love you papi!', 'Pending');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_callslip`
 --
 
 DROP TABLE IF EXISTS `tbl_callslip`;
 CREATE TABLE IF NOT EXISTS `tbl_callslip` (
   `CallSlipID` int NOT NULL AUTO_INCREMENT,
-  `SRCode` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `StaffID` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ViolationID` int NOT NULL,
   `CreationDate` date NOT NULL,
   `CallDate` date NOT NULL,
   `CallTime` time NOT NULL,
-  `Action` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Remarks` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Action` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`CallSlipID`),
-  KEY `SRCode_fk_CallSlip` (`SRCode`),
-  KEY `StaffID_fk_CallSlip` (`StaffID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  KEY `ViolationID_CallSlip` (`ViolationID`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_callslip`
 --
 
-INSERT INTO `tbl_callslip` (`CallSlipID`, `SRCode`, `StaffID`, `CreationDate`, `CallDate`, `CallTime`, `Action`, `Remarks`) VALUES
-(1, '21-31092', 's1-23', '2023-10-24', '2023-10-25', '12:05:34', 'Three- to five-day suspension', ''),
-(2, '21-35876', 's2-22', '2023-10-24', '2023-10-25', '10:05:34', 'Five- to seven-day suspension, may include re-admission probation', ''),
-(3, '21-39479', 's3-22', '2023-10-23', '2023-10-24', '10:08:10', 'Seven- to nine-day suspension, may\r\ninclude Non-readmission', ''),
-(4, '21-39841', 's4-21', '2023-10-22', '2023-10-23', '15:08:10', 'Written Warning', ''),
-(5, '21-87123', 's5-28', '2023-10-17', '2023-10-18', '11:09:19', 'Written Reprimand', '');
+INSERT INTO `tbl_callslip` (`CallSlipID`, `ViolationID`, `CreationDate`, `CallDate`, `CallTime`, `Action`, `Remarks`) VALUES
+(1, 1, '2023-10-24', '2023-10-25', '12:05:34', 'Three- to five-day suspension', ''),
+(4, 4, '2023-10-22', '2023-10-23', '15:08:10', 'Written Warning', ''),
+(5, 5, '2023-10-17', '2023-10-18', '11:09:19', 'Written Reprimand', ''),
+(6, 2, '2023-11-06', '2023-11-06', '19:34:15', '3 day suspension', ''),
+(7, 3, '2023-11-05', '2023-11-06', '15:34:15', 'Community Service', '');
 
 -- --------------------------------------------------------
 
@@ -147,8 +194,8 @@ INSERT INTO `tbl_callslip` (`CallSlipID`, `SRCode`, `StaffID`, `CreationDate`, `
 DROP TABLE IF EXISTS `tbl_course`;
 CREATE TABLE IF NOT EXISTS `tbl_course` (
   `CourseID` int NOT NULL AUTO_INCREMENT,
-  `CourseName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Department` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `CourseName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Department` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`CourseID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -171,12 +218,12 @@ INSERT INTO `tbl_course` (`CourseID`, `CourseName`, `Department`) VALUES
 
 DROP TABLE IF EXISTS `tbl_staff`;
 CREATE TABLE IF NOT EXISTS `tbl_staff` (
-  `StaffID` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `FirstName` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MiddleName` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `LastName` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ContactNumber` varchar(13) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Position` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `StaffID` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `FirstName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MiddleName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `LastName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ContactNumber` varchar(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Position` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`StaffID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -201,11 +248,11 @@ INSERT INTO `tbl_staff` (`StaffID`, `FirstName`, `MiddleName`, `LastName`, `Cont
 DROP TABLE IF EXISTS `tbl_studentaccount`;
 CREATE TABLE IF NOT EXISTS `tbl_studentaccount` (
   `UserID` int NOT NULL AUTO_INCREMENT,
-  `SRCode` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `PasswordEncrypted` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `SRCode` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `PasswordEncrypted` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`UserID`),
   KEY `SRCode_fk_User` (`SRCode`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_studentaccount`
@@ -217,7 +264,8 @@ INSERT INTO `tbl_studentaccount` (`UserID`, `SRCode`, `PasswordEncrypted`) VALUE
 (3, '21-39479', '$2y$10$.vGA1O9wmRjrwAVXD98HNOgsNpDczlqm3Jq7KnEd1rVAGv3Fykk1a\n'),
 (4, '21-39841', '$2y$10$.vGA1O9wmRjrwAVXD98HNOgsNpDczlqm3Jq7KnEd1rVAGv3Fykk1a\n'),
 (5, '21-87123', '$2y$10$.vGA1O9wmRjrwAVXD98HNOgsNpDczlqm3Jq7KnEd1rVAGv3Fykk1a\r\n'),
-(6, '21-39479', 'pogi');
+(6, '21-39479', 'pogi'),
+(7, '21-87123', 'lakas');
 
 -- --------------------------------------------------------
 
@@ -227,10 +275,10 @@ INSERT INTO `tbl_studentaccount` (`UserID`, `SRCode`, `PasswordEncrypted`) VALUE
 
 DROP TABLE IF EXISTS `tbl_students`;
 CREATE TABLE IF NOT EXISTS `tbl_students` (
-  `SRCode` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `FirstName` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MiddleName` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `LastName` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `SRCode` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `FirstName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MiddleName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `LastName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `CourseID` int NOT NULL,
   PRIMARY KEY (`SRCode`),
   KEY `CourseID_fk_Students` (`CourseID`)
@@ -261,13 +309,13 @@ CREATE TABLE IF NOT EXISTS `tbl_violationreport` (
   `ViolationTypeID` int NOT NULL,
   `ViolationDate` date NOT NULL,
   `ViolationTime` time NOT NULL,
-  `Remarks` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Evidence` blob NOT NULL,
+  `Remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Evidence` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`ViolationID`),
   KEY `ViolationTypeID_fk_ViolationReport` (`ViolationTypeID`),
-  KEY `StaffID_fk_ViolationReport` (`StaffID`),
-  KEY `SRCode_fk_ViolationReport` (`SRCode`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  KEY `SRCode_fk_ViolationReport` (`SRCode`),
+  KEY `StaffID_fk_ViolationReport` (`StaffID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_violationreport`
@@ -278,7 +326,8 @@ INSERT INTO `tbl_violationreport` (`ViolationID`, `SRCode`, `StaffID`, `Violatio
 (2, '21-35876', 's2-22', 2, '2023-10-04', '08:02:19', 'Smoke 3 cigarettes in total\r\n', ''),
 (3, '21-39479', 's3-22', 3, '2023-10-18', '10:03:11', 'Conduct a mass gambling inside the school', ''),
 (4, '21-39841', 's4-21', 4, '2023-10-20', '13:03:11', '', ''),
-(5, '21-87123', 's5-28', 5, '2023-10-23', '17:04:16', '', '');
+(5, '21-87123', 's5-28', 5, '2023-10-23', '17:04:16', '', ''),
+(6, '21-39479', 's5-28', 3, '2023-11-06', '14:05:00', 'asd', '');
 
 -- --------------------------------------------------------
 
@@ -289,9 +338,9 @@ INSERT INTO `tbl_violationreport` (`ViolationID`, `SRCode`, `StaffID`, `Violatio
 DROP TABLE IF EXISTS `tbl_violationtypes`;
 CREATE TABLE IF NOT EXISTS `tbl_violationtypes` (
   `ViolationTypeID` int NOT NULL AUTO_INCREMENT,
-  `ViolationName` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ViolationLevel` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ViolationName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ViolationLevel` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`ViolationTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -317,11 +366,16 @@ ALTER TABLE `tbl_adminaccount`
   ADD CONSTRAINT `StaffID_fk_AdminAccount` FOREIGN KEY (`StaffID`) REFERENCES `tbl_staff` (`StaffID`);
 
 --
+-- Constraints for table `tbl_appeal`
+--
+ALTER TABLE `tbl_appeal`
+  ADD CONSTRAINT `ViolationID_fk_Appeal` FOREIGN KEY (`ViolationID`) REFERENCES `tbl_violationreport` (`ViolationID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
 -- Constraints for table `tbl_callslip`
 --
 ALTER TABLE `tbl_callslip`
-  ADD CONSTRAINT `SRCode_fk_CallSlip` FOREIGN KEY (`SRCode`) REFERENCES `tbl_students` (`SRCode`),
-  ADD CONSTRAINT `StaffID_fk_CallSlip` FOREIGN KEY (`StaffID`) REFERENCES `tbl_staff` (`StaffID`);
+  ADD CONSTRAINT `ViolationID_CallSlip` FOREIGN KEY (`ViolationID`) REFERENCES `tbl_violationreport` (`ViolationID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `tbl_studentaccount`
@@ -339,8 +393,8 @@ ALTER TABLE `tbl_students`
 -- Constraints for table `tbl_violationreport`
 --
 ALTER TABLE `tbl_violationreport`
-  ADD CONSTRAINT `SRCode_fk_ViolationReport` FOREIGN KEY (`SRCode`) REFERENCES `tbl_students` (`SRCode`),
-  ADD CONSTRAINT `StaffID_fk_ViolationReport` FOREIGN KEY (`StaffID`) REFERENCES `tbl_staff` (`StaffID`),
+  ADD CONSTRAINT `SRCode_fk_ViolationReport` FOREIGN KEY (`SRCode`) REFERENCES `tbl_students` (`SRCode`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `StaffID_fk_ViolationReport` FOREIGN KEY (`StaffID`) REFERENCES `tbl_staff` (`StaffID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `ViolationTypeID_fk_ViolationReport` FOREIGN KEY (`ViolationTypeID`) REFERENCES `tbl_violationtypes` (`ViolationTypeID`);
 COMMIT;
 

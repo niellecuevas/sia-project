@@ -71,7 +71,7 @@ if (isset($_POST['id']) && isset($_POST['password']) && isset($_POST['role'])) {
         */
 
         // Query
-        $sqlQuery = "CALL SP_GetStudentAccount('$id', '$password')";
+        $sqlQuery = "CALL SP_GetStudentwithViolation('$id', '$password')";
 
         // Execute Query
         $result = mysqli_query($conn, $sqlQuery);
@@ -89,6 +89,26 @@ if (isset($_POST['id']) && isset($_POST['password']) && isset($_POST['role'])) {
                 $_SESSION['LastName'] = $user['LastName'];
                 $_SESSION['CourseName'] = $user['CourseName'];
                 $_SESSION['Department'] = $user['Department'];
+                $_SESSION['ViolationLevel'] = $user['ViolationLevel'];
+
+                // Count the Minor and Major Offenses without additional queries
+                $minorOffensesCount = 0;
+                $majorOffensesCount = 0;
+
+                // Add logic to calculate the offenses from the retrieved data
+                foreach ($user as $key => $value) {
+                    if (strpos($key, 'ViolationLevel') === 0) {
+                    if ($value === 'Minor') {
+                        $minorOffensesCount++;
+                    } elseif ($value === 'Major') {
+                            $majorOffensesCount++;
+                        }
+                    }
+                }
+
+                $_SESSION['MinorOffenses'] = $minorOffensesCount;
+                $_SESSION['MajorOffenses'] = $majorOffensesCount;
+
 
                 $middleInitial = !empty($user['MiddleName']) ? strtoupper(substr($user['MiddleName'], 0, 1) . '.') : '';
                 $fullName = $user['FirstName'] . ' ' . $middleInitial . ' ' . $user['LastName'];
