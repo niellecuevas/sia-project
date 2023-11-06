@@ -23,11 +23,11 @@
           <div class="column">
             <div class="input-box">
               <label>Date</label>
-              <input type="date" placeholder="Enter date" required />
+              <input type="date" id="dateInput" placeholder="Enter date" required />
             </div>
             <div class="input-box">
               <label>Time</label>
-              <input type="time" placeholder="Enter time" required />
+              <input type="time" id="timeInput" placeholder="Enter time" required />
             </div>
           </div>
 
@@ -74,4 +74,5 @@
       </section>
 
 </body>
+  <script src="./js/createviolationreport.js"></script>
 </html>
