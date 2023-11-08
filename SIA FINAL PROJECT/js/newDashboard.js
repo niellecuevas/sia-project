@@ -14,10 +14,6 @@ allSideMenu.forEach(item=> {
 const pathName = window.location.pathname;
 const pageName = pathName.split("/").pop();
 
-if(pageName === "adminDashboard.php"){
-	document.querySelector(".page1").classList.add("active");
-}
-
 if(pageName === "createviolationreport.php"){
 	document.querySelector(".page2").classList.add("active");
 }
@@ -35,13 +31,8 @@ const menuBar = document.querySelector('#content nav .bx.bx-menu');
 const sidebar = document.getElementById('sidebar');
 
 menuBar.addEventListener('click', function () {
-	sidebar.classList.toggle('hide');
+	sidebar.classList.toggle('hide');	
 })
-
-
-
-
-
 
 
 const searchButton = document.querySelector('#content nav form .form-input button');
@@ -67,26 +58,17 @@ searchButton.addEventListener('click', function (e) {
 if(window.innerWidth < 768) {
 	sidebar.classList.add('hide');
 } else if(window.innerWidth > 576) {
-	searchButtonIcon.classList.replace('bx-x', 'bx-search');
+	searchButtonIcon.classList.replace('bx-x');
 	searchForm.classList.remove('show');
 }
 
 
 window.addEventListener('resize', function () {
 	if(this.innerWidth > 576) {
-		searchButtonIcon.classList.replace('bx-x', 'bx-search');
+		searchButtonIcon.classList.replace('bx-x');
 		searchForm.classList.remove('show');
 	}
 })
 
 
 
-const switchMode = document.getElementById('switch-mode');
-
-switchMode.addEventListener('change', function () {
-	if(this.checked) {
-		document.body.classList.add('dark');
-	} else {
-		document.body.classList.remove('dark');
-	}
-})

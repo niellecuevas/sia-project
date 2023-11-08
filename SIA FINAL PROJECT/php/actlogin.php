@@ -58,7 +58,7 @@ if (isset($_POST['id']) && isset($_POST['password']) && isset($_POST['role'])) {
                 $_SESSION['Position'] = $user['Position'];
                 $_SESSION['PasswordEncrypted'] = $user['PasswordEncrypted'];
 
-                header("Location: ../adminDashboard.php");
+                header("Location: ../createviolationreport.php");
                 exit();
             }
         }
