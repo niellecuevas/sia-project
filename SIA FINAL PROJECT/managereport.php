@@ -25,7 +25,6 @@
                         <option value="option3">Option 3</option>
                     </select>
                     </div>
-            </div>
             <!--violation list table-->
             <div class="mngreport-body">
                 <div id="violationList">
@@ -82,6 +81,7 @@
                         </tr>
                     </table>
                 </div>
+                <!--appeal request table-->
                 <div id="appealRequestList">
                     <table>
                         <tr class="mngreport-topic-heading">
@@ -101,11 +101,11 @@
                                     Review
                                 </button>
                             </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-    </section>
+                          </tr>
+                      </table>
+                  </div>
+              </div>
+      </section>
     <!--edit violation report-->
     <section class="containerEditVio">
         <div class="edit-vio">
@@ -228,6 +228,42 @@
             </div>
           </div>
           <button>Notify</button>
+        </form>
+      </section>
+
+      <!--appeal request-->
+      <section class="containerAppealRequest">
+        <div class="review-appeal">
+            <h1>Appeal Request</h1>
+        </div>
+        <button class="close-button" onclick="closeAppealRequest()">&times;</button>
+        <form action="#" class="form">
+        <div class="input-box">
+            <label>SR Code</label>
+            <input type="text" placeholder="Enter SR Code" required />
+          </div>
+          <div class="input-box">
+            <label>Student</label>
+            <input type="text" placeholder="Enter Student's Full Name" required />
+          </div>
+          <div class="column">
+          <div class="input-box">
+            <label>Date</label>
+            <input type="date" id="generateId" placeholder="Enter date" required />
+          </div>
+            <div class="input-box">
+              <label>Program</label>
+              <input type="text" placeholder="Enter program" required />
+            </div>
+          </div>
+          <div class="input-box">
+              <label>Remarks</label>
+              <input type="text" placeholder="Enter remarks" required />
+            </div>
+          <div class="column">
+            <button>Accept</button>
+            <button>Deny</button>
+          </div>
         </form>
       </section>
     
