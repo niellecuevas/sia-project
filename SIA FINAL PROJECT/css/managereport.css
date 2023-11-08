@@ -115,6 +115,10 @@ table {
     text-align: center;
   }
 
+  #appealRequestList {
+    display:none;
+  }
+
   #callslipReqList {
     display:none;
   }

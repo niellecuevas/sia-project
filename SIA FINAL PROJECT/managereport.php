@@ -16,6 +16,7 @@
                 <h1 class="">Report Manager</h1>
                 <button class="tab-button" id="vio-list" onclick="switchTable('violationList', 'vio-list')">Violation List</button>
                 <button class="tab-button" id="call-slip-req" onclick="switchTable('callslipReqList', 'call-slip-req')">Call Slip Required List</button>
+                <button class="tab-button" id="appeal-req" onclick="switchTable('appealRequestList', 'appeal-req')">Appeal Request List</button>
                     <div class="dropdown">
                     <select id="sortDropdown">
                         <option value="" disabled selected>Sort</option>
@@ -25,6 +26,7 @@
                     </select>
                     </div>
             </div>
+            <!--violation list table-->
             <div class="mngreport-body">
                 <div id="violationList">
                     <table>
@@ -55,7 +57,7 @@
                         </tr>
                     </table>
                 </div>
-
+                <!--call slip required table-->
                 <div id="callslipReqList">
                     <table>
                         <tr class="mngreport-topic-heading">
@@ -75,6 +77,28 @@
                             <td class="centered-cell">
                             <button class="btncss" id="openCallSlipForm">
                                     Call Slip
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="appealRequestList">
+                    <table>
+                        <tr class="mngreport-topic-heading">
+                            <th>   </th>
+                            <th>SR Code</th>
+                            <th>Name</th>
+                            <th>Offense</th>
+                            <th>   </th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>21-31662</td>
+                            <td>Sofia Mae</td>
+                            <td>Improper Haircut</td>
+                            <td class="centered-cell">
+                            <button class="btncss" id="openAppealReq">
+                                    Review
                                 </button>
                             </td>
                         </tr>
