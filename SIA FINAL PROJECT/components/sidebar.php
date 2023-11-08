@@ -6,7 +6,7 @@
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
-	<link rel="stylesheet" href="css/newDashboard.css">
+	<link rel="stylesheet" href="css/sidebar.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 	<title>BatStateU</title>
 	<link rel="icon" href="img/BSULogo.png" sizes="32x32" type="image/png">
@@ -19,12 +19,6 @@
 			<span class="text">BatStateU</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="page1" >
-				<a href="adminDashboard.php" >
-					<i class='bx bxs-dashboard' ></i>
-					<span class="text">Dashboard</span>
-				</a>
-			</li>
 			<li class="page2">
 				<a href="createviolationreport.php">
 					<i class='bx bxs-report'></i>
@@ -62,14 +56,6 @@
 		<nav>
 			<i class='bx bx-menu' ></i>
 			<a href="#" class="nav-link">Admin</a>
-			<form action="#">
-				<div class="form-input">
-					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
-				</div>
-			</form>
-			<input type="checkbox" id="switch-mode" hidden>
-			<label for="switch-mode" class="switch-mode"></label>
 		</nav>
 		<!-- NAVBAR -->
         <script src="js/newDashboard.js"></script>

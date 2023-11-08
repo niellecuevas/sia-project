@@ -1,5 +1,7 @@
-<?php include "./components/sidebar.php" ?>
+<?php require "./php/authenticateadmin.php"?>
 <?php require "./php/dbconnection.php" ?>
+<?php include "./components/sidebar.php" ?>
+
 
 <!DOCTYPE html>
 <html>
