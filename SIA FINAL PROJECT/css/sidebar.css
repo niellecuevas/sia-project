@@ -71,7 +71,7 @@ body {
 #sidebar.hide {
 	width: 60px;
 }
-#sidebar .brand {
+#sidebar .brand{
 	font-size: 24px;
 	font-weight: 700;
 	height: 56px;
@@ -91,6 +91,8 @@ body {
 	display: flex;
 	justify-content: center;
 }
+
+
 #sidebar .side-menu {
 	width: 100%;
 	margin-top: 20px;
@@ -105,7 +107,6 @@ body {
 	padding: 4px;
 }
 #sidebar .side-menu li.active {
-	background: var(--grey);
 	position: relative;
 }
 #sidebar .side-menu li.active::before {
@@ -115,8 +116,7 @@ body {
 	height: 40px;
 	border-radius: 50%;
 	top: -40px;
-	right: 0;
-	box-shadow: 20px 20px 0 var(--grey);
+
 	z-index: -1;
 }
 #sidebar .side-menu li.active::after {
@@ -126,8 +126,7 @@ body {
 	height: 40px;
 	border-radius: 50%;
 	bottom: -40px;
-	right: 0;
-	box-shadow: 20px -20px 0 var(--grey);
+	
 	z-index: -1;
 }
 #sidebar .side-menu li a {
@@ -143,8 +142,14 @@ body {
 	overflow-x: hidden;
 }
 #sidebar .side-menu.top li.active a {
-	color: var(--reddish);
+	color: var(--light);
+    background-color: var(--darkred);
 }
+
+#sidebar .side-menu.top li.active a:hover {
+	color: var(--light);
+}
+
 #sidebar.hide .side-menu li a {
 	width: calc(48px - (4px * 2));
 	transition: width .3s ease;
@@ -164,6 +169,7 @@ body {
 #sidebar a.logout {
 	margin-top: 170px;
 }
+
 /* SIDEBAR */
 
 
@@ -189,7 +195,7 @@ body {
 	height: 56px;
 	background: var(--light);
 	padding: 0 24px;
-	display: flex;
+	display: none;
 	align-items: center;
 	grid-gap: 24px;
 	font-family: var(--lato);

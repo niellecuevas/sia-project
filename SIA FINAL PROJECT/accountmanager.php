@@ -4,8 +4,7 @@
 <html>
 <head>
     <!-- Link Testing Laste -->
-    <link rel="stylesheet" href="css/accountmanager.css">
-    <link rel="stylesheet" href="css/filteracc.css">
+  
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 	<title>Account Manager Student Conduct Management System</title>
@@ -13,7 +12,7 @@
 </head>
 <body>
   
-        <!-- Search -->
+        <!-- Search
 <div class="searchbar">
     <input type="text"
            placeholder="Search">
@@ -23,7 +22,7 @@
             alt="search-icon">
       </div>
 </div>
-<!-- Filter -->
+----------------- Filter -------------------
 <div class="wrapper">
 
     <div class="dropdown">
@@ -59,7 +58,7 @@
   <div id="list">
     
   </div>
-        <!-- Table Student Records -->
+        ------------ Table Student Records -------------
         <div class="record-container">
             <div class="record-header">
                 <h1 class="StudentRecord">Account Manager</h1>
@@ -92,7 +91,7 @@
             </div>
         </div>
 
-        <!-- Account Manager JS -->
-    <script src="js/accmanager.js"></script>
+        -------------- Account Manager JS ------
+    <script src="js/accmanager.js"></script> ----->
 </body>
 </html>

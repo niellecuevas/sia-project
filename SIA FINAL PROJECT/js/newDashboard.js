@@ -27,7 +27,7 @@ if(pageName === "accontmanager.php"){
 }
 
 // TOGGLE SIDEBAR
-const menuBar = document.querySelector('#content nav .bx.bx-menu');
+const menuBar = document.querySelector('#sidebar .bx.bx-menu');
 const sidebar = document.getElementById('sidebar');
 
 menuBar.addEventListener('click', function () {
