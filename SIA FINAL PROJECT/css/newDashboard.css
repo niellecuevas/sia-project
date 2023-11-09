@@ -148,7 +148,7 @@ body {
 	color: var(--reddish);
 }
 #sidebar.hide .side-menu li a {
-	width: calc(48px - (4px * 2));
+	width: calc(48px - (4px * 3));
 	transition: width .3s ease;
 }
 #sidebar .side-menu li a.logout {

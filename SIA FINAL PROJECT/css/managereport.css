@@ -35,13 +35,13 @@
     border-top-left-radius: 6px;
     margin-top: 20px;
   } 
-  .tab-button:hover {
+ .tab-button:hover {
     background-color: #eee;
   }
   .tab-button.highlighted {
     background-color: #a50113;
     color: #fff;
-  }
+  } 
   .btncss {
      background-color: #a50113;
     color: white;
@@ -74,6 +74,7 @@
   transition: all 0.2s ease;
   background: rgb(187, 15, 15);
 }
+
  /*dropdown*/
 .dropdown {
     position: absolute; 

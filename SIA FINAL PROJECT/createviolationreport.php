@@ -1,5 +1,4 @@
-<?php require "./php/authenticateadmin.php"?>
-<?php require "./php/dbconnection.php" ?>
+
 <?php include "./components/sidebar.php" ?>
 
 
@@ -20,10 +19,15 @@
             <h1>Create Violation Report</h1>
         </div>
         <form action="./php/actcreateviolation.php" method="POST" class="form" enctype="multipart/form-data">
-        <div class="input-box">
-              <label>SR Code</label>
-              <input type="text" placeholder="Enter SR-Code" name="srcode" required />
-            </div>
+        <div class="column">
+              <div class="input-box">
+                <label>SR Code</label>
+                <input type="text" placeholder="Enter SR Code" required />
+              </div>
+              <div class="input-box">
+                <button>Scan</button>
+          </div>
+          </div>
           <div class="column">
             <div class="input-box">
               <label>Date</label>
@@ -47,10 +51,6 @@
             <div class="input-box">
               <label>Program</label>
               <input type="text" placeholder="Program" name="studentprogram" required />
-            </div>
-            <div class="input-box">
-              <label>Section</label>
-              <input type="text" placeholder="Section" name="studentsection" required />
             </div>  
           </div>
           <div class="input-box address">

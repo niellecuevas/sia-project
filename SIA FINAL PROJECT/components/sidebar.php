@@ -15,8 +15,9 @@
     <!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand">
-			<img src="img/BSULogo.png" style="width: 30px; margin: 20px;">
-			<span class="text">BatStateU</span>
+		<i class='bx bx-menu' ></i>
+		<img src="img/BSULogo.png" style="width: 30px; margin-right: 10px">
+		<span class="text">BatStateU</span>
 		</a>
 		<ul class="side-menu top">
 			<li class="page2">
@@ -41,7 +42,7 @@
 		<ul class="side-menu">
 			
 			<li>
-				<a href="./php/actlogout.php" class="logout">
+				<a href="./php/actadminlogout.php" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>
 					<span class="text">Logout</span>
 				</a>
@@ -54,8 +55,7 @@
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
-			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link">Admin</a>
+
 		</nav>
 		<!-- NAVBAR -->
         <script src="js/newDashboard.js"></script>
