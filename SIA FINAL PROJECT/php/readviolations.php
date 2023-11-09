@@ -2,7 +2,7 @@
 
 // Fetch the violation types from the database
 // Call the stored procedure "GetViolationTypes" in the database
-$query = "CALL GetViolationTypes()";
+$query = "CALL SP_GetViolationTypes()";
 // Execute the stored procedure and store the result in the $result variable
 $result = $conn->query($query);
 
