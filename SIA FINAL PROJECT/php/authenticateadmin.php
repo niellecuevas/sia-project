@@ -7,7 +7,7 @@
 
     // Check if the user is authenticated
     if (!isset($_SESSION['StaffID'])) {
-        header("Location: login.php");
+        header("Location: loginadmin.php");
         exit();
     }
 

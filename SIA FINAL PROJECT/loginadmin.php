@@ -15,7 +15,7 @@
         <!-- Main Login Form -->
         <div class="form-container log-in-container">
             
-            <form action="./php/actlogin.php" method="POST" id="loginForm">
+            <form action="./php/actadminlogin.php" method="POST" id="loginForm">
                 
                 <img src="img/BSULogo.png" id="BSULogo" alt="logo" class="logo">
                 <div class="School">
