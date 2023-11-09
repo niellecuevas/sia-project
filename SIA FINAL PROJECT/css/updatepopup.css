@@ -39,9 +39,11 @@
   width: 100%;
   margin-top: 20px;
 }
+
 .input-box label {
   color: #333;
 }
+
 .form :where(.input-box input, .select-box) {
   position: relative;
   height: 50px;

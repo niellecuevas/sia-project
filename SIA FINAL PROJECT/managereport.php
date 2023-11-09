@@ -257,8 +257,8 @@
             </div>
           </div>
           <div class="input-box">
-              <label>Remarks</label>
-              <input type="text" placeholder="Enter remarks" required />
+              <label>Request</label>
+              <textarea style="width:100%; height:100px; resize:none;" placeholder="Message here" required ></textarea>
             </div>
           <div class="column">
             <button>Accept</button>
@@ -282,6 +282,13 @@
         });
          function closeCallSlipForm() {
             document.querySelector(".containerCallSlipForm").style.display = "none";
+        }
+
+        document.getElementById("openAppealReq").addEventListener("click", function() {
+            document.querySelector(".containerAppealRequest").style.display = "block";
+        });
+         function closeAppealRequest() {
+            document.querySelector(".containerAppealRequest").style.display = "none";
         }
     </script>
 </body>
