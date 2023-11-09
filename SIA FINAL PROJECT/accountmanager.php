@@ -3,95 +3,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Link Testing Laste -->
-  
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	
+<link rel="stylesheet" href="css/accountmanager.css">
 	<title>Account Manager Student Conduct Management System</title>
 
 </head>
 <body>
-  
-        <!-- Search
-<div class="searchbar">
-    <input type="text"
-           placeholder="Search">
-    <div class="searchbtn">
-      <img src= "img/search.jpg"
-            class="icn srchicn"
-            alt="search-icon">
-      </div>
-</div>
------------------ Filter -------------------
-<div class="wrapper">
+    <div class="accmanager-container">
+      <h1>Account Manager</h1>
+      <form class="search-container">
+        <input type="text" id="search-bar" placeholder="Search">
+        <a href="#"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
+      </form>
 
-    <div class="dropdown">
-        <button id="dropdownBtnFilter">Admin<i class="fa fa-caret-down"></i></button>
-        <div id="dropdownFilterOptions" class="dropdownFilterOptions">
-          <a href="#" class="filterOption">Mr.Tiquio</a>
-          <a href="#" class="filterOption">Ms. Sulit</a>
-        </div>
-      </div>
-  
-    <div class="dropdown">
-      <button id="dropdownBtnSort">Sort By <i class="fa fa-caret-down"></i></button>
-      <div id="dropdownSortOptions" class="dropdownSortOptions">
-        <a href="#" class="sortOption">Name <span>A - Z</span></a>
-        <a href="#" class="sortOption">Name <span>Z - A</span></a>
-        <a href="#" class="sortOption">Age <span>ASC</span></a>
-        <a href="#" class="sortOption">Age <span>DESC</span></a>
-      </div>
-    </div>
-    
-    <div class="dropdown">
-      <button id="dropdownBtnFilter">Filter<i class="fa fa-caret-down"></i></button>
-      <div id="dropdownFilterOptions" class="dropdownFilterOptions">
-        <a href="#" class="filterOption">Right Handed</a>
-        <a href="#" class="filterOption">Left Handed</a>
-      </div>
-    </div>
-    
-    <button id="clearBtn">Reset</button>
-    
-  </div>
-  
-  <div id="list">
-    
-  </div>
-        ------------ Table Student Records -------------
-        <div class="record-container">
-            <div class="record-header">
-                <h1 class="StudentRecord">Account Manager</h1>
-                <button class="view">View All</button>
-            </div>
-            <div class="record-body">
-                <table>
-                    <tr class="record-topic-heading">
-                        <th>SR-Code</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Action</th>
-                    </tr>
-                    <tr class="items">
-                        <td>21-73627</td>
-                        <td>Kyle Ilao</td>
-                        <td>kyle@gmail.com</td>
-                        <td>
-                            <button onclick="SubmitEvent">
-                                <span class="fas fa-pen"></span>
-                                Edit
-                            </button>
-                            <button onclick="SubmitEvent">
-                                <span class="fas fa-trash"></span>
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+          <div class="dropdown">
+             <select id="sortDropdown">
+                 <option value="" disabled selected>Sort</option>
+                 <option value="option1">Option 1</option>
+                 <option value="option2">Option 2</option>
+                 <option value="option3">Option 3</option>
+             </select>
+          </div>
 
-        -------------- Account Manager JS ------
-    <script src="js/accmanager.js"></script> ----->
+
+
+    </div>
+   
 </body>
 </html>
