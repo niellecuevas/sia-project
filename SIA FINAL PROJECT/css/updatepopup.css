@@ -111,10 +111,10 @@
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  background: rgb(100, 99, 99);
+  background: rgb(187, 15, 15);
 }
 .form button:hover {
-  background: rgb(187, 15, 15);
+  background: rgb(112, 112, 112);
 }
 
 

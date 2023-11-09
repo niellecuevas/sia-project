@@ -41,16 +41,22 @@
 
           <div class="input-box">
             <label>Name</label>
-            <input type="text" placeholder="Student Name" name="studentname" required />
+            <div class="auto-input">
+              <p name="studentname">Student Name</p>
+            </div>
           </div>
           <div class="column">
             <div class="input-box">
               <label>Department</label>
-              <input type="text" placeholder="Department" name="studentdepartment" required />
+              <div class="auto-input">
+              <p name="studentdepartment">Student Department</p>
+            </div>
             </div>
             <div class="input-box">
               <label>Program</label>
-              <input type="text" placeholder="Program" name="studentprogram" required />
+              <div class="auto-input">
+              <p name="studentprogram">Student Program</p>
+            </div>
             </div>  
           </div>
           <div class="input-box address">
