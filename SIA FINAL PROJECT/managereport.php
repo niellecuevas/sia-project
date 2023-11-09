@@ -114,14 +114,13 @@
         <button class="close-button" onclick="closeEditVio()">&times;</button>
         <form action="#" class="form">
           <div class="column">
-          <div class="input-box">
-            <label>SR Code</label>
-            <input type="text" placeholder="Enter SR Code" required />
+              <div class="input-box">
+                <label>SR Code</label>
+                <input type="text" placeholder="Enter SR Code" required />
+              </div>
+              <div class="input-box">
+                <button>Scan</button>
           </div>
-          <div class="input-box">
-            <button>Scan</button>
-          </div>
-
           </div>
           <div class="input-box">
             <label>Name</label>
@@ -147,10 +146,6 @@
               <label>Program</label>
               <input type="text" placeholder="Enter program" required />
             </div>
-            <div class="input-box">
-              <label>Section</label>
-              <input type="text" placeholder="Enter section" required />
-            </div>  
           </div>
           <div class="input-box address">
             <label>Violation</label>
@@ -203,13 +198,12 @@
           </div>
           <div class="column">
             <div class="input-box">
-              <label>Program</label>
-              <input type="text" placeholder="Enter program" required />
+              <label>Department</label>
+              <input type="text" placeholder="Enter Department" required />
             </div>
             <div class="input-box">
-              <label>Section</label>
-              <input type="text" placeholder="Enter section
-              " required />
+              <label>Program</label>
+              <input type="text" placeholder="Enter program" required />
             </div>
           </div>
 
