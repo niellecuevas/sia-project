@@ -73,7 +73,7 @@ if (isset($_POST['submit'])) {
         }
 
         // Call the stored procedure to insert data
-        $query = $conn->prepare("CALL InsertViolationReport(?, ?, ?, ?, ?, ?, ?)");
+        $query = $conn->prepare("CALL SP_InsertViolationReport(?, ?, ?, ?, ?, ?, ?)");
         $query->bind_param("ssissss", $srCode, $staffId, $violationType, $violationDate, $violationTime, $remarks, $newImageName);
 
         if ($query->execute()) {
