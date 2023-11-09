@@ -113,9 +113,15 @@
         </div>
         <button class="close-button" onclick="closeEditVio()">&times;</button>
         <form action="#" class="form">
+          <div class="column">
           <div class="input-box">
             <label>SR Code</label>
             <input type="text" placeholder="Enter SR Code" required />
+          </div>
+          <div class="input-box">
+            <button>Scan</button>
+          </div>
+
           </div>
           <div class="input-box">
             <label>Name</label>
@@ -177,9 +183,15 @@
         </div>
         <button class="close-button" onclick="closeCallSlipForm()">&times;</button>
         <form action="#" class="form">
-        <div class="input-box">
+        <div class="column">
+          <div class="input-box">
             <label>SR Code</label>
             <input type="text" placeholder="Enter SR Code" required />
+          </div>
+          <div class="input-box">
+            <button>Scan</button>
+          </div>
+
           </div>
           <div class="input-box">
             <label>Student</label>
