@@ -35,7 +35,24 @@
 .input-box label {
   color: #333;
 }
-.form :where(.input-box input, .select-box) {
+.input-box .auto-input p[name="studentname"] {
+  position: relative;
+  margin-top: 8px;
+}
+
+.input-box .auto-input p[name="studentname"]:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border-bottom: 1px solid #707070;
+  color: #707070;
+  margin-top: 8px;
+}
+
+.form .input-box input,
+.form .select-box {
   position: relative;
   height: 50px;
   width: 100%;

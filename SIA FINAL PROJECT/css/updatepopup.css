@@ -43,7 +43,21 @@
 .input-box label {
   color: #333;
 }
+.input-box .auto-input p[name="studentname"] {
+  position: relative;
+  margin-top: 8px;
+}
 
+.input-box .auto-input p[name="studentname"]:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border-bottom: 1px solid #707070;
+  color: #707070;
+  margin-top: 8px;
+}
 .form :where(.input-box input, .select-box) {
   position: relative;
   height: 50px;
@@ -111,10 +125,10 @@
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  background: rgb(100, 99, 99);
+  background: rgb(187, 15, 15);
 }
 .form button:hover {
-  background: rgb(187, 15, 15);
+  background: rgb(112, 112, 112);
 }
 
 

@@ -1,4 +1,4 @@
-<?php require "./php/authenticateadmin.php"?>
+czzzzzz
 <?php include "./components/sidebar.php" ?>
 
 <!DOCTYPE html>

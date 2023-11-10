@@ -124,7 +124,9 @@
           </div>
           <div class="input-box">
             <label>Name</label>
-            <input type="text" placeholder="Enter Name" required />
+            <div class="auto-input">
+              <p name="studentName">Student Name</p>
+            </div>
           </div>
           <div class="column">
             <div class="input-box">
@@ -138,14 +140,18 @@
           </div>
 
           <div class="column">
-            <div class="input-box">
-              <label>Department</label>
-              <input type="text" placeholder="Enter Department" required />
+          <div class="input-box">
+            <label>Department</label>
+            <div class="auto-input">
+              <p name="studentDept">Student Department</p>
             </div>
-            <div class="input-box">
-              <label>Program</label>
-              <input type="text" placeholder="Enter program" required />
+          </div>
+          <div class="input-box">
+            <label>Program</label>
+            <div class="auto-input">
+              <p name="studentProgram">Student Program</p>
             </div>
+          </div>
           </div>
           <div class="input-box address">
             <label>Violation</label>
@@ -189,22 +195,28 @@
 
           </div>
           <div class="input-box">
-            <label>Student</label>
-            <input type="text" placeholder="Enter Student's Full Name" required />
+            <label>Name</label>
+            <div class="auto-input">
+              <p name="studentName">Student Name</p>
+            </div>
           </div>
           <div class="input-box">
             <label>Date</label>
             <input type="date" id="generateId" placeholder="Enter date" required />
           </div>
           <div class="column">
-            <div class="input-box">
-              <label>Department</label>
-              <input type="text" placeholder="Enter Department" required />
+          <div class="input-box">
+            <label>Department</label>
+            <div class="auto-input">
+              <p name="studentDept">Student Department</p>
             </div>
-            <div class="input-box">
-              <label>Program</label>
-              <input type="text" placeholder="Enter program" required />
+          </div>
+          <div class="input-box">
+            <label>Program</label>
+            <div class="auto-input">
+              <p name="studentProgram">Student Program</p>
             </div>
+          </div>
           </div>
 
           <div class="column">
@@ -249,18 +261,28 @@
             <input type="text" placeholder="Enter SR Code" required />
           </div>
           <div class="input-box">
-            <label>Student</label>
-            <input type="text" placeholder="Enter Student's Full Name" required />
+            <label>Name</label>
+            <div class="auto-input">
+              <p name="studentName">Student Name</p>
+            </div>
           </div>
-          <div class="column">
           <div class="input-box">
             <label>Date</label>
             <input type="date" id="generateId" placeholder="Enter date" required />
           </div>
-            <div class="input-box">
-              <label>Program</label>
-              <input type="text" placeholder="Enter program" required />
+          <div class="column">
+          <div class="input-box">
+            <label>Department</label>
+            <div class="auto-input">
+              <p name="studentDept">Student Department</p>
             </div>
+          </div>
+          <div class="input-box">
+            <label>Program</label>
+            <div class="auto-input">
+              <p name="studentProgram">Student Program</p>
+            </div>
+          </div>
           </div>
           <div class="input-box">
               <label>Request</label>

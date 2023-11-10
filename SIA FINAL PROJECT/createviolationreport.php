@@ -1,4 +1,5 @@
-
+<?php require "./php/authenticateadmin.php"?>
+<?php require "./php/dbconnection.php"?>
 <?php include "./components/sidebar.php" ?>
 
 
@@ -7,7 +8,7 @@
 <head>
 
     <link rel="stylesheet" href="css/generatereport.css">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 	<title>Generate Report Student Conduct Management System</title>
@@ -22,7 +23,7 @@
         <div class="column">
               <div class="input-box">
                 <label>SR Code</label>
-                <input type="text" placeholder="Enter SR Code" required />
+                <input type="text" id="srCode" name="srCode" placeholder="Enter SR Code" required />
               </div>
               <div class="input-box">
                 <button>Scan</button>
@@ -41,16 +42,22 @@
 
           <div class="input-box">
             <label>Name</label>
-            <input type="text" placeholder="Student Name" name="studentname" required />
+            <div class="auto-input">
+              <p name="studentname">Student Name</p>
+            </div>
           </div>
           <div class="column">
             <div class="input-box">
               <label>Department</label>
-              <input type="text" placeholder="Department" name="studentdepartment" required />
+              <div class="auto-input">
+              <p name="studentdepartment">Student Department</p>
+            </div>
             </div>
             <div class="input-box">
               <label>Program</label>
-              <input type="text" placeholder="Program" name="studentprogram" required />
+              <div class="auto-input">
+              <p name="studentprogram">Student Program</p>
+            </div>
             </div>  
           </div>
           <div class="input-box address">
@@ -71,8 +78,37 @@
       </section>
 
 </body>
+  <script>
+    $(document).ready(function () {
+      alert('ready')
+    $('#srCode').on('keyup', function () {
+        var srCode = $(this).val();
+        alert('trigger')
+
+        // Perform an AJAX request to fetch data from the database
+        $.ajax({
+            url: 'studentdata.php', // Create a PHP script to fetch data
+            method: 'POST',
+            data: { srCode: srCode },
+            success: function (response) {
+                var data = JSON.parse(response);
+                if (data) {
+                    // Populate the HTML elements with the retrieved data
+                    $('[name="studentname"]').text(data.Name);
+                    $('[name="studentdepartment"]').text(data.Department);
+                    $('[name="studentprogram"]').text(data.CourseName);
+                } else {
+                    // Clear the HTML elements if no data is found
+                    $('[name="studentname"]').text('');
+                    $('[name="studentdepartment"]').text('');
+                    $('[name="studentprogram"]').text('');
+                }
+            }
+        });
+    });
+});
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <script src="./js/createviolationreport.js"></script>
 </html>
