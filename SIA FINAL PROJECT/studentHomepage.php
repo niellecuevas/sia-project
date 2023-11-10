@@ -1,4 +1,5 @@
 <?php require "./php/authenticatestudent.php"?>
+<?php require "./php/studviolationtypecounter.php"?>
 
 <!DOCTYPE html>
 <html>
@@ -124,14 +125,14 @@
        <!----------- STUDENT CONDUCT INFORMATION START----------------->
 <section>
 <div class="offenses-container" data-aos="fade-right">
-    <div class="offense-container">
-        <div class="offense">Minor Offense <p class="num"><?= $_SESSION['MinorOffenses'] ?></p></div>
-    </div>
+        <div class="offense-container">
+            <div class="offense">Minor Offense <p class="num" id="minorViolationCount"><?php echo $minorViolations; ?></p></div>
+        </div>
 
-    <div class="offense-container" id="majorOffense">
-        <div class="offense">Major Offense <p class="num"><?= $_SESSION['MajorOffenses'] ?></p></div>
-    </div>
-</div>  
+        <div class="offense-container" id="majorOffense">
+            <div class="offense">Major Offense <p class="num" id="majorViolationCount"><?php echo $majorViolations; ?></p></div>
+        </div>
+</div>
 
   <div class="swiper mySwiper"  data-aos="fade-left">
     <div class="swiper-wrapper" >
