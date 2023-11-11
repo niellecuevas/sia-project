@@ -1,4 +1,5 @@
 <?php include "./components/sidebar.php" ?>
+<?php require "./php/authenticateadmin.php"?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,28 +17,11 @@
                 <button class="tab-button" id="vio-list" onclick="switchTable('violationList', 'vio-list')">Violation List</button>
                 <button class="tab-button" id="call-slip-req" onclick="switchTable('callslipReqList', 'call-slip-req')">Call Slip Required List</button>
                 <button class="tab-button" id="appeal-req" onclick="switchTable('appealRequestList', 'appeal-req')">Appeal Request List</button>
-                    <div class="dropdown">
-                    <select id="sortDropdown" onchange="switchTable('violationList', 'vio-list', this.value)">
-                        <option value="default" disabled selected>Sort</option>
-                        <option value="option1">Sort By Violation</option>
-                        <option value="option2">Sort By Student</option>
-                    </select>
-                    </div>
-            <!--violation list table-->
+                <?php include './php/adminsort.php'?>
+                <!--violation list table-->
             <div class="mngreport-body">
-                <div id="violationList">
-                    <table>
-                        <tr class="mngreport-topic-heading">
-                            <th>   </th>
-                            <th>Name</th>
-                            <th>Violation</th>
-                            <th>Date</th>
-                            <th>   </th>
-                            <th>   </th>
-                        </tr>
-                        <?php include "./php/violationlist.php"?>
-                    </table>
-                </div>
+            <?php include "./php/violationlist.php"?>
+
                 <!--call slip required table-->
                 <div id="callslipReqList">
                     <table>
@@ -64,28 +48,7 @@
                     </table>
                 </div>
                 <!--appeal request table-->
-                <div id="appealRequestList">
-                    <table>
-                        <tr class="mngreport-topic-heading">
-                            <th>   </th>
-                            <th>SR Code</th>
-                            <th>Name</th>
-                            <th>Offense</th>
-                            <th>   </th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>21-31662</td>
-                            <td>Sofia Mae</td>
-                            <td>Improper Haircut</td>
-                            <td class="centered-cell">
-                            <button class="btncss" id="openAppealReq">
-                                    Review
-                                </button>
-                            </td>
-                          </tr>
-                      </table>
-                  </div>
+                <?php include "./php/appeallist.php"?>
               </div>
       </section>
     <!--edit violation report-->
