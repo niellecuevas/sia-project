@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 06, 2023 at 08:50 AM
+-- Generation Time: Nov 10, 2023 at 12:09 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db1_ba3102`
+-- Database: `db_ba3102`
 --
 
 DELIMITER $$
@@ -34,6 +34,14 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetAdminAccount` (IN `id` INT, I
 
 DROP PROCEDURE IF EXISTS `SP_GetStudentAccount`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetStudentAccount` (IN `id` INT, IN `password` VARCHAR(255))   SELECT UserID, tbl_studentaccount.SRCode, PasswordEncrypted, tbl_students.FirstName, tbl_students.MiddleName, tbl_students.LastName,  tbl_course.CourseName, tbl_course.Department FROM tbl_studentaccount INNER JOIN tbl_students ON tbl_studentaccount.SRCode = tbl_students.SRCode INNER JOIN tbl_course ON tbl_students.CourseID = tbl_course.CourseID WHERE tbl_studentaccount.SRCode = id AND PasswordEncrypted = password$$
+
+DROP PROCEDURE IF EXISTS `SP_GetStudentData`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetStudentData` (IN `srCodeParam` VARCHAR(255))   BEGIN
+    SELECT CONCAT(FirstName, ' ', LEFT(MiddleName, 1), '. ', LastName) AS Name, CourseName, Department 
+    FROM tbl_students 
+    INNER JOIN tbl_course ON tbl_students.CourseID = tbl_course.CourseID 
+    WHERE SRCode = srCodeParam;
+END$$
 
 DROP PROCEDURE IF EXISTS `SP_GetStudentwithViolation`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetStudentwithViolation` (IN `id` VARCHAR(30), IN `password` VARCHAR(255))   SELECT 
@@ -61,13 +69,39 @@ WHERE
 AND 
     tbl_studentaccount.PasswordEncrypted = password$$
 
+DROP PROCEDURE IF EXISTS `SP_GetStudentwithViolation2`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetStudentwithViolation2` (IN `id` VARCHAR(30), IN `password` VARCHAR(255))   SELECT DISTINCT
+    tbl_studentaccount.UserID, 
+    tbl_studentaccount.SRCode, 
+    tbl_studentaccount.PasswordEncrypted, 
+    tbl_students.FirstName, 
+    tbl_students.MiddleName, 
+    tbl_students.LastName, 
+    tbl_course.CourseName, 
+    tbl_course.Department, 
+    tbl_violationtypes.ViolationLevel 
+FROM 
+    tbl_studentaccount 
+INNER JOIN 
+    tbl_students ON tbl_studentaccount.SRCode = tbl_students.SRCode 
+INNER JOIN 
+    tbl_course ON tbl_students.CourseID = tbl_course.CourseID 
+INNER JOIN 
+    tbl_violationreport ON tbl_students.SRCode = tbl_violationreport.SRCode 
+INNER JOIN 
+    tbl_violationtypes ON tbl_violationreport.ViolationTypeID = tbl_violationtypes.ViolationTypeID 
+WHERE 
+    tbl_studentaccount.SRCode = id
+AND 
+    tbl_studentaccount.PasswordEncrypted = password$$
+
 DROP PROCEDURE IF EXISTS `SP_GetViolationTypes`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetViolationTypes` ()   BEGIN
     SELECT ViolationTypeID, ViolationName FROM tbl_violationtypes;
 END$$
 
 DROP PROCEDURE IF EXISTS `SP_InsertViolationReport`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertViolationReport` (IN `p_SRCode` VARCHAR(255), IN `p_StaffID` VARCHAR(255), IN `p_ViolationTypeID` INT, IN `p_ViolationDate` DATE, IN `p_ViolationTime` TIME, IN `p_Remarks` VARCHAR(255), IN `p_Evidence` VARCHAR(255))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertViolationReport` (IN `p_SRCode` VARCHAR(255), IN `p_StaffID` INT, IN `p_ViolationTypeID` INT, IN `p_ViolationDate` DATE, IN `p_ViolationTime` TIME, IN `p_Remarks` VARCHAR(255), IN `p_Evidence` VARCHAR(255))   BEGIN
     INSERT INTO tbl_violationreport (SRCode, StaffID, ViolationTypeID, ViolationDate, ViolationTime, Remarks, Evidence)
     VALUES (p_SRCode, p_StaffID, p_ViolationTypeID, p_ViolationDate, p_ViolationTime, p_Remarks, p_Evidence);
 END$$
@@ -80,7 +114,7 @@ FROM tbl_students
 WHERE tbl_students.SRCode = sr$$
 
 DROP PROCEDURE IF EXISTS `SP_StudentViolationCarousel`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_StudentViolationCarousel` (IN `sr` VARCHAR(30))   SELECT 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_StudentViolationCarousel` (IN `sr` VARCHAR(255))   SELECT 
     tbl_violationtypes.ViolationName,
     tbl_violationtypes.ViolationLevel,
     tbl_callslip.Action, 
@@ -94,12 +128,39 @@ INNER JOIN tbl_students ON tbl_students.SRCode = tbl_violationreport.SRCode
 INNER JOIN tbl_violationtypes ON tbl_violationreport.ViolationTypeID = tbl_violationtypes.ViolationTypeID
 WHERE tbl_students.SRCode = sr$$
 
+DROP PROCEDURE IF EXISTS `SP_StudentViolationTypeCounter`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_StudentViolationTypeCounter` (IN `sr` VARCHAR(30))   SELECT
+	SUM(CASE WHEN ViolationLevel = 'Minor' THEN 1 ELSE 0 END) AS MinorViolations,
+	SUM(CASE WHEN ViolationLevel = 'Major' THEN 1 ELSE 0 END) AS MajorViolations
+FROM
+	tbl_violationtypes
+INNER JOIN tbl_violationreport ON tbl_violationtypes.ViolationTypeID = tbl_violationreport.ViolationTypeID
+INNER JOIN tbl_students ON tbl_violationreport.SRCode = tbl_students.SRCode
+WHERE
+	tbl_students.SRCode = sr$$
+
 DROP PROCEDURE IF EXISTS `SP_StudHomepage`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_StudHomepage` (IN `sr` VARCHAR(30))   SELECT 
     CONCAT(FirstName, ' ', IF(LENGTH(MiddleName) > 0, CONCAT(SUBSTRING(MiddleName, 1, 1), '.'), ''), ' ', LastName) AS `FullName`,
     tbl_students.SRCode, tbl_course.CourseName, tbl_course.Department
 FROM tbl_students
 INNER JOIN tbl_course ON tbl_students.CourseID = tbl_course.CourseID
+WHERE tbl_students.SRCode = sr$$
+
+DROP PROCEDURE IF EXISTS `SP_StudViolationCarousel`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_StudViolationCarousel` (IN `sr` VARCHAR(30))   SELECT 
+	tbl_violationreport.ViolationID,
+    tbl_violationtypes.ViolationName,
+    tbl_violationtypes.ViolationLevel,
+    tbl_callslip.Action,
+    tbl_violationreport.ViolationDate,
+    tbl_violationreport.ViolationTime,
+    tbl_violationreport.Remarks,
+    tbl_violationreport.Evidence
+FROM tbl_violationreport
+INNER JOIN tbl_violationtypes ON tbl_violationreport.ViolationTypeID = tbl_violationtypes.ViolationTypeID
+INNER JOIN tbl_students ON tbl_students.SRCode = tbl_violationreport.SRCode
+INNER JOIN tbl_callslip ON tbl_callslip.ViolationID = tbl_violationreport.ViolationID
 WHERE tbl_students.SRCode = sr$$
 
 DELIMITER ;
@@ -142,8 +203,8 @@ DROP TABLE IF EXISTS `tbl_appeal`;
 CREATE TABLE IF NOT EXISTS `tbl_appeal` (
   `AppealID` int NOT NULL AUTO_INCREMENT,
   `ViolationID` int NOT NULL,
-  `Appeal` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Status` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Appeal` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`AppealID`),
   KEY `ViolationID_fk_Appeal` (`ViolationID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -172,7 +233,7 @@ CREATE TABLE IF NOT EXISTS `tbl_callslip` (
   `Remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`CallSlipID`),
   KEY `ViolationID_CallSlip` (`ViolationID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_callslip`
@@ -183,7 +244,8 @@ INSERT INTO `tbl_callslip` (`CallSlipID`, `ViolationID`, `CreationDate`, `CallDa
 (4, 4, '2023-10-22', '2023-10-23', '15:08:10', 'Written Warning', ''),
 (5, 5, '2023-10-17', '2023-10-18', '11:09:19', 'Written Reprimand', ''),
 (6, 2, '2023-11-06', '2023-11-06', '19:34:15', '3 day suspension', ''),
-(7, 3, '2023-11-05', '2023-11-06', '15:34:15', 'Community Service', '');
+(7, 3, '2023-11-05', '2023-11-06', '15:34:15', 'Community Service', ''),
+(8, 7, '2023-11-08', '2023-11-09', '11:25:49', '1 Month Suspension', '');
 
 -- --------------------------------------------------------
 
@@ -252,7 +314,7 @@ CREATE TABLE IF NOT EXISTS `tbl_studentaccount` (
   `PasswordEncrypted` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`UserID`),
   KEY `SRCode_fk_User` (`SRCode`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_studentaccount`
@@ -264,8 +326,8 @@ INSERT INTO `tbl_studentaccount` (`UserID`, `SRCode`, `PasswordEncrypted`) VALUE
 (3, '21-39479', '$2y$10$.vGA1O9wmRjrwAVXD98HNOgsNpDczlqm3Jq7KnEd1rVAGv3Fykk1a\n'),
 (4, '21-39841', '$2y$10$.vGA1O9wmRjrwAVXD98HNOgsNpDczlqm3Jq7KnEd1rVAGv3Fykk1a\n'),
 (5, '21-87123', '$2y$10$.vGA1O9wmRjrwAVXD98HNOgsNpDczlqm3Jq7KnEd1rVAGv3Fykk1a\r\n'),
-(6, '21-39479', 'pogi'),
-(7, '21-87123', 'lakas');
+(7, '21-87123', 'lakas'),
+(10, '21-39479', 'pogi');
 
 -- --------------------------------------------------------
 
@@ -304,18 +366,18 @@ INSERT INTO `tbl_students` (`SRCode`, `FirstName`, `MiddleName`, `LastName`, `Co
 DROP TABLE IF EXISTS `tbl_violationreport`;
 CREATE TABLE IF NOT EXISTS `tbl_violationreport` (
   `ViolationID` int NOT NULL AUTO_INCREMENT,
-  `SRCode` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `StaffID` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `SRCode` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `StaffID` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ViolationTypeID` int NOT NULL,
   `ViolationDate` date NOT NULL,
   `ViolationTime` time NOT NULL,
   `Remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Evidence` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Evidence` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`ViolationID`),
   KEY `ViolationTypeID_fk_ViolationReport` (`ViolationTypeID`),
   KEY `SRCode_fk_ViolationReport` (`SRCode`),
   KEY `StaffID_fk_ViolationReport` (`StaffID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_violationreport`
@@ -327,7 +389,8 @@ INSERT INTO `tbl_violationreport` (`ViolationID`, `SRCode`, `StaffID`, `Violatio
 (3, '21-39479', 's3-22', 3, '2023-10-18', '10:03:11', 'Conduct a mass gambling inside the school', ''),
 (4, '21-39841', 's4-21', 4, '2023-10-20', '13:03:11', '', ''),
 (5, '21-87123', 's5-28', 5, '2023-10-23', '17:04:16', '', ''),
-(6, '21-39479', 's5-28', 3, '2023-11-06', '14:05:00', 'asd', '');
+(6, '21-39479', 's5-28', 3, '2023-11-06', '14:05:00', 'asd', ''),
+(7, '21-39479', 's2-22', 2, '2023-11-07', '10:29:33', '', '');
 
 -- --------------------------------------------------------
 

@@ -42,7 +42,7 @@
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-right">
-                    <img src="img/OSDlogin.png" id="imagebsu" alt="logo">
+                    <img src="img/studlogin.png" id="imagebsu" alt="logo">
                 </div>
             </div>
         </div>
