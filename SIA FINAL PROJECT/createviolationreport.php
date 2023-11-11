@@ -1,8 +1,6 @@
 <?php require "./php/authenticateadmin.php"?>
 <?php require "./php/dbconnection.php"?>
 <?php include "./components/sidebar.php" ?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,14 +19,36 @@
         </div>
         <form action="./php/actcreateviolation.php" method="POST" class="form" enctype="multipart/form-data">
         <div class="column">
-              <div class="input-box">
-                <label>SR Code</label>
-                <input type="text" id="srCode" name="srCode" placeholder="Enter SR Code" required />
-              </div>
-              <div class="input-box">
-                <button>Scan</button>
+          <div class="input-box">
+            <label>SR Code</label>
+            <input type="text" id="srCode" name="srCode" placeholder="Enter SR Code" required />
           </div>
+        </div>
+
+        <div class="column">
+          <div class="input-box">
+            <label><b>Name</b></label>
+            <div class="auto-input">
+              <p name="studentname">No Student</p>
+            </div>
           </div>
+          <div class="input-box">
+              <label><b>Program</b></label>
+              <div class="auto-input">
+              <p name="studentprogram">No Student</p>
+            </div>
+            </div>  
+        </div>
+
+          <div class="column">
+            <div class="input-box">
+              <label><b>Department</b></label>
+              <div class="auto-input">
+              <p name="studentdepartment">No Student</p>
+            </div>
+            </div>
+          </div>
+          
           <div class="column">
             <div class="input-box">
               <label>Date</label>
@@ -40,26 +60,6 @@
             </div>
           </div>
 
-          <div class="input-box">
-            <label>Name</label>
-            <div class="auto-input">
-              <p name="studentname">Student Name</p>
-            </div>
-          </div>
-          <div class="column">
-            <div class="input-box">
-              <label>Department</label>
-              <div class="auto-input">
-              <p name="studentdepartment">Student Department</p>
-            </div>
-            </div>
-            <div class="input-box">
-              <label>Program</label>
-              <div class="auto-input">
-              <p name="studentprogram">Student Program</p>
-            </div>
-            </div>  
-          </div>
           <div class="input-box address">
             <label>Violation</label>
               <div class="select-box">
@@ -78,36 +78,7 @@
       </section>
 
 </body>
-  <script>
-    $(document).ready(function () {
-      alert('ready')
-    $('#srCode').on('keyup', function () {
-        var srCode = $(this).val();
-        alert('trigger')
-
-        // Perform an AJAX request to fetch data from the database
-        $.ajax({
-            url: 'studentdata.php', // Create a PHP script to fetch data
-            method: 'POST',
-            data: { srCode: srCode },
-            success: function (response) {
-                var data = JSON.parse(response);
-                if (data) {
-                    // Populate the HTML elements with the retrieved data
-                    $('[name="studentname"]').text(data.Name);
-                    $('[name="studentdepartment"]').text(data.Department);
-                    $('[name="studentprogram"]').text(data.CourseName);
-                } else {
-                    // Clear the HTML elements if no data is found
-                    $('[name="studentname"]').text('');
-                    $('[name="studentdepartment"]').text('');
-                    $('[name="studentprogram"]').text('');
-                }
-            }
-        });
-    });
-});
-  </script>
+  <script src="./js/studentdata.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <script src="./js/createviolationreport.js"></script>

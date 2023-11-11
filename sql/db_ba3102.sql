@@ -67,7 +67,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetViolationTypes` ()   BEGIN
 END$$
 
 DROP PROCEDURE IF EXISTS `SP_InsertViolationReport`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertViolationReport` (IN `p_SRCode` VARCHAR(255), IN `p_StaffID` INT, IN `p_ViolationTypeID` INT, IN `p_ViolationDate` DATE, IN `p_ViolationTime` TIME, IN `p_Remarks` VARCHAR(255), IN `p_Evidence` VARCHAR(255))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertViolationReport` (IN `p_SRCode` VARCHAR(255), IN `p_StaffID` VARCHAR(255), IN `p_ViolationTypeID` INT, IN `p_ViolationDate` DATE, IN `p_ViolationTime` TIME, IN `p_Remarks` VARCHAR(255), IN `p_Evidence` VARCHAR(255))   BEGIN
     INSERT INTO tbl_violationreport (SRCode, StaffID, ViolationTypeID, ViolationDate, ViolationTime, Remarks, Evidence)
     VALUES (p_SRCode, p_StaffID, p_ViolationTypeID, p_ViolationDate, p_ViolationTime, p_Remarks, p_Evidence);
 END$$
