@@ -8,7 +8,6 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
     <title>Report Manager</title>
     </head>
 <body>
@@ -18,11 +17,10 @@
                 <button class="tab-button" id="call-slip-req" onclick="switchTable('callslipReqList', 'call-slip-req')">Call Slip Required List</button>
                 <button class="tab-button" id="appeal-req" onclick="switchTable('appealRequestList', 'appeal-req')">Appeal Request List</button>
                     <div class="dropdown">
-                    <select id="sortDropdown">
-                        <option value="" disabled selected>Sort</option>
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
+                    <select id="sortDropdown" onchange="switchTable('violationList', 'vio-list', this.value)">
+                        <option value="default" disabled selected>Sort</option>
+                        <option value="option1">Sort By Violation</option>
+                        <option value="option2">Sort By Student</option>
                     </select>
                     </div>
             <!--violation list table-->
@@ -37,23 +35,7 @@
                             <th>   </th>
                             <th>   </th>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Sofia Mae Pepito</td>
-                            <td>Multiple piercings</td>
-                            <td>10/10/10</td>
-                            <td class="centered-cell">
-                                <button class="btncss" id="openEditForm">
-                                    Update
-                                </button>
-                            </td>
-                            <td class="centered-cell">
-                            <button class="btncss" onclick="SubmitEvent">
-                                    <span class="fas fa-trash"></span>
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
+                        <?php include "./php/violationlist.php"?>
                     </table>
                 </div>
                 <!--call slip required table-->
@@ -294,8 +276,6 @@
           </div>
         </form>
       </section>
-    
-    <script src="./js/managereporttime.js"></script>
     <script src="js/managereport.js"></script>
     <script>
         document.getElementById("openEditForm").addEventListener("click", function() {

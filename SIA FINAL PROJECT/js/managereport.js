@@ -1,5 +1,5 @@
 
-function switchTable(tableId, buttonId) {
+function switchTable(tableId, buttonId, sortOption) {
     var tables = document.querySelectorAll('.mngreport-body > div');
     for (var i = 0; i < tables.length; i++) {
       tables[i].style.display = 'none'; 
@@ -12,6 +12,7 @@ function switchTable(tableId, buttonId) {
     });
   
     document.getElementById(buttonId).classList.add('highlighted');
+    header("Location: ../managereport.php?sort=" + sortOption);
   }
 
     // Function to get today's date in the format "YYYY-MM-DD"

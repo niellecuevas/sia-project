@@ -64,8 +64,7 @@
             <label>Violation</label>
               <div class="select-box">
                 <?php include "./php/readviolations.php"; // Include the readviolations.php file ?>
-              </div>
-              <input type="text" placeholder="Enter Remarks" name="remarks" />
+</div>
             </div>
             <div class="column">
                 <div class="input-box">
