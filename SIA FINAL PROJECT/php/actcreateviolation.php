@@ -22,19 +22,18 @@ function sanitizeInput($input)
 
 // Check if the form with the name "submit" was submitted
 if (isset($_POST['submit'])) {
-    // Check if required fields are not empty and violation type is not "Violation"
-    if (!empty($_POST['srcode']) && !empty($_POST['violationtype']) && $_POST['violationtype'] !== "Violation" &&
-        !empty($_POST['violationdate']) && !empty($_POST['violationtime'])) {
+     //Check if required fields are not empty and violation type is not "Violation"
+     if (!empty($_POST['srCode']) && !empty($_POST['violationtype']) && $_POST['violationtype'] !== "Violation" &&
+         !empty($_POST['violationdate']) && !empty($_POST['violationtime'])) {
 
         // Clean and validate the inputs
-        $srCode = sanitizeInput($_POST['srcode']);
+        $srCode = sanitizeInput($_POST['srCode']);
         $staffId = $_SESSION['StaffID'];
         $violationType = sanitizeInput($_POST['violationtype']);
         // Convert the date and time inputs to specific formats
         $violationDate = date('Y-m-d', strtotime($_POST['violationdate']));
         $violationTime = date('H:i:s', strtotime($_POST['violationtime']));
         $remarks = sanitizeInput($_POST['remarks']);
-
         // Validate uploaded image
         if ($_FILES['image']['error'] === 4) {
             // If no file was uploaded, redirect with a "MissingAttachment" status
@@ -86,10 +85,10 @@ if (isset($_POST['submit'])) {
             header("Location: ../createviolationreport.php?status=InsertFail");
             exit();
         }
-    } else {
-        // If required fields are missing, redirect with a "Missing" status
-        header("Location: ../createviolationreport.php?status=Missing");
-        exit();
-    }
+     } else {
+         // If required fields are missing, redirect with a "Missing" status
+         header("Location: ../createviolationreport.php?status=Missing");
+         exit();
+     }
 }
 ?>

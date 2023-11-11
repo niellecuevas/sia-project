@@ -1,4 +1,5 @@
 <?php include "./components/sidebar.php" ?>
+<?php require "./php/authenticateadmin.php"?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,7 +9,6 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
     <title>Report Manager</title>
     </head>
 <body>
@@ -17,45 +17,11 @@
                 <button class="tab-button" id="vio-list" onclick="switchTable('violationList', 'vio-list')">Violation List</button>
                 <button class="tab-button" id="call-slip-req" onclick="switchTable('callslipReqList', 'call-slip-req')">Call Slip Required List</button>
                 <button class="tab-button" id="appeal-req" onclick="switchTable('appealRequestList', 'appeal-req')">Appeal Request List</button>
-                    <div class="dropdown">
-                    <select id="sortDropdown">
-                        <option value="" disabled selected>Sort</option>
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                    </select>
-                    </div>
-            <!--violation list table-->
+                <?php include './php/adminsort.php'?>
+                <!--violation list table-->
             <div class="mngreport-body">
-                <div id="violationList">
-                    <table>
-                        <tr class="mngreport-topic-heading">
-                            <th>   </th>
-                            <th>Name</th>
-                            <th>Violation</th>
-                            <th>Date</th>
-                            <th>   </th>
-                            <th>   </th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Sofia Mae Pepito</td>
-                            <td>Multiple piercings</td>
-                            <td>10/10/10</td>
-                            <td class="centered-cell">
-                                <button class="btncss" id="openEditForm">
-                                    Update
-                                </button>
-                            </td>
-                            <td class="centered-cell">
-                            <button class="btncss" onclick="SubmitEvent">
-                                    <span class="fas fa-trash"></span>
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+            <?php include "./php/violationlist.php"?>
+
                 <!--call slip required table-->
                 <div id="callslipReqList">
                     <table>
@@ -82,28 +48,7 @@
                     </table>
                 </div>
                 <!--appeal request table-->
-                <div id="appealRequestList">
-                    <table>
-                        <tr class="mngreport-topic-heading">
-                            <th>   </th>
-                            <th>SR Code</th>
-                            <th>Name</th>
-                            <th>Offense</th>
-                            <th>   </th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>21-31662</td>
-                            <td>Sofia Mae</td>
-                            <td>Improper Haircut</td>
-                            <td class="centered-cell">
-                            <button class="btncss" id="openAppealReq">
-                                    Review
-                                </button>
-                            </td>
-                          </tr>
-                      </table>
-                  </div>
+                <?php include "./php/appeallist.php"?>
               </div>
       </section>
     <!--edit violation report-->
@@ -294,8 +239,6 @@
           </div>
         </form>
       </section>
-    
-    <script src="./js/managereporttime.js"></script>
     <script src="js/managereport.js"></script>
     <script>
         document.getElementById("openEditForm").addEventListener("click", function() {
