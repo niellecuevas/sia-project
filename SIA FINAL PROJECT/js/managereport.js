@@ -1,22 +1,23 @@
 function switchTable(tableId, buttonId) {
-  // Add the sort option to the URL
-  const url = new URL(window.location.href);
-  url.searchParams.set('sort', sortOption);
-  window.history.pushState({}, '', url);
-
+  // Hide all tables
   var tables = document.querySelectorAll('.mngreport-body > div');
-  for (var i = 0; i < tables.length; i++) {
-      tables[i].style.display = 'none';
-  }
+  tables.forEach(function (table) {
+      table.style.display = 'none';
+  });
+
+  // Show the selected table
   document.getElementById(tableId).style.display = 'block';
 
+  // Remove the "highlighted" class from all buttons
   var buttons = document.querySelectorAll('.tab-button');
   buttons.forEach(function (btn) {
       btn.classList.remove('highlighted');
   });
 
+  // Add the "highlighted" class to the clicked button
   document.getElementById(buttonId).classList.add('highlighted');
 }
+
 
 // Function to reload the page when the sort option changes
 document.getElementById('sortDropdown').addEventListener('change', function () {
