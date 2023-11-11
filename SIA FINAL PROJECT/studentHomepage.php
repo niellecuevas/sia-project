@@ -1,4 +1,4 @@
-<?php require "./php/authenticatestudent.php"?>
+
 
 <!DOCTYPE html>
 <html>
@@ -30,7 +30,6 @@
         <div class="navbar">
           <div class="logo"><a href=""><img src="./img/BSULogo.png">Batangas State University The NEU</a></div>
           <div class="nav-btns">
-          <a id="openCallSlipForm" class="action-btn" >Call Slip</a>
           <a id="openAppealReq" class="action-btn" >Appeal</a>
           <a href="./php/actlogout.php" class="action-btn">Logout</a>
           </div>
@@ -142,15 +141,13 @@
           <input type="text" class="conductInfo" id="violation" name="violation" placeholder="Cross Dressing" readonly><br><br>
           <label for="violationType" class="lbl">Type:</label>
           <input type="text" class="conductInfo" id="violationType" name="violationType" placeholder="Minor Offense" readonly><br><br>
-          <label for="action" id="adjustSrcode" class="lbl">Action:</label>
-          <input type="text" class="conductInfo" id="action" name="action" placeholder="3 days Suspension" readonly><br><br>
           <label for="date" class="lbl">Date:</label>
           <input type="text" class="conductInfo" id="date" name="date" placeholder="10-20-2023" readonly><br><br>
           <label for="time" class="lbl" id="time">Time:</label>
           <input type="text" class="conductInfo" id="time" name="time" placeholder="02:30 PM" readonly><br><br>
-          <label for="evidence" class="lbl" id="evidence">Evidence:</label>
-          <input type="text" class="conductInfo" id="evidence" name="evidence" placeholder="Evidence here"><br><br>
-          <label for="attachment" class="lbl" id="attachment">Attachment:</label>
+          <label for="remarks" class="lbl" id="remarks">Remarks:</label>
+          <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Okay sige"readonly><br><br>
+          <label for="attachment" class="lbl" id="attachment">Evidence:</label>
         <input type="image" src="./img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
         </div>
     </form>
@@ -163,17 +160,13 @@
           <input type="text" class="conductInfo" id="violation" name="violation" placeholder="Cutting Class" readonly><br><br>
           <label for="violationType" class="lbl">Type:</label>
           <input type="text" class="conductInfo" id="violationType" name="violationType" placeholder="Minor Offense" readonly><br><br>
-          <label for="action" id="adjustSrcode" class="lbl">Action:</label>
-          <input type="text" class="conductInfo" id="action" name="action" placeholder="1 day suspension"readonly><br><br>
           <label for="date" class="lbl">Date:</label>
           <input type="text" class="conductInfo" id="date" name="date" placeholder="11-29-2023"readonly><br><br>
           <label for="time" class="lbl" id="time">Time:</label>
           <input type="text" class="conductInfo" id="time" name="time" placeholder="11:00 PM"readonly><br><br>
           <label for="remarks" class="lbl" id="remarks">Remarks:</label>
           <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Okay sige"readonly><br><br>
-          <label for="evidence" class="lbl" id="evidence">Evidence:</label>
-          <input type="text" class="conductInfo" id="evidence" name="evidence" placeholder="Evidence here"><br><br>
-          <label for="attachment" class="lbl" id="attachment">Attachment:</label>
+          <label for="attachment" class="lbl" id="attachment">Evidence:</label>
         <input type="image" src="./img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
           </div>
       </form>
@@ -186,17 +179,13 @@
             <input type="text" class="conductInfo" id="violation" name="violation" placeholder="Hair Cut" readonly><br><br>
             <label for="violationType" class="lbl">Type:</label>
           <input type="text" class="conductInfo" id="violationType" name="violationType" placeholder="Minor Offense" readonly><br><br>
-            <label for="action" id="adjustSrcode" class="lbl">Action:</label>
-            <input type="text" class="conductInfo" id="action" name="action" placeholder="5 days Suspension" readonly><br><br>
             <label for="date" class="lbl">Date:</label>
             <input type="text" class="conductInfo" id="date" name="date" placeholder="05-09-2023" readonly><br><br>
             <label for="time" class="lbl" id="time">Time:</label>
             <input type="text" class="conductInfo" id="time" name="time" placeholder="8:00 PM" readonly><br><br>
             <label for="remarks" class="lbl" id="remarks">Remarks:</label>
             <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Kaya mo yan" readonly><br><br>
-            <label for="evidence" class="lbl" id="evidence">Evidence:</label>
-            <input type="text" class="conductInfo" id="evidence" name="evidence" placeholder="Evidence here"><br><br>
-            <label for="attachment" class="lbl" id="attachment">Attachment:</label>
+            <label for="attachment" class="lbl" id="attachment">Evidence:</label>
           <input type="image" src="./img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
             </div>
           </form>
@@ -208,18 +197,14 @@
               <label for="violation" class="lbl">Violation:</label>
               <input type="text" class="conductInfo" id="violation" name="violation" placeholder="Piercings/Tattoos" readonly><br><br>
               <label for="violationType" class="lbl">Type:</label>
-          <input type="text" class="conductInfo" id="violationType" name="violationType" placeholder="Minor Offense" readonly><br><br>
-              <label for="action" id="adjustSrcode" class="lbl">Action:</label>
-              <input type="text" class="conductInfo" id="action" name="action" placeholder="1 day suspension" readonly><br><br>
+              <input type="text" class="conductInfo" id="violationType" name="violationType" placeholder="Minor Offense" readonly><br><br>
               <label for="date" class="lbl">Date:</label>
               <input type="text" class="conductInfo" id="date" name="date" placeholder="12-25-2023" readonly><br><br>
               <label for="time" class="lbl" id="time">Time:</label>
               <input type="text" class="conductInfo" id="time" name="time" placeholder="09:23 AM" readonly><br><br>
               <label for="remarks" class="lbl" id="remarks">Remarks:</label>
               <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Ayaw ko na" readonly><br><br>
-              <label for="evidence" class="lbl" id="evidence">Evidence:</label>
-              <input type="text" class="conductInfo" id="evidence" name="evidence" placeholder="Evidence here"><br><br>
-              <label for="attachment" class="lbl" id="attachment">Attachment:</label>
+              <label for="attachment" class="lbl" id="attachment">Evidence:</label>
             <input type="image" src="./img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
               </div>
             </form>
@@ -230,63 +215,6 @@
   <div class="swiper-pagination" ></div>
   </div>
 </section>
-
- <!--callslip-->
- <section class="containerCallSlipForm">
-        <div class="generate-callslip">
-            <h1>Call Slip</h1>
-        </div>
-        <button class="close-button" onclick="closeCallSlipForm()">&times;</button>
-        <form action="#" class="form">
-        <div class="column">
-          <div class="input-box">
-            <label>SR Code</label>
-            <input type="text" placeholder="Enter SR Code" readonly />
-          </div>
-
-          </div>
-          <div class="input-box">
-            <label>Student</label>
-            <input type="text" placeholder="Enter Student's Full Name" readonly />
-          </div>
-          <div class="input-box">
-            <label>Date</label>
-            <input type="date" id="generateId" placeholder="Enter date" readonly />
-          </div>
-          <div class="column">
-            <div class="input-box">
-              <label>Department</label>
-              <input type="text" placeholder="Enter Department" readonly />
-            </div>
-            <div class="input-box">
-              <label>Program</label>
-              <input type="text" placeholder="Enter program" readonly />
-            </div>
-          </div>
-
-          <div class="column">
-            <div class="input-box">
-              <label>Call Date</label>
-              <input type="date" placeholder="Enter date" readonly />
-            </div>
-            <div class="input-box">
-              <label>Call Time</label>
-              <input type="time" placeholder="Enter time" readonly />
-            </div>
-          </div>
-          <div class="input-box">
-            <label>Action</label>
-            <input type="text" placeholder="Enter action" readonly />      
-          </div>
-          <div class="input-box">
-              <label>Remarks</label>
-              <input type="text" placeholder="Enter remarks" readonly />
-          </div>
-            </div>
-            </div>
-          </div>
-        </form>
-      </section> 
       
       <!--appeal request-->
       <section class="containerAppealRequest">
@@ -330,12 +258,6 @@
 <script src="./js/managereporttime.js"></script>
     <script src="js/managereport.js"></script>
     <script>
-        document.getElementById("openCallSlipForm").addEventListener("click", function() {
-            document.querySelector(".containerCallSlipForm").style.display = "block";
-        });
-         function closeCallSlipForm() {
-            document.querySelector(".containerCallSlipForm").style.display = "none";
-        }
         document.getElementById("openAppealReq").addEventListener("click", function() {
             document.querySelector(".containerAppealRequest").style.display = "block";
         });
