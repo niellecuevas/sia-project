@@ -101,9 +101,9 @@ function deleteData(id) {
         text: `This is a non reversible action! Violation ${id} will not be recovered`,
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonColor: '#a50113',
+        cancelButtonColor: '#008000',
+        confirmButtonText: 'Delete!'
     }).then((result) => {
         if (result.isConfirmed) {
             console.log('start');
