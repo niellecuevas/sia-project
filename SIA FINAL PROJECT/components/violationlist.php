@@ -33,6 +33,11 @@ function fetchData($conn, $sortOption)
 }
 ?>
 <!-- Include the dropdown box code from adminsort.php -->
+<style>
+      .sweetalert-z-index {
+    z-index: 5000 !important; /* Adjust the z-index value as needed */
+  }
+</style>
 
     <div id="violationList">
         <table>
@@ -123,53 +128,68 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Add event listener to the "Confirm Changes" button
     document.getElementById('confirmchanges').addEventListener('click', function () {
-        // Get values from the form
-        var violationID = document.getElementById('violationID').value;
-        var srCode = document.getElementById('studentsrcode').value;
-        var violationDate = document.getElementById('violationreportdate').value;
-        var violationTime = document.getElementById('violationtime').value;
-        var remarks = document.getElementById('remark').value;
-        var violationType = document.getElementById('violationtype').value;
+    // Get values from the form
+    var violationID = document.getElementById('violationID').value;
+    var srCode = document.getElementById('studentsrcode').value;
+    var violationDate = document.getElementById('violationreportdate').value;
+    var violationTime = document.getElementById('violationtime').value;
+    var remarks = document.getElementById('remark').value;
+    var violationType = document.getElementById('violationtype').value;
 
-        // Construct the data to be sent in the request
-        var data = {
-            violationID: violationID,
-            srCode: srCode,
-            violationDate: violationDate,
-            violationTime: violationTime,
-            remarks: remarks,
-            violationType: violationType
-        };
+    // Construct the data to be sent in the request
+    var data = {
+        violationID: violationID,
+        srCode: srCode,
+        violationDate: violationDate,
+        violationTime: violationTime,
+        remarks: remarks,
+        violationType: violationType
+    };
 
-        // Send an AJAX request to update the database
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', './php/updateviolationreport.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
+    // Send an AJAX request to update the database
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', './php/updateviolationreport.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
 
-        // Handle the response from the server
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                // Handle a successful response
-                console.log('Update successful');
+    // Handle the response from the server
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            // Show SweetAlert success message with adjusted z-index
+            Swal.fire({
+                icon: 'success',
+                title: 'Update successful!',
+                showConfirmButton: false,
+                timer: 1500,
+                customClass: {
+                    popup: 'sweetalert-z-index' // Add a custom class for styling
+                }
+            });
 
-                // Close the container
-                closeEditVio();
-            } else {
-                // Handle errors
-                console.error('Update failed');
-            }
-        };
+            // Close the container
+            closeEditVio();
+        } else {
+            // Show SweetAlert error message with adjusted z-index
+            Swal.fire({
+                icon: 'error',
+                title: 'Update failed',
+                text: 'There was an error updating the data.',
+                customClass: {
+                    popup: 'sweetalert-z-index' // Add a custom class for styling
+                }
+            });
+        }
+    };
 
-        // Convert the data to JSON and send the request
-        xhr.send(JSON.stringify(data));
-    });
+    // Convert the data to JSON and send the request
+    xhr.send(JSON.stringify(data));
+});
 
     // Function to close the container
     function closeEditVio() {
         // Add your logic to close the container here
         // For example, you can hide the container or remove it from the DOM
         document.querySelector('.containerEditVio').style.display = 'none';
-        header('./managereport.php')
+        header('violationlist.php?status=done')
     }
 
     function deleteData(id) {

@@ -63,9 +63,9 @@
               </div>
 
           <div class="column">
-              <div class="input-box">
-                <label>SR Code</label>
-                <input type="text" placeholder="Enter SR Code" id="studentsrcode" class="srCode" required />
+              <div class="input-box" hidden>
+                <label hidden>SR Code</label>
+                <input type="text" placeholder="Enter SR Code" id="studentsrcode" class="srCode" required hidden />
               </div>
           </div>
           <div class="input-box">
