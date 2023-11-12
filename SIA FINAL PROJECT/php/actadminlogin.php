@@ -25,7 +25,7 @@ if (isset($_POST['id']) && isset($_POST['password'])) {
     }
 
     // SQL Query for Admin
-    $sqlQuery = "SELECT AdminID, tbl_adminaccount.StaffID, tbl_staff.FirstName, tbl_staff.MiddleName, tbl_staff.LastName, tbl_staff.ContactNumber, tbl_staff.Position, PasswordEncrypted FROM tbl_adminaccount INNER JOIN tbl_staff ON tbl_adminaccount.StaffID = tbl_staff.StaffID WHERE tbl_adminaccount.StaffId = '$id'";
+    $sqlQuery = "CALL SP_GetAdminAccount('$id');";
 
     // Execute Query
     $result = mysqli_query($conn, $sqlQuery);
