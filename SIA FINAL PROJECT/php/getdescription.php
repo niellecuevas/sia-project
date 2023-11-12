@@ -11,12 +11,12 @@ if (isset($_POST['id'])) {
     $stmt = $conn->prepare("SELECT FirstOffense FROM `tbl_violationtypes` WHERE ViolationTypeID = ?");
     $stmt->bind_param("i", $violationTypeID);
     $stmt->execute();
-    $stmt->bind_result($description);
+    $stmt->bind_result($punishment);
 
     // Fetch the result
     if ($stmt->fetch()) {
         // Return the description
-        echo $description;
+        echo $punishment;
     } else {
         // Return an empty string if no description is found
         echo '';
