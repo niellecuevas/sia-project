@@ -15,15 +15,16 @@
     <section class="mngreport-container">
                 <h1 class="">Report Manager</h1>
                 <button class="tab-button" id="vio-list" onclick="switchTable('violationList', 'vio-list')">Violation List</button>
-                <button class="tab-button" id="call-slip-req" onclick="switchTable('callslipReqList', 'call-slip-req')">Call Slip Required List</button>
+                <!-- <button class="tab-button" id="call-slip-req" onclick="switchTable('callslipReqList', 'call-slip-req')">Call Slip Required List</button> -->
                 <button class="tab-button" id="appeal-req" onclick="switchTable('appealRequestList', 'appeal-req')">Appeal Request List</button>
                 <?php include './php/adminsort.php'?>
                 <!--violation list table-->
             <div class="mngreport-body">
-            <?php include "./php/violationlist.php"?>
+                <?php include "./php/violationlist.php"?>
+                <?php include "./php/appeallist.php"?>
 
                 <!--call slip required table-->
-                <div id="callslipReqList">
+                <!-- <div id="callslipReqList">
                     <table>
                         <tr class="mngreport-topic-heading">
                             <th>   </th>
@@ -46,9 +47,8 @@
                             </td>
                         </tr>
                     </table>
-                </div>
+                </div> -->
                 <!--appeal request table-->
-                <?php include "./php/appeallist.php"?>
               </div>
       </section>
     <!--edit violation report-->
@@ -254,10 +254,8 @@
          function closeCallSlipForm() {
             document.querySelector(".containerCallSlipForm").style.display = "none";
         }
+        
 
-        document.getElementById("openAppealReq").addEventListener("click", function() {
-            document.querySelector(".containerAppealRequest").style.display = "block";
-        });
          function closeAppealRequest() {
             document.querySelector(".containerAppealRequest").style.display = "none";
         }

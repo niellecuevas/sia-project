@@ -62,3 +62,15 @@ function fetchAppeal($conn, $sortOption)
         ?>
     </table>
 </div>
+
+<script>
+// Add click event listeners to each button using the unique AppealID
+<?php
+$result->data_seek(0); // Reset the result pointer to the beginning
+while ($row = $result->fetch_assoc()) {
+    echo "document.getElementById('openAppealReq_" . $row['AppealID'] . "').addEventListener('click', function() {
+        alert('1');
+    });";
+}
+?>
+</script>
