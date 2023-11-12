@@ -21,7 +21,7 @@
         <div class="column">
           <div class="input-box">
             <label>SR Code</label>
-            <input type="text" id="srCode" name="srCode" placeholder="Enter SR Code" required />
+            <input type="text" id="srCode" class="srCode" name="srCode" placeholder="Enter SR Code" required />
           </div>
         </div>
 

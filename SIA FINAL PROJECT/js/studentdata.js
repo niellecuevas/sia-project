@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $('#srCode').on('keyup', function () {
+  $('.srCode').on('keyup', function () {
       var srCode = $(this).val();
 
       // Perform an AJAX request to fetch data from the database

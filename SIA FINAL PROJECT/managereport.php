@@ -58,67 +58,60 @@
         </div>
         <button class="close-button" onclick="closeEditVio()">&times;</button>
         <form action="#" class="form">
+              <div class="input-box">
+                <input type="text" placeholder="ViolationId" id="violationID" hidden required />
+              </div>
+
           <div class="column">
               <div class="input-box">
                 <label>SR Code</label>
-                <input type="text" placeholder="Enter SR Code" required />
+                <input type="text" placeholder="Enter SR Code" id="studentsrcode" class="srCode" required />
               </div>
-              <div class="input-box">
-                <button>Scan</button>
-          </div>
           </div>
           <div class="input-box">
             <label>Name</label>
             <div class="auto-input">
-              <p name="studentName">Student Name</p>
+              <p name="studentname" id="studentname">Student Name</p>
             </div>
           </div>
-          <div class="column">
-            <div class="input-box">
-              <label>Date</label>
-              <input type="date" placeholder="Enter date" required />
-            </div>
-            <div class="input-box">
-              <label>Time</label>
-              <input type="time" placeholder="Enter time" required />
-            </div>
-          </div>
-
           <div class="column">
           <div class="input-box">
             <label>Department</label>
             <div class="auto-input">
-              <p name="studentDept">Student Department</p>
+              <p name="studentdepartment" id="studentdept">Student Department</p>
             </div>
           </div>
           <div class="input-box">
             <label>Program</label>
             <div class="auto-input">
-              <p name="studentProgram">Student Program</p>
+              <p name="studentprogram" id="studentprogram">Student Program</p>
             </div>
           </div>
           </div>
-          <div class="input-box address">
-            <label>Violation</label>
-              <div class="select-box">
-                <select>
-                  <option hidden>Violation</option>
-                  <option>Hair cut</option>
-                  <option>Hair color</option>
-                  <option>Improper Unifrom</option>
-                  <option>Bullying</option>
-                </select>
+          <div class="column">
+            <div class="input-box">
+              <label>Date</label>
+              <input type="date" placeholder="Enter date" id="violationreportdate" required pattern="\d{4}-\d{2}-\d{2}" />
+            </div>
+            <div class="input-box">
+              <label>Time</label>
+              <input type="time" placeholder="Enter time" id="violationtime" required />
+            </div>
+          </div>
+          <?php include "./components/violationdropbox.php"?>
+          <div class="input-box">
+                <label>Remarks</label>
+                <input type="text" placeholder="Remarks" id="remark" required />
               </div>
-              <input type="text" placeholder="Enter description" required />
-            </div>
+
             <div class="column">
-                <div class="input-box">
-                <form action="/upload_image" method="post" enctype="multipart/form-data">
-                <input type="file" name="image" accept="image/*">
+                <div class="input-box" hidden>
+                <form action="/upload_image" method="post" enctype="multipart/form-data" hidden>
+                <input type="file" name="image" accept="image/*" hidden>
             </div>
             </div>
           </div>
-          <button>Confirm Changes</button>
+          <button id="confirmchanges">Confirm Changes</button>
         </form>
       </section>
 
