@@ -36,7 +36,7 @@ function fetchData($conn, $sortOption)
     <div id="violationList">
         <table>
             <tr class="mngreport-topic-heading">
-                <th>   </th>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Violation</th>
                 <th>Date</th>
@@ -67,18 +67,18 @@ function fetchData($conn, $sortOption)
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Add event listeners to all "Update" buttons
-    var updateButtons = document.getElementsByClassName('update-button');
-    for (var i = 0; i < updateButtons.length; i++) {
-        updateButtons[i].addEventListener('click', function () {
-            // Get the ViolationID from the data attribute
-            var violationID = this.parentNode.parentNode.getAttribute('data-vio-id');
+    // // Add event listeners to all "Update" buttons
+    // var updateButtons = document.getElementsByClassName('update-button');
+    // for (var i = 0; i < updateButtons.length; i++) {
+    //     updateButtons[i].addEventListener('click', function () {
+    //         // Get the ViolationID from the data attribute
+    //         var violationID = this.parentNode.parentNode.getAttribute('data-vio-id');
             
-            // Display the ViolationID using an alert (you can customize this part)
-            alert('ViolationID: ' + violationID);
-            document.querySelector(".containerEditVio").style.display = "block";
-        });
-    }
+    //         // Display the ViolationID using an alert (you can customize this part)
+    //         alert('ViolationID: ' + violationID);
+    //         document.querySelector(".containerEditVio").style.display = "block";
+    //     });
+    // }
 
     // Add event listeners to all "Delete" buttons
     var deleteButtons = document.getElementsByClassName('delete-button');

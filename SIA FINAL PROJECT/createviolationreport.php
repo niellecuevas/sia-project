@@ -60,12 +60,9 @@
             </div>
           </div>
 
-          <div class="input-box address">
-            <label>Violation</label>
-              <div class="select-box">
-                <?php include "./php/readviolations.php"; // Include the readviolations.php file ?>
-</div>
-            </div>
+          <?php include "./components/violationdropbox.php"; // Include the readviolations.php file ?>
+          <?php include "./components/remarks.php"?>
+
             <div class="column">
                 <div class="input-box">
                 <input type="file" name="image" accept="image/*">
