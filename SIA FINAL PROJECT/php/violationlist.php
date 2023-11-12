@@ -100,7 +100,7 @@ function deleteData(id) {
         console.log('ajax starting')
         $.ajax({
             // Action
-            url: './deleteviolationreport.php',
+            url: './php/deleteviolationreport.php',
             // Method
             type: 'POST',
             data: {
