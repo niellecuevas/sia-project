@@ -7,6 +7,7 @@
         <link rel="icon" href="./img/BSULogo.png" sizes="32x32" type="image/png">
         <!--studhome.css -->
         <link rel="stylesheet" href="./css/studhome.css">
+        <link rel="stylesheet" href="./css/managereport.css">
         <!-- Link Swiper's CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
         <!-- font-awesome -->
@@ -125,7 +126,8 @@
     <form>
       <div class="violationInfo">
           <label for="violation" class="lbl">Violation:</label>
-          <input type="text" class="conductInfo" id="violation" name="violation" placeholder="Cross Dressing" readonly><br><br>
+          <input type="text" class="conductInfo" id="violation" name="violation" placeholder="Cross Dressing" readonly>
+          <button type="button" class="btncss" id="appealbtn">Appeal</button><br><br> 
           <label for="violationType" class="lbl">Type:</label>
           <input type="text" class="conductInfo" id="violationType" name="violationType" placeholder="Minor Offense" readonly><br><br>
           <label for="date" class="lbl">Date:</label>
@@ -136,6 +138,7 @@
           <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Okay sige"readonly><br><br>
           <label for="attachment" class="lbl" id="attachment">Evidence:</label>
         <input type="image" src="./img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
+        
         </div>
     </form>
     </div>
@@ -201,6 +204,27 @@
   <div class="swiper-button-prev" style="color:#a50113;"></div>
   <div class="swiper-pagination" ></div>
   </div>
+
+  <!--Popup Container-->
+
+  <section class="containerAppealMessage">
+        <div class="appeal-msg">
+            <h1>Appeal Request</h1>
+        </div>
+        <button class="close-button" onclick="closeAppeal()">&times;</button>
+        <form action="#" class="form">
+        <div class="input-box">
+            <label>Date</label>
+            <input type="date" id="generateId" placeholder="Enter date" required />
+          </div>
+          <div class="input-box">
+              <label>Request</label>
+              <textarea style="width:100%; height:100px; resize:none;" placeholder="Message here" required ></textarea>
+            </div>
+            <button>Confirm</button>
+        </form>
+      </section>
+
 </div>
   <!---------------FOOTER STARTS--------------------->
 <footer>
@@ -212,6 +236,16 @@
         <!--End-->
      
         <script src="./js/studHomepage.js"></script>
+        
+        <!--Popup Script-->
+        <script>
+          document.getElementById("appealbtn").addEventListener("click", function() {
+            document.querySelector(".containerAppealMessage").style.display = "block";
+        });
+         function closeAppeal() {
+            document.querySelector(".containerAppealMessage").style.display = "none";
+        }
+        </script>
 
     </body>
 </html>

@@ -35,11 +35,11 @@
 .input-box label {
   color: #333;
 }
+
 .input-box .auto-input p[name="studentname"] {
   position: relative;
   margin-top: 8px;
 }
-
 .input-box .auto-input p[name="studentname"]:after {
   content: "";
   position: absolute;
