@@ -1,23 +1,30 @@
 <?php
 require "dbconnection.php";
+echo "<script>alert('starts deleting')</script>";
+// Check if the violationID parameter is set
+if (isset($_GET['violationID'])) {
+    $violationID = $_GET['violationID'];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate and sanitize the input
-    $id = filter_input(INPUT_POST, "id", FILTER_SANITIZE_NUMBER_INT);
-
-    // Perform the delete operation
-    require "dbconnection.php";
-    $sql = "DELETE FROM tbl_violationreport WHERE ViolationID = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
+    // Prepare and execute the SQL DELETE query
+    $stmt = $conn->prepare("DELETE FROM tbl_violationreport WHERE ViolationID = ?");
+    $stmt->bind_param("i", $violationID);
 
     if ($stmt->execute()) {
-        echo "Record deleted successfully";
+        // If the deletion is successful, send a success response
+        echo json_encode(["status" => "success"]);
     } else {
-        echo "Error deleting record: " . $stmt->error;
+        // If there is an error, send an error response
+        echo json_encode(["status" => "error", "message" => "Error deleting the record"]);
     }
 
+    // Close the statement
     $stmt->close();
-    $conn->close();
+    echo "<script>alert('deleted')</script>";
+} else {
+    // If violationID is not set, send an error response
+    echo json_encode(["status" => "error", "message" => "ViolationID parameter is not set"]);
 }
+
+// Close the database connection
+$conn->close();
 ?>
