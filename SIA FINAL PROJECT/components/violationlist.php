@@ -1,6 +1,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <?php
-require "dbconnection.php";
+require "./php/dbconnection.php";
 // Check if a sort option is selected
 $sortOption = isset($_GET['sort']) ? $_GET['sort'] : 'default';
 
@@ -21,6 +21,7 @@ function fetchData($conn, $sortOption)
             $query .= " ORDER BY Name";
             break;
         case 'default':
+            $query .= " ORDER BY ViolationID";
             break;
     }
 

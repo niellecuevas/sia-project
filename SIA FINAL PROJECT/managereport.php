@@ -17,10 +17,10 @@
                 <button class="tab-button" id="vio-list" onclick="switchTable('violationList', 'vio-list')">Violation List</button>
                 <!-- <button class="tab-button" id="call-slip-req" onclick="switchTable('callslipReqList', 'call-slip-req')">Call Slip Required List</button> -->
                 <button class="tab-button" id="appeal-req" onclick="switchTable('appealRequestList', 'appeal-req')">Appeal Request List</button>
-                <?php include './php/adminsort.php'?>
+                <?php include './components/adminsort.php'?>
                 <!--violation list table-->
             <div class="mngreport-body">
-                <?php include "./php/violationlist.php"?>
+                <?php include "./components/violationlist.php"?>
                 <?php include "./php/appeallist.php"?>
 
                 <!--call slip required table-->
