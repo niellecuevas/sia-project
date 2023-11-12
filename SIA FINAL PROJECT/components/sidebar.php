@@ -32,12 +32,12 @@
 					<span class="text">Manage Report</span>
 				</a>
 			</li>
-			<li class="page5">
+			<!-- <li class="page5">
 				<a href="accountmanager.php">
 					<i class='bx bxs-group' ></i>
 					<span class="text">Account Manager</span>
 				</a>
-			</li>
+			</li> -->
 		</ul>
 		<ul class="side-menu">
 			
