@@ -25,7 +25,7 @@ if (isset($_POST['id']) && isset($_POST['password'])) {
     }
 
     // Query for Student Role
-    $sqlQuery = "CALL SP_GetStudentAccount('$id', '$password')";
+    $sqlQuery = "SELECT UserID, tbl_studentaccount.SRCode, PasswordEncrypted, tbl_students.FirstName, tbl_students.MiddleName, tbl_students.LastName,  tbl_course.CourseName, tbl_course.Department FROM tbl_studentaccount INNER JOIN tbl_students ON tbl_studentaccount.SRCode = tbl_students.SRCode INNER JOIN tbl_course ON tbl_students.CourseID = tbl_course.CourseID WHERE tbl_studentaccount.SRCode = '$id'";
 
     // Execute Query
     $result = mysqli_query($conn, $sqlQuery);
@@ -35,22 +35,32 @@ if (isset($_POST['id']) && isset($_POST['password'])) {
         if (mysqli_num_rows($result) == 1) {
             // User authenticated, store session information
             $user = mysqli_fetch_assoc($result);
-            $_SESSION['UserID'] = $user['UserID'];
-            $_SESSION['SRCode'] = $user['SRCode'];
-            $_SESSION['PasswordEncrypted'] = $user['PasswordEncrypted'];
-            $_SESSION['FirstName'] = $user['FirstName'];
-            $_SESSION['MiddleName'] = $user['MiddleName'];
-            $_SESSION['LastName'] = $user['LastName'];
-            $_SESSION['CourseName'] = $user['CourseName'];
-            $_SESSION['Department'] = $user['Department'];
+            $hashedPassword = $user['PasswordEncrypted'];
 
-            $middleInitial = !empty($user['MiddleName']) ? strtoupper(substr($user['MiddleName'], 0, 1) . '.') : '';
-            $fullName = $user['FirstName'] . ' ' . $middleInitial . ' ' . $user['LastName'];
-
-            // Store the combined FullName in the session
-            $_SESSION['FullName'] = $fullName;
-
-            header("Location: ../newstudenthomepage.php");
+            if (password_verify($password, $hashedPassword)) {
+                $_SESSION['UserID'] = $user['UserID'];
+                $_SESSION['SRCode'] = $user['SRCode'];
+                $_SESSION['PasswordEncrypted'] = $user['PasswordEncrypted'];
+                $_SESSION['FirstName'] = $user['FirstName'];
+                $_SESSION['MiddleName'] = $user['MiddleName'];
+                $_SESSION['LastName'] = $user['LastName'];
+                $_SESSION['CourseName'] = $user['CourseName'];
+                $_SESSION['Department'] = $user['Department'];
+    
+                $middleInitial = !empty($user['MiddleName']) ? strtoupper(substr($user['MiddleName'], 0, 1) . '.') : '';
+                $fullName = $user['FirstName'] . ' ' . $middleInitial . ' ' . $user['LastName'];
+    
+                // Store the combined FullName in the session
+                $_SESSION['FullName'] = $fullName;
+    
+                header("Location: ../newstudenthomepage.php");
+                exit();
+            } else {
+                header("Location: ../login.php?error=Password Verification Failed!");
+                exit();
+            }
+        } else {
+            header("Location: ../login.php?error=User not found");
             exit();
         }
     }

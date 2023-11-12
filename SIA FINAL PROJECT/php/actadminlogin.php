@@ -25,25 +25,35 @@ if (isset($_POST['id']) && isset($_POST['password'])) {
     }
 
     // SQL Query for Admin
-    $sqlQuery = "CALL SP_GetAdminAccount('$id', '$password')";
+    $sqlQuery = "SELECT AdminID, tbl_adminaccount.StaffID, tbl_staff.FirstName, tbl_staff.MiddleName, tbl_staff.LastName, tbl_staff.ContactNumber, tbl_staff.Position, PasswordEncrypted FROM tbl_adminaccount INNER JOIN tbl_staff ON tbl_adminaccount.StaffID = tbl_staff.StaffID WHERE tbl_adminaccount.StaffId = '$id'";
 
     // Execute Query
     $result = mysqli_query($conn, $sqlQuery);
 
     if ($result && mysqli_num_rows($result) == 1) {
-        // Admin authenticated, store session information
+        // Admin found, verify the password
         $user = mysqli_fetch_assoc($result);
-        $_SESSION['AdminID'] = $user['AdminID'];
-        $_SESSION['StaffID'] = $user['StaffID'];
-        $_SESSION['PermissionLevel'] = $user['PermissionLevel'];
-        $_SESSION['FirstName'] = $user['FirstName'];
-        $_SESSION['MiddleName'] = $user['MiddleName'];
-        $_SESSION['LastName'] = $user['LastName'];
-        $_SESSION['ContactNumber'] = $user['ContactNumber'];
-        $_SESSION['Position'] = $user['Position'];
-        $_SESSION['PasswordEncrypted'] = $user['PasswordEncrypted'];
+        $hashedPassword = $user['PasswordEncrypted'];
 
-        header("Location: ../createviolationreport.php");
+        if (password_verify($password, $hashedPassword)) {
+            // Password is correct, store session information
+            $_SESSION['AdminID'] = $user['AdminID'];
+            $_SESSION['StaffID'] = $user['StaffID'];
+            $_SESSION['FirstName'] = $user['FirstName'];
+            $_SESSION['MiddleName'] = $user['MiddleName'];
+            $_SESSION['LastName'] = $user['LastName'];
+            $_SESSION['ContactNumber'] = $user['ContactNumber'];
+            $_SESSION['Position'] = $user['Position'];
+            $_SESSION['PasswordEncrypted'] = $user['PasswordEncrypted'];
+
+            header("Location: ../createviolationreport.php");
+            exit();
+        } else {
+            header("Location: ../loginadmin.php?error=Password Verification Failed!");
+            exit();
+        }
+    } else {
+        header("Location: ../loginadmin.php?error=User not found");
         exit();
     }
 
