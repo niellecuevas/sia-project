@@ -134,7 +134,7 @@ function deleteData(id) {
                             // Use SweetAlert for failure message
                             Swal.fire(
                                 'Error!',
-                                'Data cannot be deleted. Please contact your administrator',
+                                'Data cannot be deleted. Other functionality currently uses this information',
                                 'error'
                             );
                         }
