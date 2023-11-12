@@ -14,9 +14,8 @@
 <body>
     <!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="#" class="brand">
-		<i class='bx bx-menu' ></i>
-		<img src="img/BSULogo.png" style="width: 30px; margin-right: 10px">
+		<a href="#" class="brand" style="margin-top:20px;">
+		<img src="img/BSULogo.png" style="width: 30px; margin-right: 10px; margin-left:40px;>
 		<span class="text">BatStateU</span>
 		</a>
 		<ul class="side-menu top">
