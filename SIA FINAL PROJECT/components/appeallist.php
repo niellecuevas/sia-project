@@ -4,34 +4,29 @@ require "./php/dbconnection.php";
 // Check if a sort option is selected
 $sortOption = isset($_GET['sort']) ? $_GET['sort'] : 'default';
 
-// Fetch data using the function
+// Fetch data using the stored procedure
 $result = fetchAppeal($conn, $sortOption);
 
 function fetchAppeal($conn, $sortOption)
 {
-    // Define the default query without ORDER BY clause
-    $query = "SELECT AppealID, tbl_students.SRCode, CONCAT(FirstName, ' ', SUBSTRING(MiddleName, 1, 1), '. ', LastName) AS Name, ViolationName FROM `tbl_appeal` INNER JOIN tbl_violationreport ON tbl_appeal.ViolationID = tbl_violationreport.ViolationID INNER JOIN tbl_students ON tbl_violationreport.SRCode = tbl_students.SRCode INNER JOIN tbl_violationtypes ON tbl_violationreport.ViolationTypeID = tbl_violationtypes.ViolationTypeID";
+    // Prepare the stored procedure call
+    $stmt = $conn->prepare("CALL SP_GetAppeals(?)");
+    $stmt->bind_param("s", $sortOption);
 
-    // Modify the query based on the selected sort option
-    switch ($sortOption) {
-        case 'option1':
-            $query .= " ORDER BY ViolationName";
-            break;
-        case 'option2':
-            $query .= " ORDER BY Name";
-            break;
-        case 'default':
-            $query .= " ORDER BY AppealID";
-            break;
-    }
+    // Execute the stored procedure
+    $stmt->execute();
 
-    // Execute the modified query
-    $result = $conn->query($query);
+    // Get the result set
+    $result = $stmt->get_result();
+
+    // Close the statement
+    $stmt->close();
 
     // Return the result set
     return $result;
 }
 ?>
+
 
 <!-- Include the dropdown box code from adminsort.php -->
 

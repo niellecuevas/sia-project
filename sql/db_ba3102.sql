@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2023 at 02:40 PM
+-- Generation Time: Nov 12, 2023 at 03:13 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -28,9 +28,66 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CreateStaff` (IN `id` VARCHAR(30), IN `fname` VARCHAR(50), IN `mname` VARCHAR(50), IN `lname` VARCHAR(50), IN `number` VARCHAR(13), IN `position` VARCHAR(100))   INSERT INTO tbl_staff (StaffID, FirstName, MiddleName, LastName, ContactNumber, Position)
 VALUES (id, fname, mname, lname, number, position)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetAdminAccount` (IN `id` INT, IN `password` VARCHAR(255))   SELECT AdminID, tbl_adminaccount.StaffID, PermissionLevel, tbl_staff.FirstName, tbl_staff.MiddleName, tbl_staff.LastName, tbl_staff.ContactNumber, tbl_staff.Position, PasswordEncrypted FROM tbl_adminaccount INNER JOIN tbl_staff ON tbl_adminaccount.StaffID = tbl_staff.StaffID WHERE tbl_adminaccount.StaffId = id AND PasswordEncrypted = password$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_DeleteViolationReport` (IN `inputViolationID` INT)   BEGIN
+    DELETE FROM tbl_violationreport WHERE ViolationID = inputViolationID;
+END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetStudentAccount` (IN `id` INT, IN `password` VARCHAR(255))   SELECT UserID, tbl_studentaccount.SRCode, PasswordEncrypted, tbl_students.FirstName, tbl_students.MiddleName, tbl_students.LastName,  tbl_course.CourseName, tbl_course.Department FROM tbl_studentaccount INNER JOIN tbl_students ON tbl_studentaccount.SRCode = tbl_students.SRCode INNER JOIN tbl_course ON tbl_students.CourseID = tbl_course.CourseID WHERE tbl_studentaccount.SRCode = id AND PasswordEncrypted = password$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetAdminAccount` (IN `inputStaffId` VARCHAR(255))   BEGIN
+    SELECT 
+        tbl_adminaccount.AdminID, 
+        tbl_adminaccount.StaffID, 
+        tbl_staff.FirstName, 
+        tbl_staff.MiddleName, 
+        tbl_staff.LastName, 
+        tbl_staff.ContactNumber, 
+        tbl_staff.Position, 
+        tbl_adminaccount.PasswordEncrypted 
+    FROM tbl_adminaccount
+    INNER JOIN tbl_staff ON tbl_adminaccount.StaffID = tbl_staff.StaffID
+    WHERE tbl_adminaccount.StaffId = inputStaffId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetAppeals` (IN `sortOption` VARCHAR(255))   BEGIN
+    SELECT AppealID, tbl_students.SRCode, CONCAT(FirstName, ' ', SUBSTRING(MiddleName, 1, 1), '. ', LastName) AS Name, ViolationName
+    FROM tbl_appeal
+    INNER JOIN tbl_violationreport ON tbl_appeal.ViolationID = tbl_violationreport.ViolationID
+    INNER JOIN tbl_students ON tbl_violationreport.SRCode = tbl_students.SRCode
+    INNER JOIN tbl_violationtypes ON tbl_violationreport.ViolationTypeID = tbl_violationtypes.ViolationTypeID
+    ORDER BY
+        CASE
+            WHEN sortOption = 'option1' THEN ViolationName
+            WHEN sortOption = 'option2' THEN Name
+            ELSE AppealID
+        END;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetFirstOffense` (IN `p_ViolationTypeID` INT)   BEGIN
+    SELECT FirstOffense
+    FROM tbl_violationtypes
+    WHERE ViolationTypeID = p_ViolationTypeID;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetSecondOffense` (IN `p_ViolationTypeID` INT)   BEGIN
+    SELECT SecondOffense
+    FROM tbl_violationtypes
+    WHERE ViolationTypeID = p_ViolationTypeID;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetStudentAccount` (IN `inputSRCode` VARCHAR(255))   BEGIN
+    SELECT 
+        tbl_studentaccount.UserID, 
+        tbl_studentaccount.SRCode, 
+        tbl_studentaccount.PasswordEncrypted, 
+        tbl_students.FirstName, 
+        tbl_students.MiddleName, 
+        tbl_students.LastName, 
+        tbl_course.CourseName, 
+        tbl_course.Department 
+    FROM tbl_studentaccount
+    INNER JOIN tbl_students ON tbl_studentaccount.SRCode = tbl_students.SRCode
+    INNER JOIN tbl_course ON tbl_students.CourseID = tbl_course.CourseID
+    WHERE tbl_studentaccount.SRCode = inputSRCode;
+END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetStudentData` (IN `srCodeParam` VARCHAR(255))   BEGIN
     SELECT CONCAT(FirstName, ' ', LEFT(MiddleName, 1), '. ', LastName) AS Name, CourseName, Department 
@@ -88,6 +145,18 @@ WHERE
     tbl_studentaccount.SRCode = id
 AND 
     tbl_studentaccount.PasswordEncrypted = password$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetThirdOffense` (IN `p_ViolationTypeID` INT)   BEGIN
+    SELECT ThirdOffense
+    FROM tbl_violationtypes
+    WHERE ViolationTypeID = p_ViolationTypeID;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetViolationReport` (IN `p_SRCode` VARCHAR(255), IN `p_ViolationTypeID` INT)   BEGIN
+    SELECT *
+    FROM tbl_violationreport
+    WHERE SRCode = p_SRCode AND ViolationTypeID = p_ViolationTypeID;
+END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetViolationTypes` ()   BEGIN
     SELECT ViolationTypeID, ViolationName FROM tbl_violationtypes;
@@ -482,7 +551,7 @@ ALTER TABLE `tbl_studentaccount`
 -- AUTO_INCREMENT for table `tbl_violationreport`
 --
 ALTER TABLE `tbl_violationreport`
-  MODIFY `ViolationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ViolationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tbl_violationtypes`

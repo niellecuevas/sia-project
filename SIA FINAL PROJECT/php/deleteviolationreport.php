@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($action === 'delete') {
             try {
                 // Prepare and execute the delete query
-                $sql = "DELETE FROM tbl_violationreport WHERE ViolationID = ?";
+                $sql = "CALL SP_DeleteViolationReport(?)";
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("i", $id);
                 $stmt->execute();

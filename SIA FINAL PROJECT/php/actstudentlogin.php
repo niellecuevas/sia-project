@@ -25,7 +25,7 @@ if (isset($_POST['id']) && isset($_POST['password'])) {
     }
 
     // Query for Student Role
-    $sqlQuery = "SELECT UserID, tbl_studentaccount.SRCode, PasswordEncrypted, tbl_students.FirstName, tbl_students.MiddleName, tbl_students.LastName,  tbl_course.CourseName, tbl_course.Department FROM tbl_studentaccount INNER JOIN tbl_students ON tbl_studentaccount.SRCode = tbl_students.SRCode INNER JOIN tbl_course ON tbl_students.CourseID = tbl_course.CourseID WHERE tbl_studentaccount.SRCode = '$id'";
+    $sqlQuery = "CALL SP_GetStudentAccount('$id')";
 
     // Execute Query
     $result = mysqli_query($conn, $sqlQuery);
