@@ -14,23 +14,11 @@
 
 
 body{
+  height: 100vh;
   margin:auto;
+  background-color: #fffbf2;
   scroll-snap-type: y mandatory;
-}
-
-.whole-container {
-  position: relative;
-    max-width: 70%;
-    width: 100%;
-    background: #f9f9f9;
-    padding: 25px;
-    border-radius: 8px;
-    max-height: calc(100vh - 56px);
-      overflow-y: auto;
-    margin:auto;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    box-shadow: 10px 10px 30px grey;
+  
 }
 
 a {
@@ -125,7 +113,32 @@ header{
   scale:  0.95;
 }
 
+/* dropdown menu */
+.dropdown_menu {
+  display: none;
+  position: absolute;
+  right: 5rem;
+  top: 60px;
+  height: 0;
+  width:300px;
+  background: #a50114e4;
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
+.dropdown_menu.open{
+  height: 120px;
+
+}
+
+.dropdown_menu li {
+  padding: 0.7rem ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .dropdown_menu .action-btn{
   width: 100%;
@@ -134,7 +147,9 @@ header{
   
 }
 
-
+.dropdown_menu .toggle-btn {
+  display: flex;
+}
 
 /* responsive design */
 
@@ -170,63 +185,85 @@ header{
 
 /* ------------------- Student Information Banner Here ---------------------------------*/
 
+.container {
+  width: 50%;
+  height: 50px;
+}
+
 .banner {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-}
-
-.studentInfo-text1 {
-  margin-top: 20px;
- 
-  font-size: 15px;
-  display: inline;
-}
-
-.studentInfo-text2 {
-  margin-top: 20px;
-
-  font-size: 15px;
-  display: inline;
-}
-
- span .text-label {
-  font-weight: bold;
-  display: inline-block;
-}
-
-p .text-info{
-  display: inline-flex;
-}
-
-/* minor and major offenses section*/
-
-.offense-container {
-  position: relative;
+  width: 50%;
   float: right;
-  width: 100px;
-  height: 100px;
-  background-color: #a50113;
-  margin-top: -100px;
-  margin-bottom: 5px;
-  margin-right: 20px;
-  border-radius: 10px;
+}
+
+.banner-text h1 {
+  letter-spacing: 4px;
+  font-weight: bold;
+  font-size: 40px;
+  text-align: right;
+}
+
+.info {
+  background-color: #fffbf2;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+  border: none;
+  padding: 5px 5px;
+  box-sizing: border-box;
+  display: inline-flex;
   
 }
 
-.offense {
-  color: #fffbf2;
-  width: 100px;
-  height: 100px;
-  margin-top: 25px;
-  text-align: center;
-  font-size: 15px;
+label {
+  font-size: 20px;
+  display: inline-block;
+  text-align: right;
+  margin-left: 100px;
+}
+
+.studInfo {
+  margin-top: 30px;
+  text-align: right;
+  margin-bottom: 50px;
+}
+
+.nameNsrcode {
+  float: left;
+
+}
+
+.courseNdept {
+  float: right;
 }
 
 
-.num {
-  font-size: 30px;
-  text-align: center;
-  font-weight: bolder;
+@media (max-width: 200px){
+  .banner {
+    margin-top: 5px;
+  }
+
+  .banner-text h1{
+    font-size: 40px;
+  }
+
+  .studInfo {
+    margin-top: 5px;
+  }
+
+  .info {
+    font-size: medium;
+    justify-content: space-between;
+    border: none;
+  }
+
+  label {
+    font-size: medium;
+    left: 5rem;
+    width: unset ; 
+  }
+  .courseNdept {
+    margin-right: 10px;
+  }
 }
 
 /*----------- ANNOUNCEMENT BANNER SLIDESHOW CSS ------------- */
@@ -236,8 +273,8 @@ img {vertical-align: middle;}
 
 /* Slideshow container */
 .slideshow-container {
-  width: 100%;
- 
+  width: 50%;
+  float: left;
 }
 
 /* Caption text */
@@ -284,18 +321,65 @@ img {vertical-align: middle;}
   .text {font-size: 11px}
 }
 
+/* minor and major offenses section*/
+
+.offense-container {
+  display: flex;
+  width: 50%;
+  position: absolute;
+  flex-direction: column;
+  background-color: #a50113;
+  box-shadow: 3px 3px 10px rgba(12, 0, 0, 0.751);
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  
+}
+
+.offense {
+  color: #fffbf2;
+  width: 50%;
+  height: 150px;
+  margin-top: 20px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 30px;
+}
+
+#majorOffense {
+  margin-top: 20px;
+  width: 50%;
+}
+
+.num {
+  font-size: 30px;
+  text-align: center;
+  font-weight: bolder;
+}
 
 .openingText {
   margin-top: 80px;
 }
 
+.offenses-container {
+  float: left;
+  width: 50%; 
+}
+
 .swiper {
   position: absolute;
-  height: 80vh;
-  width: auto;
+  float: right;
+  height: 600px;
+  width: 900px;
   background-size: cover;
+  margin-right: 100px;
   border-radius: 20px;
+  box-shadow: 3px 3px 10px rgba(12, 0, 0, 0.751);
   padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -350,6 +434,7 @@ footer{
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: #f1f1f0; /* Black w/opacity/see-through */
   color: white;
+  box-shadow: 3px 3px 10px rgba(12, 0, 0, 0.751);
   font-weight: bold;
   border: 5px solid #f1f1f1;
   position: absolute;
@@ -359,7 +444,6 @@ footer{
   z-index: 2;
   width: 200px;
   padding-top: 30px;
-  text-align: center;
 }
 
 .conductInfo {
@@ -412,81 +496,6 @@ input[type="time"]::-webkit-calendar-picker-indicator:hover {
   opacity: 1
 }
 
-/*-----------Slider button--------------*/
-
-#appealbtn {
-  width: 150px; 
-  height: 40px; 
-  font-size: 16px;
-  position: absolute;
-  right: 5%;
-  border-radius: 10px;
-}
-
-/*-----------Appeal Popup--------------*/
-
-.containerAppealMessage {
-  display: none;
-position: fixed;
-top: 50%;
-left: 50%;
-max-width: 700px;
-width: 100%;
-background: #f9f9f9;
-padding: 25px;
-border-radius: 8px;
-border: 2px solid #ccc;
-max-height: calc(100vh - 56px);
-overflow-y: auto;
-margin:auto;
-margin-top: 25px;
-margin-bottom: 25px;
-z-index: 9999;
-transform: translate(-50%, -50%);
-align-items: center;
-justify-content: center;
-}
-.containerAppealMessage::-webkit-scrollbar {
-  display: none;
-}
-.form .input-box {
-  width: 100%;
-  margin-top: 20px;
-}
-.input-box label {
-  color: #333;
-}
-.form :where(.input-box input, .select-box) {
-  position: relative;
-  height: 50px;
-  width: 100%;
-  outline: none;
-  font-size: 1rem;
-  color: #707070;
-  margin-top: 8px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 0 15px;
-}
-.input-box input:focus {
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-}
-.form button {
-  height: 55px;
-  width: 100%;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 400;
-  margin-top: 30px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  background: rgb(187, 15, 15);
-}
-.form button:hover {
-  background: rgb(112, 112, 112);
-}
-
 /*-----------SLIDER CSS VIOLATION INFORMATION--------------*/
 
 @media (max-width: 600px){
@@ -509,6 +518,3 @@ justify-content: center;
 
 
   }
-
-
-  
