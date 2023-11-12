@@ -350,7 +350,6 @@ footer{
 .swiper-slide {
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: #f1f1f0; /* Black w/opacity/see-through */
-  color: white;
   font-weight: bold;
   border: 5px solid #f1f1f1;
   position: absolute;
@@ -360,7 +359,6 @@ footer{
   z-index: 2;
   width: 200px;
   padding-top: 30px;
-  text-align: center;
 }
 
 .conductInfo {
@@ -368,23 +366,23 @@ footer{
   border: none;
   color: #f1f1f0;
   font-size: 20px;
-  padding-left: 10px;
+  padding-left: 50px;
   width: 50%;
   display: inline;
   text-align: left;
-  margin-left: 20px;
+  margin-left: 10px;
   outline: none;
 }
 
 .lbl {
+  align-self: left;
   width: 100px;
   display: inline-block;
   color: #000;
   padding-top: 1px;
   padding-right: 150px;
-
+  margin-left: 20%;
 }
-
 
 .swiper-slide img {
   display: block;
@@ -413,6 +411,12 @@ input[type="time"]::-webkit-calendar-picker-indicator:hover {
   opacity: 1
 }
 
+.imageEvidence {
+  max-width: 25%; 
+  max-height: 25%; 
+  margin-left: 40%;
+  margin-right: 50%;
+}
 /*-----------Slider button--------------*/
 
 #appealbtn {

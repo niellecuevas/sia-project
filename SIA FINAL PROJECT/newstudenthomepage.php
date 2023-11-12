@@ -147,11 +147,12 @@
                             <input type="text" class="conductInfo" id="remarks" name="remarks" value="<?php echo $violation['Remarks']; ?>" readonly style="color: black;"><br><br>
                             
                             <!-- Evidence Label -->
-                            <label for="attachment" class="lbl" id="attachment">Evidence:</label>
+                            
+                            <label for="attachment" class="lbl" id="attachment">Evidence:</label><br><br>
                             
                             <!-- Display evidence image -->
                             <?php if (!empty($violation['Evidence'])): ?>
-                                <img src="<?php echo './img/violationEvidence/' . $violation['Evidence']; ?>" alt="Evidence Image" class="conductInfo" style="width: 80px; height: 100px;">
+                                <img src="<?php echo './img/violationEvidence/' . $violation['Evidence']; ?>" alt="Evidence Image" class="imageEvidence">
                             <?php endif; ?>
                         </div>
                     </form>
