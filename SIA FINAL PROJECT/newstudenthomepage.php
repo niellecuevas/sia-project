@@ -40,30 +40,30 @@
             <!------------- STUDENT INFORMATON STARTS ------------------> 
                 <div class="banner">
                     <div class = "studentInfo-text1">
-                        <span class="text-label">Name:</span>
-                        <p  class="text-info" id="name"><?php  echo $_SESSION['FullName']; ?> </p><br>
+                        <span class="text-label" style="font-weight: bold;">Name:</span>
+                        <span  class="text-info" id="name"><?php  echo $_SESSION['FullName']; ?> </span><br><br><br>
 
                         <div class = "studentInfo-text">
-                        <span class="text-label">Sr-Code:</span>
-                        <p  class="text-info" id="srcode"><?php  echo $_SESSION['SRCode']; ?></p><br>
+                        <span class="text-label"style="font-weight: bold;">Sr-Code:</span>
+                        <span  class="text-info" id="srcode"><?php  echo $_SESSION['SRCode']; ?></span><br><br><br>
                         </div>
                     </div>
 
                     <div class = "studentInfo-text2">
                     <div class = "studentInfo-text">
-                    <span class="text-label" >Course:</span>
-                    <p class="text-info" id="course"> <?php  echo $_SESSION['CourseName']; ?></p><br>
+                    <span class="text-label" style="font-weight: bold;">Course:</span>
+                    <span class="text-info" id="course"> <?php  echo $_SESSION['CourseName']; ?></span><br><br><br>
                     </div>
 
                     <div class = "studentInfo-text">
-                    <span class="text-label">Department:</span>
-                    <p class="text-info" id="department"> <?php  echo $_SESSION['Department']; ?></p><br>
+                    <span class="text-label" style="font-weight: bold;">Department:</span>
+                    <span class="text-info" id="department"> <?php  echo $_SESSION['Department']; ?></span><br><br><br>
                     </div>
                 </div>
 
 <?php include "./php/studviolationtypecounter.php"?>                
     </div>
-            <div class="offense-container">
+            <div class="offense-container" id="minorOffense">
                     <div class="offense">Minor Offense <p class="num" id="minorViolationCount"><?php  echo $minorViolations; ?></p></div>
             </div>
 
