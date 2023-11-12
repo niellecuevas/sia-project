@@ -1,3 +1,4 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <?php
 require "dbconnection.php";
 // Check if a sort option is selected
@@ -44,7 +45,7 @@ function fetchData($conn, $sortOption)
             </tr>
             <?php
                 while ($row = $result->fetch_assoc()) {
-                    echo "<tr data-vio-id='" . $row['ViolationID'] . "' data-name='" . $row['Name'] . "' data-violation='" . $row['ViolationName'] . "' data-date='" . $row['ViolationDate'] . "'>";
+                    echo "<tr id='" . $row['ViolationID'] . "' data-vio-id='" . $row['ViolationID'] . "' data-name='" . $row['Name'] . "' data-violation='" . $row['ViolationName'] . "' data-date='" . $row['ViolationDate'] . "'>";
                     echo "<td id='violationid'>" . $row['ViolationID'] . "</td>";
                     echo "<td id='name'>" . $row['Name'] . "</td>";
                     echo "<td id='violation'>" . $row['ViolationName'] . "</td>";
@@ -62,76 +63,87 @@ function fetchData($conn, $sortOption)
             ?>
     </table>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Add event listeners to all "Update" buttons
     var updateButtons = document.getElementsByClassName('update-button');
     for (var i = 0; i < updateButtons.length; i++) {
-        updateButtons[i].addEventListener('click', function() {
+        updateButtons[i].addEventListener('click', function () {
             // Get the ViolationID from the data attribute
-            var violationID = this.parentNode.parentNode.dataset.vioId;
+            var violationID = this.parentNode.parentNode.getAttribute('data-vio-id');
             
             // Display the ViolationID using an alert (you can customize this part)
             alert('ViolationID: ' + violationID);
             document.querySelector(".containerEditVio").style.display = "block";
         });
     }
-});
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Add event listeners to all delete buttons
+    // Add event listeners to all "Delete" buttons
     var deleteButtons = document.getElementsByClassName('delete-button');
     for (var i = 0; i < deleteButtons.length; i++) {
         deleteButtons[i].addEventListener('click', function () {
             // Get the ViolationID from the data attribute
-            var violationID = this.dataset.id;
+            var violationID = this.parentNode.parentNode.getAttribute('data-vio-id');
 
-            // Display the delete confirmation using Swal.fire
-            Swal.fire({
-                title: `Delete violation ${violationID}?`,
-                text: "Once deleted, this violation report cannot be reverted!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Delete"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Send an AJAX request to the server to delete the record
-                    var xhr = new XMLHttpRequest();
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState == 4) {
-                            if (xhr.status == 200) {
-                                // Display the success message
-                                Swal.fire({
-                                    title: "Deleted!",
-                                    text: "Your file has been deleted.",
-                                    icon: "success"
-                                });
-
-                                // Perform any additional client-side actions if needed
-                            } else {
-                                // Display an error message if the request fails
-                                Swal.fire({
-                                    title: "Error!",
-                                    text: "Failed to delete the violation.",
-                                    icon: "error"
-                                });
-                            }
-                        }
-                    };
-
-                    // Open a DELETE request to your server-side script
-                    xhr.open("GET", "./php/deleteviolation.php?violationID=" + violationID, true);
-                    xhr.send();
-                }
-            });
+            // Call the deleteData function with the ViolationID
+            deleteData(violationID);
         });
     }
 });
 
+function deleteData(id) {
+    // Use SweetAlert for confirmation
+    Swal.fire({
+        title: 'Are you sure?',
+        text: `This is a non reversible action! Violation ${id} will not be recovered`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            console.log('start');
+            $(document).ready(function() {
+                console.log('ajax starting');
+                $.ajax({
+                    // Action
+                    url: './php/deleteviolationreport.php',
+                    // Method
+                    type: 'POST',
+                    data: {
+                        // Get Value
+                        id: id,
+                        action: "delete"
+                    }, 
+                    success:function(response) {
+                        console.log('done');
+                        // Response is the output of the action
+                        if(response == 1) {
+                            // Use SweetAlert for success message
+                            Swal.fire(
+                                'Deleted!',
+                                'Data has been deleted.',
+                                'success'
+                            );
+                            document.getElementById(id).style.display = "none";
+                        }
+                        else if (response == 0) {
+                            // Use SweetAlert for failure message
+                            Swal.fire(
+                                'Error!',
+                                'Data cannot be deleted. Please contact your administrator',
+                                'error'
+                            );
+                        }
+                    }
+                });
+            });
+        }
+    });
+}
 
 function sortTable(containerId, sortOption) {
     // Make an asynchronous request to the server to fetch sorted data
@@ -147,4 +159,5 @@ function sortTable(containerId, sortOption) {
     xhr.open("GET", "./php/violationlist.php?sort=" + sortOption, true);
     xhr.send();
 }
+
 </script>
