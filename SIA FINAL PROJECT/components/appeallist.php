@@ -1,5 +1,5 @@
 <?php
-require "dbconnection.php";
+require "./php/dbconnection.php";
 
 // Check if a sort option is selected
 $sortOption = isset($_GET['sort']) ? $_GET['sort'] : 'default';
@@ -21,6 +21,7 @@ function fetchAppeal($conn, $sortOption)
             $query .= " ORDER BY Name";
             break;
         case 'default':
+            $query .= " ORDER BY AppealID";
             break;
     }
 

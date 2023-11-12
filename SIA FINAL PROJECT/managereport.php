@@ -21,7 +21,7 @@
                 <!--violation list table-->
             <div class="mngreport-body">
                 <?php include "./components/violationlist.php"?>
-                <?php include "./php/appeallist.php"?>
+                <?php include "./components/appeallist.php"?>
 
                 <!--call slip required table-->
                 <!-- <div id="callslipReqList">
