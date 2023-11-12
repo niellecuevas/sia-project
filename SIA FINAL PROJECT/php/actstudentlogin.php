@@ -50,7 +50,7 @@ if (isset($_POST['id']) && isset($_POST['password'])) {
             // Store the combined FullName in the session
             $_SESSION['FullName'] = $fullName;
 
-            header("Location: ../studentHomepage.php");
+            header("Location: ../newstudenthomepage.php");
             exit();
         }
     }

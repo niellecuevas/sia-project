@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 10, 2023 at 12:09 PM
+-- Generation Time: Nov 12, 2023 at 05:32 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_ba3102`
+-- Database: `db`
 --
 
 DELIMITER $$
@@ -114,18 +114,17 @@ FROM tbl_students
 WHERE tbl_students.SRCode = sr$$
 
 DROP PROCEDURE IF EXISTS `SP_StudentViolationCarousel`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_StudentViolationCarousel` (IN `sr` VARCHAR(255))   SELECT 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_StudentViolationCarousel` (IN `sr` VARCHAR(30))   SELECT 
+	tbl_violationreport.ViolationID,
     tbl_violationtypes.ViolationName,
     tbl_violationtypes.ViolationLevel,
-    tbl_callslip.Action, 
     tbl_violationreport.ViolationDate, 
     tbl_violationreport.ViolationTime, 
     tbl_violationreport.Remarks, 
     tbl_violationreport.Evidence 
-FROM tbl_callslip
-INNER JOIN tbl_violationreport ON tbl_callslip.ViolationID = tbl_violationreport.ViolationID
-INNER JOIN tbl_students ON tbl_students.SRCode = tbl_violationreport.SRCode
+FROM tbl_violationreport
 INNER JOIN tbl_violationtypes ON tbl_violationreport.ViolationTypeID = tbl_violationtypes.ViolationTypeID
+INNER JOIN tbl_students ON tbl_violationreport.SRCode = tbl_students.SRCode
 WHERE tbl_students.SRCode = sr$$
 
 DROP PROCEDURE IF EXISTS `SP_StudentViolationTypeCounter`$$
@@ -377,7 +376,7 @@ CREATE TABLE IF NOT EXISTS `tbl_violationreport` (
   KEY `ViolationTypeID_fk_ViolationReport` (`ViolationTypeID`),
   KEY `SRCode_fk_ViolationReport` (`SRCode`),
   KEY `StaffID_fk_ViolationReport` (`StaffID`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_violationreport`
@@ -390,7 +389,9 @@ INSERT INTO `tbl_violationreport` (`ViolationID`, `SRCode`, `StaffID`, `Violatio
 (4, '21-39841', 's4-21', 4, '2023-10-20', '13:03:11', '', ''),
 (5, '21-87123', 's5-28', 5, '2023-10-23', '17:04:16', '', ''),
 (6, '21-39479', 's5-28', 3, '2023-11-06', '14:05:00', 'asd', ''),
-(7, '21-39479', 's2-22', 2, '2023-11-07', '10:29:33', '', '');
+(7, '21-39479', 's2-22', 2, '2023-11-07', '10:29:33', '', ''),
+(11, '21-39479', 's1-23', 4, '2023-11-11', '23:40:00', 'Nadapa', '654fa078c46fc.jpg'),
+(12, '21-39479', 's1-23', 5, '2023-11-11', '12:40:00', 'Rapist', '654fa7ed00572.png');
 
 -- --------------------------------------------------------
 

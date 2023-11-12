@@ -1,3 +1,5 @@
+<?php require "./php/authenticatestudent.php"?>
+
 <!DOCTYPE html>
 <html>
     <head lang="en" dir="ltr">
@@ -39,33 +41,34 @@
                 <div class="banner">
                     <div class = "studentInfo-text1">
                         <span class="text-label">Name:</span>
-                        <p  class="text-info" id="name"><?php // echo $_SESSION['FullName']; ?> </p><br>
+                        <p  class="text-info" id="name"><?php  echo $_SESSION['FullName']; ?> </p><br>
 
                         <div class = "studentInfo-text">
                         <span class="text-label">Sr-Code:</span>
-                        <p  class="text-info" id="srcode"><?php // echo $_SESSION['SRCode']; ?></p><br>
+                        <p  class="text-info" id="srcode"><?php  echo $_SESSION['SRCode']; ?></p><br>
                         </div>
                     </div>
 
                     <div class = "studentInfo-text2">
                     <div class = "studentInfo-text">
                     <span class="text-label" >Course:</span>
-                    <p class="text-info" id="course"> <?php // echo $_SESSION['CourseName']; ?></p><br>
+                    <p class="text-info" id="course"> <?php  echo $_SESSION['CourseName']; ?></p><br>
                     </div>
 
                     <div class = "studentInfo-text">
                     <span class="text-label">Department:</span>
-                    <p class="text-info" id="department"> <?php // echo $_SESSION['Department']; ?></p><br>
+                    <p class="text-info" id="department"> <?php  echo $_SESSION['Department']; ?></p><br>
                     </div>
                 </div>
-  
+
+<?php include "./php/studviolationtypecounter.php"?>                
     </div>
             <div class="offense-container">
-                    <div class="offense">Minor Offense <p class="num" id="minorViolationCount"><?php // echo $minorViolations; ?></p></div>
+                    <div class="offense">Minor Offense <p class="num" id="minorViolationCount"><?php  echo $minorViolations; ?></p></div>
             </div>
 
             <div class="offense-container" id="majorOffense">
-                    <div class="offense">Major Offense <p class="num" id="majorViolationCount"><?php // echo $majorViolations; ?></p></div>
+                    <div class="offense">Major Offense <p class="num" id="majorViolationCount"><?php  echo $majorViolations; ?></p></div>
             </div>
             <br>
 
@@ -120,90 +123,51 @@
 
          <!--Violation Information Start-->
 
-        <div class="swiper mySwiper">
-    <div class="swiper-wrapper" >
-    <div class="swiper-slide">
-    <form>
-      <div class="violationInfo">
-          <label for="violation" class="lbl">Violation:</label>
-          <input type="text" class="conductInfo" id="violation" name="violation" placeholder="Cross Dressing" readonly>
-          <button type="button" class="btncss" id="appealbtn">Appeal</button><br><br> 
-          <label for="violationType" class="lbl">Type:</label>
-          <input type="text" class="conductInfo" id="violationType" name="violationType" placeholder="Minor Offense" readonly><br><br>
-          <label for="date" class="lbl">Date:</label>
-          <input type="text" class="conductInfo" id="date" name="date" placeholder="10-20-2023" readonly><br><br>
-          <label for="time" class="lbl" id="time">Time:</label>
-          <input type="text" class="conductInfo" id="time" name="time" placeholder="02:30 PM" readonly><br><br>
-          <label for="remarks" class="lbl" id="remarks">Remarks:</label>
-          <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Okay sige"readonly><br><br>
-          <label for="attachment" class="lbl" id="attachment">Evidence:</label>
-        <input type="image" src="./img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
-        
-        </div>
-    </form>
+<?php include "./php/studentviolationcarousel.php"; ?>
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+        <?php
+        if (isset($studentViolations) && !empty($studentViolations)) {
+            foreach ($studentViolations as $violation) {
+        ?>
+                <div class="swiper-slide">
+                    <form>
+                        <div class="violationInfo">
+                        
+                            <label for="violation" class="lbl">Violation:</label>
+                            <input type="text" class="conductInfo" id="violation" name="violation" value="<?php echo $violation['ViolationName']; ?>" readonly style="color: black;">
+                            <button type="button" class="btncss" id="appealbtn">Appeal</button><br><br>
+                            <label for="violationType" class="lbl">Type:</label>
+                            <input type="text" class="conductInfo" id="violationType" name="violationType" value="<?php echo $violation['ViolationLevel']; ?>" readonly style="color: black;"><br><br>
+                            <label for="date" class="lbl">Date:</label>
+                            <input type="text" class="conductInfo" id="date" name="date" value="<?php echo $violation['ViolationDate']; ?>" readonly style="color: black;"><br><br>
+                            <label for="time" class="lbl" id="time">Time:</label>
+                            <input type="text" class="conductInfo" id="time" name="time" value="<?php echo $violation['ViolationTime']; ?>" readonly style="color: black;"><br><br>
+                            <label for="remarks" class="lbl" id="remarks">Remarks:</label>
+                            <input type="text" class="conductInfo" id="remarks" name="remarks" value="<?php echo $violation['Remarks']; ?>" readonly style="color: black;"><br><br>
+                            
+                            <!-- Evidence Label -->
+                            <label for="attachment" class="lbl" id="attachment">Evidence:</label>
+                            
+                            <!-- Display evidence image -->
+                            <?php if (!empty($violation['Evidence'])): ?>
+                                <img src="<?php echo './img/violationEvidence/' . $violation['Evidence']; ?>" alt="Evidence Image" class="conductInfo" style="width: 80px; height: 100px;">
+                            <?php endif; ?>
+                        </div>
+                    </form>
+                </div>
+        <?php
+            }
+        } else {
+            // Display a message if no violations are found
+            echo '<p>No violation data available.</p>';
+        }
+        ?>
     </div>
-
-    <div class="swiper-slide">
-      <form>
-        <div class="violationInfo">
-          <label for="violation" class="lbl">Violation:</label>
-          <input type="text" class="conductInfo" id="violation" name="violation" placeholder="Cutting Class" readonly><br><br>
-          <label for="violationType" class="lbl">Type:</label>
-          <input type="text" class="conductInfo" id="violationType" name="violationType" placeholder="Minor Offense" readonly><br><br>
-          <label for="date" class="lbl">Date:</label>
-          <input type="text" class="conductInfo" id="date" name="date" placeholder="11-29-2023"readonly><br><br>
-          <label for="time" class="lbl" id="time">Time:</label>
-          <input type="text" class="conductInfo" id="time" name="time" placeholder="11:00 PM"readonly><br><br>
-          <label for="remarks" class="lbl" id="remarks">Remarks:</label>
-          <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Okay sige"readonly><br><br>
-          <label for="attachment" class="lbl" id="attachment">Evidence:</label>
-        <input type="image" src="./img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
-          </div>
-      </form>
-      </div>
-
-      <div class="swiper-slide">
-        <form>
-          <div class="violationInfo">
-            <label for="violation" class="lbl">Violation:</label>
-            <input type="text" class="conductInfo" id="violation" name="violation" placeholder="Hair Cut" readonly><br><br>
-            <label for="violationType" class="lbl">Type:</label>
-          <input type="text" class="conductInfo" id="violationType" name="violationType" placeholder="Minor Offense" readonly><br><br>
-            <label for="date" class="lbl">Date:</label>
-            <input type="text" class="conductInfo" id="date" name="date" placeholder="05-09-2023" readonly><br><br>
-            <label for="time" class="lbl" id="time">Time:</label>
-            <input type="text" class="conductInfo" id="time" name="time" placeholder="8:00 PM" readonly><br><br>
-            <label for="remarks" class="lbl" id="remarks">Remarks:</label>
-            <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Kaya mo yan" readonly><br><br>
-            <label for="attachment" class="lbl" id="attachment">Evidence:</label>
-          <input type="image" src="./img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
-            </div>
-          </form>
-        </div>
-
-        <div class="swiper-slide">
-          <form>
-            <div class="violationInfo">
-              <label for="violation" class="lbl">Violation:</label>
-              <input type="text" class="conductInfo" id="violation" name="violation" placeholder="Piercings/Tattoos" readonly><br><br>
-              <label for="violationType" class="lbl">Type:</label>
-              <input type="text" class="conductInfo" id="violationType" name="violationType" placeholder="Minor Offense" readonly><br><br>
-              <label for="date" class="lbl">Date:</label>
-              <input type="text" class="conductInfo" id="date" name="date" placeholder="12-25-2023" readonly><br><br>
-              <label for="time" class="lbl" id="time">Time:</label>
-              <input type="text" class="conductInfo" id="time" name="time" placeholder="09:23 AM" readonly><br><br>
-              <label for="remarks" class="lbl" id="remarks">Remarks:</label>
-              <input type="text" class="conductInfo" id="remarks" name="remarks" placeholder="Ayaw ko na" readonly><br><br>
-              <label for="attachment" class="lbl" id="attachment">Evidence:</label>
-            <input type="image" src="./img/studHomeImg/violation.jpg" class="conductInfo" alt="violationImage" width="80" height="100">
-              </div>
-            </form>
-          </div>
-  </div>
-  <div class="swiper-button-next" style="color:#a50113;"></div>
-  <div class="swiper-button-prev" style="color:#a50113;"></div>
-  <div class="swiper-pagination" ></div>
-  </div>
+    <div class="swiper-button-next" style="color:#a50113;"></div>
+    <div class="swiper-button-prev" style="color:#a50113;"></div>
+    <div class="swiper-pagination"></div>
+</div>
 
   <!--Popup Container-->
 
