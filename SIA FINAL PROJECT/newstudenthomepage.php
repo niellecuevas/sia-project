@@ -130,7 +130,7 @@
         if (isset($studentViolations) && !empty($studentViolations)) {
             foreach ($studentViolations as $violation) {
         ?>
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-vio-id="<?php echo $violation['ViolationID']; ?>">
                     <form>
                         <div class="violationInfo">
                         
@@ -173,22 +173,40 @@
   <!--Popup Container-->
 
   <section class="containerAppealMessage">
-        <div class="appeal-msg">
-            <h1>Appeal Request</h1>
-        </div>
-        <button class="close-button" onclick="closeAppeal()">&times;</button>
-        <form action="#" class="form">
-        <div class="input-box">
-            <label>Date</label>
-            <input type="date" id="generateId" placeholder="Enter date" required />
-          </div>
-          <div class="input-box">
-              <label>Request</label>
-              <textarea style="width:100%; height:100px; resize:none;" placeholder="Message here" required ></textarea>
-            </div>
-            <button>Confirm</button>
-        </form>
-      </section>
+    <div class="appeal-msg">
+        <h1>Appeal Request</h1>
+    </div>
+    <button class="close-button" onclick="closeAppeal()">&times;</button>
+    <form action="./php/studcreateappeal.php" method="POST" class="form" id="appealForm">
+    <!-- Add a hidden input for the violation ID -->
+    <input type="hidden" name="violationId" id="violationId" value="">
+    
+    <div class="input-box">
+        <label for="date">Date</label>
+        <input type="date" id="generateId" name="date" placeholder="Enter date" required />
+    </div>
+    <div class="input-box">
+        <label for="request">Request</label>
+        <textarea name="request" style="width:100%; height:100px; resize:none;" placeholder="Message here" required></textarea>
+    </div>
+    <button type="button" onclick="submitAppealForm()">Confirm</button>
+
+
+    <script>
+    function submitAppealForm() {
+        // Get the currently active slide
+        var activeSlide = document.querySelector('.swiper-slide-active');
+
+        // Get the violation ID from the active slide
+        var violationId = activeSlide.getAttribute('data-vio-id');
+
+        // Set the violation ID in the hidden input
+        document.querySelector('#violationId').value = violationId;
+
+        // Submit the form
+        document.querySelector('#appealForm').submit();
+    }
+</script>
 
 </div>
   <!---------------FOOTER STARTS--------------------->
@@ -204,9 +222,11 @@
         
         <!--Popup Script-->
         <script>
-          document.getElementById("appealbtn").addEventListener("click", function() {
-            document.querySelector(".containerAppealMessage").style.display = "block";
-        });
+          document.querySelectorAll(".btncss").forEach(function(button) {
+          button.addEventListener("click", function() {
+              document.querySelector(".containerAppealMessage").style.display = "block";
+              });
+          });
          function closeAppeal() {
             document.querySelector(".containerAppealMessage").style.display = "none";
         }
