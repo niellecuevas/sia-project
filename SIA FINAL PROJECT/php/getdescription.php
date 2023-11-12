@@ -8,7 +8,7 @@ if (isset($_POST['id'])) {
     $violationTypeID = $_POST['id'];
 
     // Prepare and execute the SQL query
-    $stmt = $conn->prepare("SELECT Description FROM `tbl_violationtypes` WHERE ViolationTypeID = ?");
+    $stmt = $conn->prepare("SELECT FirstOffense FROM `tbl_violationtypes` WHERE ViolationTypeID = ?");
     $stmt->bind_param("i", $violationTypeID);
     $stmt->execute();
     $stmt->bind_result($description);
