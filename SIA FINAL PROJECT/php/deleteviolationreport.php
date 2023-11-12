@@ -11,21 +11,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Check if the action is 'delete'
         if ($action === 'delete') {
-            // Prepare and execute the delete query
-            $sql = "DELETE FROM tbl_violationreport WHERE ViolationID = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
+            try {
+                // Prepare and execute the delete query
+                $sql = "DELETE FROM tbl_violationreport WHERE ViolationID = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
 
-            // Check if the delete was successful
-            if ($stmt->affected_rows > 0) {
-                echo 1; // Success
-            } else {
+                // Check if the delete was successful
+                if ($stmt->affected_rows > 0) {
+                    echo 1; // Success
+                } else {
+                    echo 0; // No rows were affected
+                }
+
+                // Close the statement
+                $stmt->close();
+            } catch (Exception $e) {
+                // Catch any exceptions, such as foreign key constraint violation
                 echo 0; // Failure
             }
-
-            // Close the statement
-            $stmt->close();
         }
     } else {
         // Parameters not set

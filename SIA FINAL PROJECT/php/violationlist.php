@@ -93,33 +93,55 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// The deleteData function remains unchanged
 function deleteData(id) {
-    console.log('start')
-    $(document).ready(function() {
-        console.log('ajax starting')
-        $.ajax({
-            // Action
-            url: './php/deleteviolationreport.php',
-            // Method
-            type: 'POST',
-            data: {
-                // Get Value
-                id: id,
-                action: "delete"
-            }, 
-            success:function(response) {
-                console.log('done')
-                // Response is the output of the action
-                if(response == 1) {
-                    alert('Data Deleted Successfully');
-                    document.getElementById(id).style.display = "none"
-                }
-                else if (response == 0) {
-                    alert('Data Cannot Be Deleted');
-                }
-            }
-        })
+    // Use SweetAlert for confirmation
+    Swal.fire({
+        title: 'Are you sure?',
+        text: `This is a non reversible action! Violation ${id} will not be recovered`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            console.log('start');
+            $(document).ready(function() {
+                console.log('ajax starting');
+                $.ajax({
+                    // Action
+                    url: './php/deleteviolationreport.php',
+                    // Method
+                    type: 'POST',
+                    data: {
+                        // Get Value
+                        id: id,
+                        action: "delete"
+                    }, 
+                    success:function(response) {
+                        console.log('done');
+                        // Response is the output of the action
+                        if(response == 1) {
+                            // Use SweetAlert for success message
+                            Swal.fire(
+                                'Deleted!',
+                                'Data has been deleted.',
+                                'success'
+                            );
+                            document.getElementById(id).style.display = "none";
+                        }
+                        else if (response == 0) {
+                            // Use SweetAlert for failure message
+                            Swal.fire(
+                                'Error!',
+                                'Data cannot be deleted. Please contact your administrator',
+                                'error'
+                            );
+                        }
+                    }
+                });
+            });
+        }
     });
 }
 
