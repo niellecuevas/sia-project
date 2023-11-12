@@ -11,6 +11,7 @@ $(document).ready(function() {
     function updateRemarks() {
         // Get the selected violation type ID
         var selectedViolationTypeID = $('#violationtype').val();
+        var selectedSRCode = $('#srCode').val();
 
         // Check if a violation type is selected
         if (selectedViolationTypeID) {
@@ -18,7 +19,7 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 url: './php/getdescription.php', // Replace with the actual path to your PHP file
-                data: { id: selectedViolationTypeID },
+                data: { id: selectedViolationTypeID, srCode: selectedSRCode },
                 success: function(response) {
                     // Update the remarks textbox with the fetched description
                     $('#remarks').val(response);
