@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2023 at 01:46 PM
+-- Generation Time: Nov 13, 2023 at 01:53 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -48,7 +48,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetAdminAccount` (IN `inputStaff
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetAppeals` (IN `sortOption` VARCHAR(255))   BEGIN
-SELECT AppealID, tbl_students.SRCode, CONCAT(tbl_students.FirstName, ' ', SUBSTRING(tbl_students.MiddleName, 1, 1), '. ', tbl_students.LastName) AS Name, ViolationName, Department, CourseName, tbl_appeal.Date AS AppealDate, ViolationName, ViolationDate, ViolationTime, CONCAT(tbl_staff.FirstName, ' ', SUBSTRING(tbl_staff.MiddleName, 1, 1), '. ', tbl_staff.LastName) AS StaffName, Remarks, Appeal
+SELECT AppealID,  tbl_violationreport.ViolationID, tbl_students.SRCode, CONCAT(tbl_students.FirstName, ' ', SUBSTRING(tbl_students.MiddleName, 1, 1), '. ', tbl_students.LastName) AS Name, ViolationName, Department, CourseName, tbl_appeal.Date AS AppealDate, ViolationName, ViolationDate, ViolationTime, CONCAT(tbl_staff.FirstName, ' ', SUBSTRING(tbl_staff.MiddleName, 1, 1), '. ', tbl_staff.LastName) AS StaffName, Remarks, Appeal
     FROM tbl_appeal
     INNER JOIN tbl_violationreport ON tbl_appeal.ViolationID = tbl_violationreport.ViolationID
     INNER JOIN tbl_students ON tbl_violationreport.SRCode = tbl_students.SRCode

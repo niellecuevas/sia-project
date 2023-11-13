@@ -8,6 +8,16 @@
         <form action="#" class="form">
 
         <div class="input-box">
+          <label hidden>ViolationID</label>
+          <p id="apviolationid" hidden>ViolationID</p>
+        </div>
+
+        <div class="input-box">
+          <label hidden>AppealID</label>
+          <p id="apappealid" hidden>AppealID</p>
+        </div>
+
+        <div class="input-box">
           <label>SR Code</label>
           <input type="text" placeholder="Enter SR Code" id="apsrcode" required />
         </div>
@@ -84,9 +94,117 @@
         </div>
 
         <div class="column">
-          <button>Accept</button>
-          <button>Deny</button>
+          <button id="acceptbutton">Accept</button>
+          <button id="denybutton">Deny</button>
         </div>
         </form>
 
       </section>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    // Get the Accept button
+    var acceptButton = $("#acceptbutton");
+    var denyButton = $("#denybutton")
+
+    // Add click event listener
+    acceptButton.on("click", function () {
+      // Get the values from the hidden p elements
+      var appealID = $("#apappealid").text();
+      var violationID = $("#apviolationid").text();
+      closeAppealRequest();
+      // Run the SQL deletion
+      acceptDeleteAppeal(appealID, violationID);
+    });
+
+    // Add click event listener
+    denyButton.on("click", function () {
+      // Get the values from the hidden p elements
+      var appealID = $("#apappealid").text();
+      var violationID = $("#apviolationid").text();
+      closeAppealRequest();
+      // Run the SQL deletion
+      denyDeleteAppeal(appealID);
+    });
+
+    function denyDeleteAppeal(appealID) {
+      $.ajax({
+        type: "POST",
+        url: "./php/deleteappeal.php",
+        data: { appealID: appealID },
+        success: function (response) {
+          // Show SweetAlert2 notification based on the response
+          if (response.success) {
+
+            id = `ap${appealID}`;
+            document.getElementById(id).style.display = "none";
+
+            Swal.fire({
+              icon: 'success',
+              title: 'Appeal Denied',
+              text: `Appeal ${appealID} has been denied`,
+            });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Encountered an error while denying appeal. Please try again later!',
+            });
+          }
+        },
+        error: function () {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Failed to communicate with the server',
+          });
+        },
+      });
+    }
+
+    function acceptDeleteAppeal(appealID, violationID) {
+      $.ajax({
+        type: "POST",
+        url: "./php/deleteappealandviolation.php",
+        data: { appealID: appealID, violationID: violationID },
+        success: function (response) {
+          // Show SweetAlert2 notification based on the response
+          if (response.success) {
+
+            id = `ap${appealID}`;
+            document.getElementById(id).style.display = "none";
+
+            Swal.fire({
+              icon: 'success',
+              title: 'Appeal Accepted',
+              text: `Violation ${violationID} has now been deleted`,
+            });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error Encountered',
+              text: 'Encountered an error while accepting appeal. Please try again later!',
+            });
+          }
+        },
+        error: function () {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Failed to communicate with the server',
+          });
+        },
+      });
+    }
+
+  // Function to close the container
+  function closeAppealRequest() {
+    document.querySelector('.containerAppealRequest').style.display = 'none';
+  }
+});
+</script>
+
+
