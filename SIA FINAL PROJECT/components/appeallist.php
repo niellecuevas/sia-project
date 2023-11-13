@@ -43,13 +43,27 @@ function fetchAppeal($conn, $sortOption)
         <?php
         // Dynamically generate table rows based on fetched data
         while ($row = $result->fetch_assoc()) {
-            echo "<tr >";
+            echo "<tr id = '" . $row['AppealID'] . 
+                 "' dataAppealID = '" . $row['AppealID'] . 
+                 "' dataSRCode = '" . $row['SRCode'] . 
+                 "' dataStudentName = '" . $row['Name'] . 
+                 "' dataViolationName = '" . $row['ViolationName'] . 
+                 "' dataDepartment = '" . $row['Department'] . 
+                 "' dataCourseName = '" . $row['CourseName'] . 
+                 "' dataAppealDate = '" . $row['AppealDate'] . 
+                 "' dataViolationName = '" . $row['ViolationName'] . 
+                 "' dataViolationDate = '" . $row['ViolationDate'] . 
+                 "' dataViolationTime = '" . $row['ViolationTime'] . 
+                 "' dataStaffName = '" . $row['StaffName'] . 
+                 "' dataRemarks = '" . $row['Remarks'] . 
+                 "' dataAppeal = '" . $row['Appeal'] . "'>";
+
             echo "<td id='appealid'>" . $row['AppealID'] . "</td>";
             echo "<td id='srcode'>" . $row['SRCode'] . "</td>";
             echo "<td id='name'>" . $row['Name'] . "</td>";
             echo "<td id='violation'>" . $row['ViolationName'] . "</td>";
             echo "<td class='centered-cell'>";
-            echo "<button class='btncss' id='openAppealReq'>Review</button>";
+            echo "<button class='btncss openAppealReq' id='openAppealReq'>Review</button>";
             echo "</td>";
             echo "</tr>";
         }
@@ -61,9 +75,30 @@ function fetchAppeal($conn, $sortOption)
 // Add click event listeners to each button using the unique AppealID
 document.addEventListener('DOMContentLoaded', function () {
     // Add event listeners to all "Appeal" buttons
-    var appealButtons = document.getElementsByClassName('containerAppealRequest');
+    var appealButtons = document.getElementsByClassName('openAppealReq');
     for (var i = 0; i < appealButtons.length; i++) {
         appealButtons[i].addEventListener('click', function () {
+            var row = this.parentNode.parentNode;
+            var appealID = row.getAttribute('dataAppealID');
+            var srCode = row.getAttribute('dataSRCode');
+            var studentName = row.getAttribute('dataStudentName');
+            var violationName = row.getAttribute('dataViolationName');
+            var department = row.getAttribute('dataDepartment');
+            var courseName = row.getAttribute('dataCourseName');
+            var appealDate = row.getAttribute('dataAppealDate');
+            var violationDate = row.getAttribute('dataViolationDate');
+            var violationTime = row.getAttribute('dataViolationTime');
+            var staffName = row.getAttribute('dataStaffName');
+            var remarks = row.getAttribute('dataRemarks');
+            var appeal = row.getAttribute('dataAppeal');
+
+            document.getElementById('apsrcode').value = srCode;
+            document.getElementById('apstudentname').innerText = studentName;
+            document.getElementById('apstudentdepartment').innerText = department;
+            document.getElementById('apstudentprogram').innerText = courseName;
+            document.getElementById('apstudentprogram').innerText = courseName;
+
+
             // Display the pop-up container
             document.querySelector('.containerAppealRequest').style.display = 'block';
         });
