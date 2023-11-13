@@ -43,15 +43,13 @@ function fetchAppeal($conn, $sortOption)
         <?php
         // Dynamically generate table rows based on fetched data
         while ($row = $result->fetch_assoc()) {
-            echo "<tr>";
+            echo "<tr >";
             echo "<td id='appealid'>" . $row['AppealID'] . "</td>";
             echo "<td id='srcode'>" . $row['SRCode'] . "</td>";
             echo "<td id='name'>" . $row['Name'] . "</td>";
             echo "<td id='violation'>" . $row['ViolationName'] . "</td>";
             echo "<td class='centered-cell'>";
-            echo "<button class='btncss' id='openAppealReq'>";
-            echo "Review";
-            echo "</button>";
+            echo "<button class='btncss' id='openAppealReq'>Review</button>";
             echo "</td>";
             echo "</tr>";
         }
@@ -61,12 +59,14 @@ function fetchAppeal($conn, $sortOption)
 
 <script>
 // Add click event listeners to each button using the unique AppealID
-<?php
-$result->data_seek(0); // Reset the result pointer to the beginning
-while ($row = $result->fetch_assoc()) {
-    echo "document.getElementById('openAppealReq_" . $row['AppealID'] . "').addEventListener('click', function() {
-        alert('1');
-    });";
-}
-?>
+document.addEventListener('DOMContentLoaded', function () {
+    // Add event listeners to all "Appeal" buttons
+    var appealButtons = document.getElementsByClassName('containerAppealRequest');
+    for (var i = 0; i < appealButtons.length; i++) {
+        appealButtons[i].addEventListener('click', function () {
+            // Display the pop-up container
+            document.querySelector('.containerAppealRequest').style.display = 'block';
+        });
+    }
+});
 </script>
