@@ -161,7 +161,13 @@
             }
         } else {
             // Display a message if no violations are found
-            echo '<p>No violation data available.</p>';
+            echo '<div style="position: absolute; left: 50%; transform: translateX(-50%); 
+            top:40%; text-align: center; align-content: center; z-index: 5;">
+            <p style="font-size: 20px;">No violation data available.</p>
+            </div>
+            <div style="position: absolute; top: 5%; left: 50%; transform: translateX(-50%); z-index: 1; align-content: center;">
+            <img src="img/BSULogoBW.png" style="height: 100%; width: 100%; opacity: 0.10;">
+            </div>';
         }
         ?>
     </div>
