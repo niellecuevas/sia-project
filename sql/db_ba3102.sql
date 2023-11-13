@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2023 at 01:53 PM
+-- Generation Time: Nov 13, 2023 at 03:13 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -258,19 +258,18 @@ CREATE TABLE `tbl_appeal` (
   `AppealID` int(11) NOT NULL,
   `ViolationID` int(11) NOT NULL,
   `Date` date NOT NULL,
-  `Appeal` varchar(255) NOT NULL,
-  `Status` varchar(50) NOT NULL
+  `Appeal` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_appeal`
 --
 
-INSERT INTO `tbl_appeal` (`AppealID`, `ViolationID`, `Date`, `Appeal`, `Status`) VALUES
-(1, 6, '2023-11-12', 'Di naman po ako yan! Fake News!!!!', 'Pending'),
-(2, 5, '2023-11-03', 'Good day po! Concern ko lang po na baka sala po ang type nyo ng SR Code. Di po ako ang nabigyan ng violation kanina', 'Pending'),
-(3, 2, '2023-11-03', 'I believe po ay mali po ang verdict sa akin regarding sa case na ito', 'Pending'),
-(4, 7, '2023-11-03', 'Mali po ang nabigay sa akin na violation', 'Pending');
+INSERT INTO `tbl_appeal` (`AppealID`, `ViolationID`, `Date`, `Appeal`) VALUES
+(1, 6, '2023-11-12', 'Di naman po ako yan! Fake News!!!!'),
+(2, 5, '2023-11-03', 'Good day po! Concern ko lang po na baka sala po ang type nyo ng SR Code. Di po ako ang nabigyan ng violation kanina'),
+(3, 2, '2023-11-03', 'I believe po ay mali po ang verdict sa akin regarding sa case na ito'),
+(4, 7, '2023-11-03', 'Mali po ang nabigay sa akin na violation');
 
 -- --------------------------------------------------------
 
