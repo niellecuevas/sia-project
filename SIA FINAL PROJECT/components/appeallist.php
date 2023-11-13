@@ -34,7 +34,7 @@ function fetchAppeal($conn, $sortOption)
 <div id="appealRequestList">
     <table>
         <tr class="mngreport-topic-heading">
-            <th>   </th>
+            <th>ID</th>
             <th>SR Code</th>
             <th>Name</th>
             <th>Offense</th>
