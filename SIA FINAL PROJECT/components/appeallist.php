@@ -43,7 +43,21 @@ function fetchAppeal($conn, $sortOption)
         <?php
         // Dynamically generate table rows based on fetched data
         while ($row = $result->fetch_assoc()) {
-            echo "<tr id='" . $row['AppealID'] . "'>";
+            echo "<tr id = '" . $row['AppealID'] . 
+                 "' dataAppealID = '" . $row['AppealID'] . 
+                 "' dataSRCode = '" . $row['SRCode'] . 
+                 "' dataStudentName = '" . $row['Name'] . 
+                 "' dataViolationName = '" . $row['ViolationName'] . 
+                 "' dataDepartment = '" . $row['Department'] . 
+                 "' dataCourseName = '" . $row['CourseName'] . 
+                 "' dataAppealDate = '" . $row['AppealDate'] . 
+                 "' dataViolationName = '" . $row['ViolationName'] . 
+                 "' dataViolationDate = '" . $row['ViolationDate'] . 
+                 "' dataViolationTime = '" . $row['ViolationTime'] . 
+                 "' dataStaffName = '" . $row['StaffName'] . 
+                 "' dataRemarks = '" . $row['Remarks'] . 
+                 "' dataAppeal = '" . $row['Appeal'] . "'>";
+
             echo "<td id='appealid'>" . $row['AppealID'] . "</td>";
             echo "<td id='srcode'>" . $row['SRCode'] . "</td>";
             echo "<td id='name'>" . $row['Name'] . "</td>";
@@ -64,6 +78,27 @@ document.addEventListener('DOMContentLoaded', function () {
     var appealButtons = document.getElementsByClassName('openAppealReq');
     for (var i = 0; i < appealButtons.length; i++) {
         appealButtons[i].addEventListener('click', function () {
+            var row = this.parentNode.parentNode;
+            var appealID = row.getAttribute('dataAppealID');
+            var srCode = row.getAttribute('dataSRCode');
+            var studentName = row.getAttribute('dataStudentName');
+            var violationName = row.getAttribute('dataViolationName');
+            var department = row.getAttribute('dataDepartment');
+            var courseName = row.getAttribute('dataCourseName');
+            var appealDate = row.getAttribute('dataAppealDate');
+            var violationDate = row.getAttribute('dataViolationDate');
+            var violationTime = row.getAttribute('dataViolationTime');
+            var staffName = row.getAttribute('dataStaffName');
+            var remarks = row.getAttribute('dataRemarks');
+            var appeal = row.getAttribute('dataAppeal');
+
+            document.getElementById('apsrcode').value = srCode;
+            document.getElementById('apstudentname').innerText = studentName;
+            document.getElementById('apstudentdepartment').innerText = department;
+            document.getElementById('apstudentprogram').innerText = courseName;
+            document.getElementById('apstudentprogram').innerText = courseName;
+
+
             // Display the pop-up container
             document.querySelector('.containerAppealRequest').style.display = 'block';
         });

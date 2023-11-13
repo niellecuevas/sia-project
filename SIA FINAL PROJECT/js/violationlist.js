@@ -22,9 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('studentname').innerText = name;
             document.getElementById('studentdept').innerText = department;
             document.getElementById('studentprogram').innerText = courseName;
-
             document.getElementById('violationreportdate').value = violationDate;
-
             document.getElementById('violationtime').value = violationTime;
             document.getElementById('violationtype').value = violationTypeId;
             document.getElementById('remark').value = remarks;
