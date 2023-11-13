@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2023 at 03:13 PM
+-- Generation Time: Nov 13, 2023 at 01:46 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -48,11 +48,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetAdminAccount` (IN `inputStaff
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetAppeals` (IN `sortOption` VARCHAR(255))   BEGIN
-    SELECT AppealID, tbl_students.SRCode, CONCAT(FirstName, ' ', SUBSTRING(MiddleName, 1, 1), '. ', LastName) AS Name, ViolationName
+SELECT AppealID, tbl_students.SRCode, CONCAT(tbl_students.FirstName, ' ', SUBSTRING(tbl_students.MiddleName, 1, 1), '. ', tbl_students.LastName) AS Name, ViolationName, Department, CourseName, tbl_appeal.Date AS AppealDate, ViolationName, ViolationDate, ViolationTime, CONCAT(tbl_staff.FirstName, ' ', SUBSTRING(tbl_staff.MiddleName, 1, 1), '. ', tbl_staff.LastName) AS StaffName, Remarks, Appeal
     FROM tbl_appeal
     INNER JOIN tbl_violationreport ON tbl_appeal.ViolationID = tbl_violationreport.ViolationID
     INNER JOIN tbl_students ON tbl_violationreport.SRCode = tbl_students.SRCode
     INNER JOIN tbl_violationtypes ON tbl_violationreport.ViolationTypeID = tbl_violationtypes.ViolationTypeID
+    INNER JOIN tbl_course ON tbl_students.CourseID = tbl_course.CourseID
+    INNER JOIN tbl_staff ON tbl_violationreport.StaffID = tbl_staff.StaffID
     ORDER BY
         CASE
             WHEN sortOption = 'option1' THEN ViolationName
@@ -381,6 +383,7 @@ CREATE TABLE `tbl_students` (
 INSERT INTO `tbl_students` (`SRCode`, `FirstName`, `MiddleName`, `LastName`, `CourseID`) VALUES
 ('21-31092', 'Schwartz', 'Sevilla', 'Hirang', 2),
 ('21-31662', 'Sofia Mae', '', 'Pepito', 1),
+('21-33470', 'Emjay', 'A', 'Rongavilla', 1),
 ('21-35876', 'Santiago', 'Dela Cruz', 'Ensaimada', 4),
 ('21-36339', 'Jhon Kyle', 'Pardillo', 'Ilao', 1),
 ('21-38628', 'Raniella', 'R', 'Cuevas', 1),
@@ -410,14 +413,15 @@ CREATE TABLE `tbl_violationreport` (
 --
 
 INSERT INTO `tbl_violationreport` (`ViolationID`, `SRCode`, `StaffID`, `ViolationTypeID`, `ViolationDate`, `ViolationTime`, `Remarks`, `Evidence`) VALUES
-(1, '21-39479', 's1-23', 1, '2023-10-31', '21:18:00', 'Three- to five-day suspension (3-5)', '6550d16d20d71.jpg'),
+(1, '21-39479', 's1-23', 1, '2023-10-18', '23:18:00', 'Three- to five-day suspension (3-5)', '6550d16d20d71.jpg'),
 (2, '21-87123', 's1-23', 4, '2023-11-12', '21:21:00', 'Written Warning', '6550d24a63bf4.jpg'),
 (3, '21-39479', 's1-23', 6, '2023-11-12', '21:27:00', 'Written Reprimand', '6550d2c6623a9.jpg'),
 (4, '21-39479', 's1-23', 6, '2023-11-12', '21:27:00', 'Written Reprimand to One-day suspension', '6550d2d46a0c2.jpg'),
 (5, '21-31662', 's1-23', 7, '2023-11-12', '21:29:00', 'Written Reprimand', '6550d34889972.png'),
 (6, '21-38628', 's1-23', 7, '2023-11-12', '21:29:00', 'Written Reprimand', '6550d3b30990a.png'),
 (7, '21-39841', 's1-23', 2, '2023-11-12', '21:31:00', 'Three- to five-day suspension (3-5)', '6550d3f713438.jpg'),
-(8, '21-39479', 's1-23', 3, '2023-11-12', '21:32:00', 'Three- to five-day suspension (3-5)', '6550d445b42cb.jpg');
+(8, '21-39479', 's1-23', 3, '2023-11-12', '21:32:00', 'Three- to five-day suspension (3-5)', '6550d445b42cb.jpg'),
+(23, '21-36339', 's1-23', 6, '2023-11-13', '11:31:00', 'Written Reprimand', '655198b18a0bb.jpg');
 
 -- --------------------------------------------------------
 
@@ -551,7 +555,7 @@ ALTER TABLE `tbl_studentaccount`
 -- AUTO_INCREMENT for table `tbl_violationreport`
 --
 ALTER TABLE `tbl_violationreport`
-  MODIFY `ViolationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ViolationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tbl_violationtypes`

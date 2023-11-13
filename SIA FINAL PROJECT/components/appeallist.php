@@ -97,7 +97,13 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('apstudentdepartment').innerText = department;
             document.getElementById('apstudentprogram').innerText = courseName;
             document.getElementById('apstudentprogram').innerText = courseName;
-
+            document.getElementById('apappealdate').value = appealDate;
+            document.getElementById('apviolationname').innerText = violationName;
+            document.getElementById('apviolationdate').innerText = violationDate;
+            document.getElementById('apviolationtime').innerText = violationTime;
+            document.getElementById('apstaffname').innerText = staffName;
+            document.getElementById('apremarks').innerText = remarks;
+            document.getElementById('apappeal').value = appeal;
 
             // Display the pop-up container
             document.querySelector('.containerAppealRequest').style.display = 'block';
