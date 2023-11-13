@@ -34,6 +34,41 @@
             </div>
           </div>
           </div>
+          <div class="review-appeal">
+            <h1>Violation Details</h1>
+        </div>
+        <div class="column">
+          <div class="input-box">
+            <label>Violation</label>
+            <div class="auto-input">
+              <p name="violationDetail">Violation</p>
+            </div>
+          </div>
+          <div class="input-box">
+            <label>Date</label>
+            <div class="auto-input">
+              <p name="violationDate">MM/DD/YYYY</p>
+            </div>
+          </div>
+          <div class="input-box">
+            <label>Time</label>
+            <div class="auto-input">
+              <p name="violationTime">0:00</p>
+            </div>
+          </div>
+        </div>
+          <div class="input-box">
+            <label>Handler</label>
+            <div class="auto-input">
+              <p name="violationHandlerName">Handler Name</p>
+            </div>
+          </div>
+          <div class="input-box">
+            <label>Remarks</label>
+            <div class="auto-input">
+              <p name="violation">Remarks</p>
+            </div>
+          </div>
           <div class="input-box">
               <label>Request</label>
               <textarea style="width:100%; height:100px; resize:none;" placeholder="Message here" required ></textarea>
