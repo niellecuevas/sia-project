@@ -12,7 +12,7 @@
           <div class="column">
               <div class="input-box" hidden>
                 <label hidden>SR Code</label>
-                <input type="text" placeholder="Enter SR Code" id="studentsrcode" class="srCode" required hidden />
+                <p id="studentsrcode" class="srCode">SR Code</p>
               </div>
           </div>
           <div class="input-box">

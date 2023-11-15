@@ -18,8 +18,8 @@
         </div>
 
         <div class="input-box">
-          <label>SR Code</label>
-          <input type="text" placeholder="Enter SR Code" id="apsrcode" required />
+          <labe>SR Code</label>
+          <p id="apsrcode">SR Code</p>
         </div>
 
         <div class="input-box">
@@ -46,7 +46,7 @@
 
         <div class="input-box">
           <label>Date</label>
-          <input type="date" id="apappealdate" class="appealdate" placeholder="Enter date" required />
+          <p id="apappealdate" class="appealdate">Date</p>
         </div>
 
         <div class="review-appeal">
@@ -82,6 +82,13 @@
         </div>
 
         <div class="input-box">
+          <label>Evidence</label>
+          <div class="auto-input">
+          <img src="<?php echo './img/violationEvidence/' . $violation['Evidence']; ?>" alt="Evidence Image" class="imageEvidence">
+          </div>
+        </div>
+
+        <div class="input-box">
           <label>Remarks</label>
           <div class="auto-input">
             <p name="violation" id="apremarks">Remarks</p>
@@ -90,7 +97,7 @@
 
         <div class="input-box">
           <label>Request</label>
-          <textarea style="width:100%; height:100px; resize:none;" placeholder="Message here" id="apappeal" required ></textarea>
+          <p id="apappeal">Message Here</p>
         </div>
 
         <div class="column">

@@ -37,7 +37,7 @@
 
 .form .input-box {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .input-box label {
@@ -115,6 +115,8 @@
 .form button:hover {
   background: rgb(112, 112, 112);
 }
+
+
 
 
 /*Responsive*/
