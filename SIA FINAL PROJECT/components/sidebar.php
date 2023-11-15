@@ -15,7 +15,7 @@
     <!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand" style="margin-top:20px;">
-		<img src="img/BSULogo.png" id="logo-img"style="width: 30px;>
+		<img src="img/BSULogo.png" id="logo-img"style="width: 30px;">
 		<span class="text">BatStateU</span>
 		</a>
 		<ul class="side-menu top">
@@ -31,15 +31,6 @@
 					<span class="text">Manage Report</span>
 				</a>
 			</li>
-			<!-- <li class="page5">
-				<a href="accountmanager.php">
-					<i class='bx bxs-group' ></i>
-					<span class="text">Account Manager</span>
-				</a>
-			</li> -->
-		</ul>
-		<ul class="side-menu">
-			
 			<li>
 				<a href="./php/actadminlogout.php" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>
@@ -52,11 +43,7 @@
     
 	<!-- CONTENT -->
 	<section id="content">
-		<!-- NAVBAR -->
-		<nav>
 
-		</nav>
-		<!-- NAVBAR -->
         <script src="js/newDashboard.js"></script>
     </body>
 </html>
