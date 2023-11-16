@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2023 at 05:02 AM
+-- Generation Time: Nov 16, 2023 at 06:17 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -403,8 +403,8 @@ INSERT INTO `tbl_violationreport` (`ViolationID`, `SRCode`, `StaffID`, `Violatio
 (3, '21-39479', 's1-23', 6, '2023-11-12', '21:27:00', 'Written Reprimand', '6550d2c6623a9.jpg', 'Ongoing'),
 (4, '21-39479', 's1-23', 6, '2023-11-12', '21:27:00', 'Written Reprimand to One-day suspension', '6550d2d46a0c2.jpg', 'Ongoing'),
 (5, '21-31662', 's1-23', 7, '2023-11-12', '21:29:00', 'Written Reprimand', '6550d34889972.png', 'Done'),
-(6, '21-38628', 's1-23', 7, '2023-11-12', '21:29:00', 'Written Reprimand', '6550d3b30990a.png', 'Failed'),
-(7, '21-39841', 's1-23', 2, '2023-11-12', '21:31:00', 'Three- to five-day suspension (3-5)', '6550d3f713438.jpg', 'Failed'),
+(6, '21-38628', 's1-23', 7, '2023-11-12', '21:29:00', 'Written Reprimand', '6550d3b30990a.png', 'Ongoing'),
+(7, '21-39841', 's1-23', 2, '2023-11-12', '21:31:00', 'Three- to five-day suspension (3-5)', '6550d3f713438.jpg', 'Done'),
 (8, '21-39479', 's1-23', 3, '2023-11-12', '21:32:00', 'Three- to five-day suspension (3-5)', '6550d445b42cb.jpg', 'Ongoing'),
 (23, '21-36339', 's1-23', 6, '2023-11-13', '11:31:00', 'Written Reprimand', '655198b18a0bb.jpg', 'Done');
 
@@ -434,7 +434,19 @@ INSERT INTO `tbl_violationtypes` (`ViolationTypeID`, `ViolationName`, `Violation
 (4, 'Cutting Class', 'Minor', 'Written Warning', 'Written Reprimand', 'One-day suspension'),
 (5, 'Public Display of Affection', 'Minor', 'Written Reprimand', 'Written Reprimand to One-day suspension', 'Two-day suspension may include Disciplinary Probation\r\n'),
 (6, 'Improper Uniform / Dress Code', 'Minor', 'Written Reprimand', 'Written Reprimand to One-day suspension', 'Two-day suspension, may include Disciplinary Probation\r\n'),
-(7, 'Misbehavior', 'Minor', 'Written Reprimand', 'Written Reprimand to One-day suspension', 'Two-day suspension, may include Disciplinary Probation\r\n');
+(7, 'Misbehavior', 'Minor', 'Written Reprimand', 'Written Reprimand to One-day suspension', 'Two-day suspension, may include Disciplinary Probation\r\n'),
+(8, 'Provocation to a fight (quarrel or fistfight).', 'Minor', 'Written Reprimand', 'Written Reprimand to One-day suspension', 'Two-day suspension, may include Disciplinary Probation\r\n'),
+(9, 'Making all forms of disturbances', 'Minor', 'Written Reprimand', 'Written Reprimand to One-day suspension', 'Two-day suspension, may include Disciplinary Probation\r\n'),
+(10, 'Unauthorized removal of official notices, posters, \r\nstreamers, tarpaulins', 'Minor', 'Written Reprimand', 'Written Reprimand to One-day suspension', 'Two-day suspension, may include Disciplinary Probation\r\n'),
+(11, 'Breaking into a class or College-sponsored activities without the permission of the organizer', 'Minor', 'Written Reprimand', 'Written Reprimand to One-day suspension', 'Two-day suspension, may include Disciplinary Probation\r\n'),
+(12, 'Membership to fraternities or sororities which are not duly recognized by the University.', 'Major', 'Three- to six-day suspension (3-6)', 'Six- to eight-day suspension (6-8), may include \r\nRe-admission Probation', 'Eight- to ten-day suspension (8-10), may \r\ninclude Non-readmission'),
+(13, 'Destructive acts, due to vandalism or drunkenness or \r\nrecklessness', 'Major', 'Four- to eight-day suspension (4-8)', 'Eight- to ten-day suspension (8-10), may include Re-admission Probation', 'Ten- to twelve-day suspension (10-12), may include Non-readmission'),
+(14, 'Bringing bladed objects and similar objects', 'Major', 'Four- to eight-day suspension (4-8)', 'Eight- to ten-day suspension (8-10), may include Re-admission Probation', 'Ten- to twelve-day suspension (10-12), may include Non-readmission'),
+(15, 'Acts that result to slight physical injury against any individual within the University premises', 'Major', 'Four- to eight-day suspension (4-8)', 'Eight- to ten-day suspension (8-10), may include Re-admission Probation', 'Ten- to twelve-day suspension (10-12), may include Non-readmission'),
+(16, 'Bribery of any nature given to any employee of the University ', 'Major', 'Six- to ten-day suspension (6-10), may include Non-readmission', 'Ten- to twelve-day suspension (10-12), may include Non-readmission', 'Twelve- to fourteen-day suspension (12-14), may include Non-readmission\r\n'),
+(17, 'Acts that cause serious physical injury which may include damage to property', 'Major', 'Eight- to twelve-day suspension (8-12), may include Non-readmission', 'Twelve- fourteen-day suspension (12-14), may include Non-readmission', 'Fourteen- to sixteen-day suspension (14-16), may include Non-readmission'),
+(18, 'Student protests whose distinctive character is intimidation, obstruction and/or destruction.', 'Major', 'Ten to fourteen day suspension (10 -14), may \r\ninclude Non-readmission', 'Fifteen to seventeen day suspension (15-17), may include Non-readmission', 'Eighteen to twenty day suspension (18-20), may include Non-readmission '),
+(19, 'Academic dishonesty or cheating during examination', 'Major', 'Grade of zero (0) in the test/exam/requirement and one-day (1) suspension', 'Grade of zero (0) in the test/exam/requirement and one-day (1) suspension', 'Grade of zero (0) in the test/exam/requirement and one-day (1) suspension');
 
 --
 -- Indexes for dumped tables
@@ -533,7 +545,7 @@ ALTER TABLE `tbl_violationreport`
 -- AUTO_INCREMENT for table `tbl_violationtypes`
 --
 ALTER TABLE `tbl_violationtypes`
-  MODIFY `ViolationTypeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ViolationTypeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables
