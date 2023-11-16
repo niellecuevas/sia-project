@@ -82,7 +82,15 @@
         </div>
 
         <div class="input-box">
-          <label><b>Remarks</b></label>
+          <label><b>Status</b></label>
+          <div class="auto-input">
+            <p name="violationstatus" id="apviolationstatus">Violation Status</p>
+          </div>
+        </div>
+
+        </div>
+        <div class="input-box">
+          <label><br><b>Remarks</b></label>
           <div class="auto-input">
             <p name="violation" id="apremarks">Remarks</p>
           </div>
