@@ -24,7 +24,7 @@ function sanitizeInput($input)
 if (isset($_POST['submit'])) {
      //Check if required fields are not empty and violation type is not "Violation"
      if (!empty($_POST['srCode']) && !empty($_POST['violationtype']) && $_POST['violationtype'] !== "Violation" &&
-         !empty($_POST['violationdate']) && !empty($_POST['violationtime'])) {
+         !empty($_POST['violationdate']) &&  !empty($_POST['status']) && !empty($_POST['violationtime'])) {
 
         // Clean and validate the inputs
         $srCode = sanitizeInput($_POST['srCode']);
@@ -34,6 +34,7 @@ if (isset($_POST['submit'])) {
         $violationDate = date('Y-m-d', strtotime($_POST['violationdate']));
         $violationTime = date('H:i:s', strtotime($_POST['violationtime']));
         $remarks = sanitizeInput($_POST['remarks']);
+        $status = sanitizeInput($_POST['status']);
         // Validate uploaded image
         if ($_FILES['image']['error'] === 4) {
             // If no file was uploaded, redirect with a "MissingAttachment" status
@@ -72,8 +73,8 @@ if (isset($_POST['submit'])) {
         }
 
         // Call the stored procedure to insert data
-        $query = $conn->prepare("CALL SP_InsertViolationReport(?, ?, ?, ?, ?, ?, ?)");
-        $query->bind_param("ssissss", $srCode, $staffId, $violationType, $violationDate, $violationTime, $remarks, $newImageName);
+        $query = $conn->prepare("CALL SP_InsertViolationReport(?, ?, ?, ?, ?, ?, ?, ?)");
+        $query->bind_param("ssisssss", $srCode, $staffId, $violationType, $violationDate, $violationTime, $remarks, $newImageName, $status);
 
         if ($query->execute()) {
             // If the query is successful, set a session variable and redirect with "InsertSuccess" status

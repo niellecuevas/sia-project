@@ -183,7 +183,7 @@
     function acceptDeleteAppeal(appealID, violationID) {
       $.ajax({
         type: "POST",
-        url: "./php/deleteappealandviolation.php",
+        url: "./php/deleteappeal.php",
         data: { appealID: appealID, violationID: violationID },
         success: function (response) {
           // Show SweetAlert2 notification based on the response
