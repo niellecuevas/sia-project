@@ -57,7 +57,8 @@ function fetchAppeal($conn, $sortOption)
                  "' dataStaffName = '" . $row['StaffName'] . 
                  "' dataRemarks = '" . $row['Remarks'] . 
                  "' dataAppeal = '" . $row['Appeal'] . 
-                 "' dataViolationID = '" . $row['ViolationID'] . "'>";
+                 "' dataViolationID = '" . $row['ViolationID'] . 
+                 "' dataEvidence = '" . $row['Evidence'] . "'>";
 
             echo "<td id='appealid'>" . $row['AppealID'] . "</td>";
             echo "<td id='srcode'>" . $row['SRCode'] . "</td>";
@@ -93,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var remarks = row.getAttribute('dataRemarks');
             var appeal = row.getAttribute('dataAppeal');
             var violationID = row.getAttribute('dataViolationID');
+            var evidence = row.getAttribute('dataEvidence')
 
             document.getElementById('apsrcode').value = srCode;
             document.getElementById('apstudentname').innerText = studentName;
@@ -105,9 +107,10 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('apviolationtime').innerText = violationTime;
             document.getElementById('apstaffname').innerText = staffName;
             document.getElementById('apremarks').innerText = remarks;
-            document.getElementById('apappeal').value = appeal;
+            document.getElementById('apappeal').innerText = appeal;
             document.getElementById('apviolationid').innerHTML = violationID;
             document.getElementById('apappealid').innerHTML = appealID;
+            document.getElementById('apevidence').src = "./img/violationEvidence/" + evidence;
 
             // Display the pop-up container
             document.querySelector('.containerAppealRequest').style.display = 'block';
