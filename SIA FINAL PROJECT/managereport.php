@@ -23,7 +23,7 @@
         <?php include "./components/violationlist.php"?>
         <?php include "./components/appeallist.php"?>
 
-        <!--call slip required table-->
+        <!--call slivp required table-->
         <!-- <div id="callslipReqList">
           <table>
             <tr class="mngreport-topic-heading">
@@ -53,6 +53,8 @@
     <?php include "./components/generatecallslip.php"?>
     <?php include "./components/appealdetail.php"?>
     <script src="js/managereport.js"></script>
+    <script src="js/reportdates.js"></script>
+    <script src="js/switchtable.js"></script>
     <script>
         document.getElementById("openEditForm").addEventListener("click", function() {
             document.querySelector(".containerEditVio").style.display = "block";
