@@ -130,7 +130,9 @@
         if (isset($studentViolations) && !empty($studentViolations)) {
             foreach ($studentViolations as $violation) {
         ?>
-                <div class="swiper-slide" data-vio-id="<?php echo $violation['ViolationID']; ?>">
+                <div class="swiper-slide" style="display: grid;
+                grid-template-rows: auto; box-sizing: content-box; 
+                padding-top: 120px; min-height: 110%;" data-vio-id="<?php echo $violation['ViolationID']; ?>">
                     <form>
                         <div class="violationInfo">
                         
@@ -145,14 +147,16 @@
                             <input type="text" class="conductInfo" id="time" name="time" value="<?php echo $violation['ViolationTime']; ?>" readonly style="color: black;"><br><br>
                             <label for="remarks" class="lbl" id="remarks">Remarks:</label>
                             <input type="text" class="conductInfo" id="remarks" name="remarks" value="<?php echo $violation['Remarks']; ?>" readonly style="color: black;"><br><br>
+                            <label for="remarks" class="lbl" id="remarks">Status:</label>
+                            <input type="text" class="conductInfo" id="remarks" name="remarks" value="<?php echo $violation['Remarks']; ?>" readonly style="color: black;"><br><br>
                             
                             <!-- Evidence Label -->
                             
-                            <label for="attachment" class="lbl" id="attachment">Evidence:</label><br><br>
+                            <label for="attachment" class="lbl" id="attachment">Evidence:</label><br>
                             
                             <!-- Display evidence image -->
                             <?php if (!empty($violation['Evidence'])): ?>
-                                <img src="<?php echo './img/violationEvidence/' . $violation['Evidence']; ?>" alt="Evidence Image" class="imageEvidence">
+                                <img src="<?php echo './img/violationEvidence/' . $violation['Evidence']; ?>" alt="Evidence Image" class="imageEvidence"><br><br>
                             <?php endif; ?>
                         </div>
                     </form>
