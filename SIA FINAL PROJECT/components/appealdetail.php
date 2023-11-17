@@ -18,12 +18,12 @@
         </div>
 
         <div class="input-box">
-          <labe>SR Code</label>
+          <label style="font-weight: bold;">SR Code</label>
           <p id="apsrcode">SR Code</p>
         </div>
 
         <div class="input-box">
-          <label>Name</label>
+          <label style="font-weight: bold;">Name</label>
           <div class="auto-input">
             <p name="studentName" id="apstudentname">Student Name</p>
           </div>
@@ -31,13 +31,13 @@
 
         <div class="column">
         <div class="input-box">
-          <label>Department</label>
+          <label style="font-weight: bold;">Department</label>
           <div class="auto-input">
             <p name="studentDept" id="apstudentdepartment">Student Department</p>
           </div>
         </div>
         <div class="input-box">
-          <label>Program</label>
+          <label style="font-weight: bold;">Program</label>
           <div class="auto-input">
             <p name="studentProgram" id="apstudentprogram">Student Program</p>
           </div>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="input-box">
-          <label>Date</label>
+          <label style="font-weight: bold;">Date</label>
           <p id="apappealdate" class="appealdate">Date</p>
         </div>
 
@@ -55,19 +55,19 @@
 
         <div class="column">
           <div class="input-box">
-            <label>Violation</label>
+            <label style="font-weight: bold;">Violation</label>
             <div class="auto-input">
               <p name="violationDetail" id="apviolationname">Violation</p>
             </div>
           </div>
           <div class="input-box">
-            <label>Date</label>
+            <label style="font-weight: bold;">Date</label>
             <div class="auto-input">
               <p name="violationDate" id="apviolationdate">MM/DD/YYYY</p>
             </div>
           </div>
           <div class="input-box">
-            <label>Time</label>
+            <label style="font-weight: bold;">Time</label>
             <div class="auto-input">
               <p name="violationTime" id="apviolationtime">0:00</p>
             </div>
@@ -75,28 +75,28 @@
         </div>
 
         <div class="input-box">
-          <label>Handler</label>
+          <label style="font-weight: bold;">Handler</label>
           <div class="auto-input">
             <p name="violationHandlerName" id="apstaffname">Handler Name</p>
           </div>
         </div>
 
         <div class="input-box">
-          <label>Evidence</label>
+          <label style="font-weight: bold;">Evidence</label>
           <div class="auto-input">
           <img src="<?php echo './img/violationEvidence/' . $violation['Evidence']; ?>" alt="Evidence Image" class="imageEvidence">
           </div>
         </div>
 
         <div class="input-box">
-          <label>Remarks</label>
+          <label style="font-weight: bold;">Remarks</label>
           <div class="auto-input">
             <p name="violation" id="apremarks">Remarks</p>
           </div>
         </div>
 
         <div class="input-box">
-          <label>Request</label>
+          <label style="font-weight: bold;">Request</label>
           <p id="apappeal">Message Here</p>
         </div>
 

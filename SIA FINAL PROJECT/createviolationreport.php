@@ -20,7 +20,7 @@
         <form action="./php/actcreateviolation.php" method="POST" class="form" enctype="multipart/form-data">
         <div class="column">
           <div class="input-box">
-            <label>SR Code</label>
+            <label style="font-weight: bold;">SR Code</label>
             <input type="text" id="srCode" class="srCode" name="srCode" placeholder="Enter SR Code" required />
           </div>
         </div>
@@ -51,11 +51,11 @@
           
           <div class="column">
             <div class="input-box">
-              <label>Date</label>
+              <label style="font-weight: bold;">Date</label>
               <input type="date" id="dateInput" placeholder="Enter date" name="violationdate" required />
             </div>
             <div class="input-box">
-              <label>Time</label>
+              <label style="font-weight: bold;">Time</label>
               <input type="time" id="timeInput" placeholder="Enter time" name="violationtime" required />
             </div>
           </div>

@@ -16,20 +16,20 @@
               </div>
           </div>
           <div class="input-box">
-            <label>Name</label>
+            <label style="font-weight: bold;">Name</label>
             <div class="auto-input">
               <p name="studentname" id="studentname">Student Name</p>
             </div>
           </div>
           <div class="column">
           <div class="input-box">
-            <label>Department</label>
+            <label style="font-weight: bold;">Department</label>
             <div class="auto-input">
               <p name="studentdepartment" id="studentdept">Student Department</p>
             </div>
           </div>
           <div class="input-box">
-            <label>Program</label>
+            <label style="font-weight: bold;">Program</label>
             <div class="auto-input">
               <p name="studentprogram" id="studentprogram">Student Program</p>
             </div>
@@ -37,17 +37,17 @@
           </div>
           <div class="column">
             <div class="input-box">
-              <label>Date</label>
+              <label style="font-weight: bold;">Date</label>
               <input type="date" placeholder="Enter date" id="violationreportdate" required pattern="\d{4}-\d{2}-\d{2}" />
             </div>
             <div class="input-box">
-              <label>Time</label>
+              <label style="font-weight: bold;">Time</label>
               <input type="time" placeholder="Enter time" id="violationtime" required />
             </div>
           </div>
           <?php include "./components/violationdropbox.php"?>
           <div class="input-box">
-                <label>Remarks</label>
+                <label style="font-weight: bold;">Remarks</label>
                 <input type="text" placeholder="Remarks" id="remark" required />
               </div>
 

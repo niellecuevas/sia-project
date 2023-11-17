@@ -1,7 +1,7 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <div class="input-box">
-    <label>Remarks</label>
+    <label style="font-weight: bold;">Remarks</label>
     <input type="text" id="remarks" name="remarks" placeholder="Remarks"required />
 </div>
 

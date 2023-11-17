@@ -9,7 +9,7 @@ $result = $conn->query($query);
 ?>
 
 <div class="input-box address">
-    <label>Violation</label>
+    <label style="font-weight: bold;">Violation</label>
     <div class="select-box">
         <select name="violationtype" id="violationtype">
             <!-- Default hidden option in the dropdown -->
