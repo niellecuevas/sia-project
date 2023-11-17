@@ -30,6 +30,7 @@ if (isset($_SESSION['SRCode'])) {
                     'ViolationDate' => $row['ViolationDate'],
                     'ViolationTime' => $formattedTime,
                     'Remarks' => $row['Remarks'],
+                    'Status' => $row['Status'],
                     'Evidence' => $evidenceFileName  // Use only the file name
                 );
             
