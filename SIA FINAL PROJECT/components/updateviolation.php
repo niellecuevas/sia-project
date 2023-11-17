@@ -50,6 +50,17 @@
                 <label style="font-weight: bold;">Remarks</label>
                 <input type="text" placeholder="Remarks" id="remark" required />
               </div>
+          
+          <div class="input-box address">
+            <label style="font-weight: bold;">Status</label>
+              <div class="select-box">
+                <select id="violationstatus" name="violationstatus">
+                  <option hidden>Status</option>
+                  <option value="Ongoing">Ongoing</option>
+                  <option value="Done">Done</option>
+                </select>
+              </div>
+            </div>
 
             <div class="column">
                 <div class="input-box" hidden>

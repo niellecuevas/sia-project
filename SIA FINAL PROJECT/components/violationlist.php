@@ -10,7 +10,7 @@ $result = fetchData($conn, $sortOption);
 function fetchData($conn, $sortOption)
 {
     // Define the default query without ORDER BY clause
-    $query = "SELECT ViolationID, tbl_students.SRCode, CONCAT(FirstName, ' ', SUBSTRING(MiddleName, 1, 1), '. ', LastName) AS Name, Department, CourseName, ViolationDate, ViolationTime, ViolationName, Remarks, tbl_violationreport.ViolationTypeID FROM `tbl_violationreport` INNER JOIN tbl_students ON tbl_violationreport.SRCode = tbl_students.SRCode INNER JOIN tbl_violationtypes ON tbl_violationreport.ViolationTypeID = tbl_violationtypes.ViolationTypeID INNER JOIN tbl_course ON tbl_students.CourseID = tbl_course.CourseID";
+    $query = "SELECT ViolationID, tbl_students.SRCode, CONCAT(FirstName, ' ', SUBSTRING(MiddleName, 1, 1), '. ', LastName) AS Name, Department, CourseName, ViolationDate, ViolationTime, ViolationName, Remarks, tbl_violationreport.ViolationTypeID, tbl_violationreport.Status AS ViolationStatus FROM `tbl_violationreport` INNER JOIN tbl_students ON tbl_violationreport.SRCode = tbl_students.SRCode INNER JOIN tbl_violationtypes ON tbl_violationreport.ViolationTypeID = tbl_violationtypes.ViolationTypeID INNER JOIN tbl_course ON tbl_students.CourseID = tbl_course.CourseID";
 
     // Modify the query based on the selected sort option
     switch ($sortOption) {
@@ -51,10 +51,18 @@ function fetchData($conn, $sortOption)
             </tr>
             <?php
                 while ($row = $result->fetch_assoc()) {
-                    echo "<tr id='" . $row['ViolationID'] . "' data-vio-id='" . $row['ViolationID'] . "' data-srcode='" . $row['SRCode'] . "' data-name='" . 
-                        $row['Name'] . "' data-department='" . $row['Department'] . "' data-course-name='" . $row['CourseName']. "' data-violation-date='" . 
-                        $row['ViolationDate'] . "' data-violation-time='" . $row['ViolationTime'] . "' data-violation='" . $row['ViolationName'] . "' data-remarks='" . 
-                        $row['Remarks']. "' data-violation-type-id ='" . $row['ViolationTypeID'] . "' >";
+                    echo "<tr id='" . $row['ViolationID'] . 
+                         "' data-vio-id = '" . $row['ViolationID'] . 
+                         "' data-srcode = '" . $row['SRCode'] . 
+                         "' data-name = '" . $row['Name'] . 
+                         "' data-department = '" . $row['Department'] . 
+                         "' data-course-name = '" . $row['CourseName']. 
+                         "' data-violation-date = '" . $row['ViolationDate'] . 
+                         "' data-violation-time = '" . $row['ViolationTime'] . 
+                         "' data-violation = '" . $row['ViolationName'] . 
+                         "' data-remarks = '" . $row['Remarks']. 
+                         "' data-violation-type-id = '" . $row['ViolationTypeID'] . 
+                         "' data-status = '" . $row['ViolationStatus'] . "'>";
                     echo "<td id='violationid'>" . $row['ViolationID'] . "</td>";
                     echo "<td id='name'>" . $row['Name'] . "</td>";
                     echo "<td id='violation'>" . $row['ViolationName'] . "</td>";
@@ -74,4 +82,4 @@ function fetchData($conn, $sortOption)
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="./js/studentdata.js"></script>
-<script src="./js/violationlist.js"></script>
+<script src="./js/openviolations.js"></script>

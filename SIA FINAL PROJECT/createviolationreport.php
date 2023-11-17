@@ -63,6 +63,17 @@
           <?php include "./components/violationdropbox.php"; // Include the readviolations.php file ?>
           <?php include "./components/remarks.php"?>
 
+          <div class="input-box address">
+            <label style="font-weight: bold;">Status</label>
+              <div class="select-box">
+                <select id="status" class="status" name="status">
+                  <option hidden>Status</option>
+                  <option>Ongoing</option>
+                  <option>Done</option>
+                </select>
+              </div>
+            </div>
+
             <div class="column">
                 <div class="input-box">
                 <input type="file" name="image" accept="image/*">

@@ -8,12 +8,12 @@
         <form action="#" class="form">
 
         <div class="input-box">
-          <label hidden>ViolationID</label>
+          <label hidden><b>ViolationID</b></label>
           <p id="apviolationid" hidden>ViolationID</p>
         </div>
 
         <div class="input-box">
-          <label hidden>AppealID</label>
+          <label hidden><b>AppealID</b></label>
           <p id="apappealid" hidden>AppealID</p>
         </div>
 
@@ -84,10 +84,11 @@
         <div class="input-box">
           <label style="font-weight: bold;">Evidence</label>
           <div class="auto-input">
-          <img src="<?php echo './img/violationEvidence/' . $violation['Evidence']; ?>" alt="Evidence Image" class="imageEvidence">
+            <p name="violationstatus" id="apviolationstatus">Violation Status</p>
           </div>
         </div>
 
+        </div>
         <div class="input-box">
           <label style="font-weight: bold;">Remarks</label>
           <div class="auto-input">
@@ -98,6 +99,13 @@
         <div class="input-box">
           <label style="font-weight: bold;">Request</label>
           <p id="apappeal">Message Here</p>
+        </div>
+
+        <div class="input-box">
+          <label><br><b>Evidence</b></label>
+          <div class="auto-input">
+          <img src="" id="apevidence" alt="Evidence Image" class="imageEvidence">
+          </div>
         </div>
 
         <div class="column">
@@ -175,7 +183,7 @@
     function acceptDeleteAppeal(appealID, violationID) {
       $.ajax({
         type: "POST",
-        url: "./php/deleteappealandviolation.php",
+        url: "./php/deleteappeal.php",
         data: { appealID: appealID, violationID: violationID },
         success: function (response) {
           // Show SweetAlert2 notification based on the response

@@ -1,8 +1,8 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <div class="input-box">
-    <label style="font-weight: bold;">Remarks</label>
-    <input type="text" id="remarks" name="remarks" placeholder="Remarks"required />
+    <label style="font-weight: bold;">Sanction</label>
+    <input type="text" id="remarks" name="remarks" placeholder="Sanction"required />
 </div>
 
 <script>

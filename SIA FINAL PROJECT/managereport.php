@@ -15,63 +15,23 @@
     <section class="mngreport-container">
       <h1 class="">Report Manager</h1>
       <button class="tab-button" id="vio-list" onclick="switchTable('violationList', 'vio-list')">Violation List</button>
-      <!-- <button class="tab-button" id="call-slip-req" onclick="switchTable('callslipReqList', 'call-slip-req')">Call Slip Required List</button> -->
       <button class="tab-button" id="appeal-req" onclick="switchTable('appealRequestList', 'appeal-req')">Appeal Request List</button>
+      
+      <!-- Sorting Dropbox -->
       <?php include './components/adminsort.php'?>
-      <!--violation list table-->
+      
+      <!--Tables-->
       <div class="mngreport-body">
         <?php include "./components/violationlist.php"?>
         <?php include "./components/appeallist.php"?>
-
-        <!--call slip required table-->
-        <!-- <div id="callslipReqList">
-          <table>
-            <tr class="mngreport-topic-heading">
-              <th>   </th>
-              <th>Name</th>
-              <th>Program</th>
-              <th>Minor Offense Quantity</th>
-              <th>Major Offense Quantity</th>
-              <th>   </th>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Sofia Mae Pepito</td>
-              <td>BSIT BA</td>
-              <td>10</td>
-              <td>10</td>
-              <td class="centered-cell">
-                <button class="btncss" id="openCallSlipForm">Call Slip</button>
-              </td>
-            </tr>
-          </table>
-          </div> -->
-                <!--appeal request table-->
       </div>
     </section>
     <?php include "./components/updateviolation.php"?>
     <?php include "./components/generatecallslip.php"?>
     <?php include "./components/appealdetail.php"?>
     <script src="js/managereport.js"></script>
-    <script>
-        document.getElementById("openEditForm").addEventListener("click", function() {
-            document.querySelector(".containerEditVio").style.display = "block";
-        });
-         function closeEditVio() {
-            document.querySelector(".containerEditVio").style.display = "none";
-        }
-
-        document.getElementById("openCallSlipForm").addEventListener("click", function() {
-            document.querySelector(".containerCallSlipForm").style.display = "block";
-        });
-         function closeCallSlipForm() {
-            document.querySelector(".containerCallSlipForm").style.display = "none";
-        }
-        
-
-         function closeAppealRequest() {
-            document.querySelector(".containerAppealRequest").style.display = "none";
-        }
-    </script>
+    <script src="js/reportdates.js"></script>
+    <script src="js/switchtable.js"></script>
+    <script src="js/openandcloseadminforms.js"></script>
 </body>
 </html>

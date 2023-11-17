@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
             var violation = row.getAttribute('data-violation');
             var remarks = row.getAttribute('data-remarks');
             var violationTypeId = row.getAttribute('data-violation-type-id');
-
+            var vstatus = row.getAttribute('data-status'); // Add this line to define vstatus
+    
             // Fill the textbox values in the pop-up container
             document.getElementById('violationID').value = violationID;
             document.getElementById('studentsrcode').value = srCode;
@@ -26,9 +27,10 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('violationtime').value = violationTime;
             document.getElementById('violationtype').value = violationTypeId;
             document.getElementById('remark').value = remarks;
-
+            document.getElementById('violationstatus').value = vstatus; // Correct the ID here
+    
             // Update other fields as needed
-
+    
             // Display the pop-up container
             document.querySelector('.containerEditVio').style.display = 'block';
         });
@@ -55,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var violationTime = document.getElementById('violationtime').value;
     var remarks = document.getElementById('remark').value;
     var violationType = document.getElementById('violationtype').value;
+    var status = document.getElementById('violationstatus').value;
 
     // Construct the data to be sent in the request
     var data = {
@@ -63,7 +66,8 @@ document.addEventListener('DOMContentLoaded', function () {
         violationDate: violationDate,
         violationTime: violationTime,
         remarks: remarks,
-        violationType: violationType
+        violationType: violationType,
+        status: status
     };
 
     // Send an AJAX request to update the database
