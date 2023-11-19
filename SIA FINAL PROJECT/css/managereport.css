@@ -97,7 +97,7 @@ table {
   table tr td {
     border-right: 1px solid #bbb;
     border-bottom: 1px solid #bbb;
-    background: #eee;
+   
     padding: 2px;
   }
   
@@ -107,7 +107,6 @@ table {
   }
   
   table tr th {
-    background: #eee;
     border-top: 1px solid #bbb;
     text-align: left;
   }
@@ -123,3 +122,10 @@ table {
   #callslipReqList {
     display:none;
   }
+
+  table tr:nth-child(odd) {
+    background-color: #eee;
+ }
+ table tr:nth-child(even) {
+    background-color: rgb(216, 216, 216);
+ }
