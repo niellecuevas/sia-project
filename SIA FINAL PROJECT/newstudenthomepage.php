@@ -156,8 +156,9 @@
                             
                             <!-- Display evidence image -->
                             <?php if (!empty($violation['Evidence'])): ?>
-                                <img src="<?php echo './img/violationEvidence/' . $violation['Evidence']; ?>" alt="Evidence Image" class="imageEvidence"><br><br>
+                                <img src="<?php echo './img/violationEvidence/' . $violation['Evidence']; ?>" alt="Evidence Image" class="imageEvidence">
                             <?php endif; ?>
+                            <button type="button" class="btncss" id="appealbtn-bottom">Appeal</button><br><br>
                         </div>
                     </form>
                 </div>

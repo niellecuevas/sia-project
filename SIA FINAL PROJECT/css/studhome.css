@@ -15,7 +15,6 @@
 
 body{
   margin:auto;
-  scroll-snap-type: y mandatory;
 }
 
 .whole-container {
@@ -138,26 +137,84 @@ header{
 
 /* responsive design */
 
-@media (max-width: 992px){
+@media (max-width: 2000px){
+  .navbar .logout img{
+    display: none;
+  }
+
+  #appealbtn-bottom {
+    visibility: hidden;
+  }
+
+
+}
+
+@media (max-width: 998px){
   .navbar .action-btn {
     display: none;
   }
 
-  .navbar .toggle-btn {
-    display: block;
-    filter: invert(0.8);
-  }
-
-  .dropdown_menu {
-    display: block;
-  }
 }
 
+
+
+
 @media (max-width: 576px){
-  .dropdown_menu {
-    left: 5rem;
-    width: unset ;
+  .navbar .logo a {
+    font-size: 16px;
+    transition: scale 0.2 ease;
   }
+
+  .navbar .logo img{
+    width: 35px;
+    transition: scale 0.2 ease;
+  }
+
+  /*.navbar .logout img{
+    width: 20px;
+    display: block;
+    filter: invert(1);
+  }*/
+
+  h1 {
+    font-size: 22px;
+    transition: scale 0.2 ease;
+  }
+
+  .banner{
+    margin-top: 10px;
+  }
+
+  .whole-container .offense-container {
+    width: 100px;
+    height: 110px;
+    display:flex;
+    margin: auto;
+    margin-right: -55px;
+    margin-left: 20px;
+    position: absolute;
+    transition: scale 0.2 ease;
+  }
+
+  .whole-container .offense-container .offense{
+    color: #fffbf2;
+    text-align: center;
+    font-size: 13px;
+  }
+  
+  
+  .whole-container .offense-container .num {
+    font-size: 25px;
+    text-align: center;
+    font-weight: bolder;
+    padding-top: 10px;
+  }
+
+  .slideshow-container {
+   
+    margin-top: 120px;
+  }
+
 }
 
 
@@ -292,7 +349,7 @@ img {vertical-align: middle;}
 
 .swiper {
   position: absolute;
-  height: 80vh;
+  height: 85vh;
   width: auto;
   background-size: cover;
   border-radius: 20px;
@@ -491,22 +548,39 @@ justify-content: center;
 @media (max-width: 600px){
   .swiper {
     width: 320px; 
+    position: static;
   }
 
   .conductInfo {
     width: auto;
-    margin-left: 20%;
-    font-size: medium;
+    font-size: 15px;
   }
 
   .lbl {
     width: 10px;
-    margin-left: 10%;
     display: inline-block;
-    font-size: medium;
+    font-size: 15px;
   }
 
+  .lbl #remarks{
+    overflow: visible;
+  }
 
+  #appealbtn{
+    display: none;
+  }
+
+  #appealbtn-bottom{
+  width: 80%; 
+  height: 40px; 
+  font-size: 16px;
+  border-radius: 10px;
+  margin-top: 15px;
+  margin-left: 27px;
+  position: static;
+  align-self: center;
+  visibility: visible;
+  }
   }
 
 
