@@ -3,10 +3,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-
     <link rel="stylesheet" href="css/managereport.css">
     <link rel="stylesheet" href="css/updatepopup.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>Report Manager</title>
@@ -27,7 +25,6 @@
       </div>
     </section>
     <?php include "./components/updateviolation.php"?>
-    <?php include "./components/generatecallslip.php"?>
     <?php include "./components/appealdetail.php"?>
     <script src="js/managereport.js"></script>
     <script src="js/reportdates.js"></script>
