@@ -18,19 +18,19 @@ if (isset($_SESSION['SRCode'])) {
 
             while ($row = mysqli_fetch_assoc($result)) {
                 // Convert the time to 12-hour clock format
-                $formattedTime = date("h:i A", strtotime($row['ViolationTime']));
+                $formattedTime = date("h:i A", strtotime($row['violationtime']));
             
                 // Build the file path for the evidence image
-                $evidenceFileName = $row['Evidence']; // Store only the file name
+                $evidenceFileName = $row['evidence']; // Store only the file name
             
                 $violation = array(
-                    'ViolationID' => $row['ViolationID'],
-                    'ViolationName' => $row['ViolationName'],
-                    'ViolationLevel' => $row['ViolationLevel'],
-                    'ViolationDate' => $row['ViolationDate'],
+                    'ViolationID' => $row['violationid'],
+                    'ViolationName' => $row['violationame'],
+                    'ViolationLevel' => $row['violationlevel'],
+                    'ViolationDate' => $row['violationdate'],
                     'ViolationTime' => $formattedTime,
-                    'Remarks' => $row['Remarks'],
-                    'Status' => $row['Status'],
+                    'Remarks' => $row['remarks'],
+                    'Status' => $row['status'],
                     'Evidence' => $evidenceFileName  // Use only the file name
                 );
             

@@ -44,7 +44,7 @@
                         <span  class="text-info" id="name"><?php  echo $_SESSION['FullName']; ?> </span><br><br><br>
 
                         <div class = "studentInfo-text">
-                        <span class="text-label"style="font-weight: bold;">Sr-Code:</span>
+                        <span class="text-label"style="font-weight: bold;">Student ID:</span>
                         <span  class="text-info" id="srcode"><?php  echo $_SESSION['SRCode']; ?></span><br><br><br>
                         </div>
                     </div>

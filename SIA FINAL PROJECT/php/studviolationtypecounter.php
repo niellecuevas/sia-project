@@ -7,10 +7,10 @@ $majorViolations = 0; // Initialize as 0
 $minorViolations = 0; // Initialize as 0
 
 if (isset($_SESSION['SRCode'])) {
-    $sr = $_SESSION['SRCode'];
+    $id = $_SESSION['SRCode'];
 
     // Query to call the SP_StudentViolationTypeCounter stored procedure
-    $sqlQuery = "CALL SP_StudentViolationTypeCounter('$sr')";
+    $sqlQuery = "CALL SP_StudentViolationTypeCounter('$id')";
 
     // Execute the stored procedure
     $result = mysqli_query($conn, $sqlQuery);
