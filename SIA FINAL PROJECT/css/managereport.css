@@ -62,6 +62,10 @@
     font-size: 20px;
     cursor: pointer;
 }
+
+.close-button:hover{
+  background-color: rgba(23, 20, 20, 0.742);
+}
 #confirm-change {
   height: 55px;
   width: 100%;
