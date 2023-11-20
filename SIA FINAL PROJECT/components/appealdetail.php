@@ -19,7 +19,7 @@
 
         <div class="input-box">
           <label style="font-weight: bold;">SR Code</label>
-          <p id="apsrcode">SR Code</p>
+          <p id="apstudid">SR Code</p>
         </div>
 
         <div class="input-box">

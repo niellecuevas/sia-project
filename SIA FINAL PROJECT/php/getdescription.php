@@ -17,9 +17,9 @@ if (isset($_POST['id'])) {
         // Check if srCode is not empty
         if (!empty($srCode)) {
             // Prepare and execute the SQL query to check the violation report
-            $reportQuery = "SELECT * FROM `tbl_violationreport` WHERE SRCode = ? AND ViolationTypeID = ?";
+            $reportQuery = "CALL SP_GetViolationReport(?,?)";
             $reportStmt = $conn->prepare($reportQuery);
-            $reportStmt->bind_param("si", $srCode, $violationTypeID);
+            $reportStmt->bind_param("ii", $srCode, $violationTypeID);
             $reportStmt->execute();
             $reportResult = $reportStmt->get_result();
             $reportRowCount = $reportResult->num_rows;
@@ -27,13 +27,13 @@ if (isset($_POST['id'])) {
             // If no rows, use FirstOffense column; if 1 row, use SecondOffense column; if 2 or more rows, use ThirdOffense column
             if ($reportRowCount == 0) {
                 // If no violation report, use FirstOffense column from tbl_violationtypes
-                $stmt = $conn->prepare("SELECT FirstOffense FROM `tbl_violationtypes` WHERE ViolationTypeID = ?");
+                $stmt = $conn->prepare("CALL SP_GetFirstOffense(?)");
             } elseif ($reportRowCount == 1) {
                 // If 1 row in violation report, use SecondOffense column from tbl_violationtypes
-                $stmt = $conn->prepare("SELECT SecondOffense FROM `tbl_violationtypes` WHERE ViolationTypeID = ?");
+                $stmt = $conn->prepare("CALL SP_GetSecondOffense(?)");
             } else {
                 // If 2 or more rows in violation report, use ThirdOffense column from tbl_violationtypes
-                $stmt = $conn->prepare("SELECT ThirdOffense FROM `tbl_violationtypes` WHERE ViolationTypeID = ?");
+                $stmt = $conn->prepare("CALL SP_GetSecondOffense(?)");
             }
 
             // Execute the appropriate SQL query

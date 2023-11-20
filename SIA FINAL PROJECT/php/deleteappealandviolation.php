@@ -11,11 +11,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     try {
         // Perform your SQL queries to delete records
-        $stmtAppeal = $conn->prepare("DELETE FROM tbl_appeal WHERE AppealID = ?");
+        $stmtAppeal = $conn->prepare("CALL SP_DeleteAppeal(?)");
         $stmtAppeal->bind_param("i", $appealID);
         $stmtAppeal->execute();
 
-        $stmtViolation = $conn->prepare("DELETE FROM tbl_violationreport WHERE ViolationID = ?");
+        $stmtViolation = $conn->prepare("CALL SP_DeleteViolationReport(?)");
         $stmtViolation->bind_param("i", $violationID);
         $stmtViolation->execute();
 

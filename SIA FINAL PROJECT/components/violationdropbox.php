@@ -19,7 +19,7 @@ $result = $conn->query($query);
             // Dynamically generate the options using data from the database result
             while ($row = $result->fetch_assoc()) {
                 // Generate an <option> element for each violation type with the ViolationTypeID as the value and ViolationName as the label
-                echo "<option value='" . $row['ViolationTypeID'] . "'>" . $row['ViolationName'] . "</option>";
+                echo "<option value='" . $row['violationtypeid'] . "'>" . $row['violationame'] . "</option>";
             }
         ?>
         </select>

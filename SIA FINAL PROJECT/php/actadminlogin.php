@@ -33,18 +33,16 @@ if (isset($_POST['id']) && isset($_POST['password'])) {
     if ($result && mysqli_num_rows($result) == 1) {
         // Admin found, verify the password
         $user = mysqli_fetch_assoc($result);
-        $hashedPassword = $user['PasswordEncrypted'];
+        $hashedPassword = $user['passwordencrypted'];
 
         if (password_verify($password, $hashedPassword)) {
             // Password is correct, store session information
-            $_SESSION['AdminID'] = $user['AdminID'];
-            $_SESSION['StaffID'] = $user['StaffID'];
-            $_SESSION['FirstName'] = $user['FirstName'];
-            $_SESSION['MiddleName'] = $user['MiddleName'];
-            $_SESSION['LastName'] = $user['LastName'];
-            $_SESSION['ContactNumber'] = $user['ContactNumber'];
-            $_SESSION['Position'] = $user['Position'];
-            $_SESSION['PasswordEncrypted'] = $user['PasswordEncrypted'];
+            $_SESSION['AdminID'] = $user['adminid'];
+            $_SESSION['EmpID'] = $user['empid'];
+            $_SESSION['Username'] = $user['username'];
+            $_SESSION['FirstName'] = $user['firstname'];
+            $_SESSION['LastName'] = $user['lastname'];
+            $_SESSION['PasswordEncrypted'] = $user['passwordencrypted'];
 
             header("Location: ../createviolationreport.php");
             exit();

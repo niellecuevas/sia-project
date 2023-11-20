@@ -30,7 +30,7 @@
 
 
                 <!-- Form TextBoxes -->
-                <input type="text" placeholder="Admin Code" name="id" id="idInput" required/>
+                <input type="text" placeholder="Username" name="id" id="idInput" required/>
                 <input type="password" placeholder="Password" name="password" required/>
 
 
