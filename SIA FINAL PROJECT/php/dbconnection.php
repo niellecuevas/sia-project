@@ -6,7 +6,7 @@
     $password = "";
 
     //Database Name
-    $dbName = "db_ba3102";
+    $dbName = "nina";
 
     $conn = mysqli_connect($sname, $uname, $password, $dbName);
 

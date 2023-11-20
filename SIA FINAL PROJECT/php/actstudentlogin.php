@@ -35,20 +35,19 @@ if (isset($_POST['id']) && isset($_POST['password'])) {
         if (mysqli_num_rows($result) == 1) {
             // User authenticated, store session information
             $user = mysqli_fetch_assoc($result);
-            $hashedPassword = $user['PasswordEncrypted'];
+            $hashedPassword = $user['passwordencrypted'];
 
             if (password_verify($password, $hashedPassword)) {
-                $_SESSION['UserID'] = $user['UserID'];
-                $_SESSION['SRCode'] = $user['SRCode'];
-                $_SESSION['PasswordEncrypted'] = $user['PasswordEncrypted'];
-                $_SESSION['FirstName'] = $user['FirstName'];
-                $_SESSION['MiddleName'] = $user['MiddleName'];
-                $_SESSION['LastName'] = $user['LastName'];
-                $_SESSION['CourseName'] = $user['CourseName'];
-                $_SESSION['Department'] = $user['Department'];
+                $_SESSION['UserID'] = $user['userid'];
+                $_SESSION['SRCode'] = $user['studid'];
+                $_SESSION['PasswordEncrypted'] = $user['passwordencrypted'];
+                $_SESSION['FirstName'] = $user['firstname'];
+                
+                $_SESSION['LastName'] = $user['lastname'];
+                $_SESSION['CourseName'] = $user['course'];
+                $_SESSION['Department'] = $user['department'];
     
-                $middleInitial = !empty($user['MiddleName']) ? strtoupper(substr($user['MiddleName'], 0, 1) . '.') : '';
-                $fullName = $user['FirstName'] . ' ' . $middleInitial . ' ' . $user['LastName'];
+                $fullName = $user['firstname'] . ' ' . $user['lastname'];
     
                 // Store the combined FullName in the session
                 $_SESSION['FullName'] = $fullName;
