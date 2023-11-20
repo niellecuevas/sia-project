@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
 
         // Clean and validate the inputs
         $srCode = sanitizeInput($_POST['srCode']);
-        $staffId = $_SESSION['StaffID'];
+        $staffId = $_SESSION['EmpID'];
         $violationType = sanitizeInput($_POST['violationtype']);
         // Convert the date and time inputs to specific formats
         $violationDate = date('Y-m-d', strtotime($_POST['violationdate']));

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Nov 20, 2023 at 10:54 AM
--- Server version: 8.0.31
--- PHP Version: 8.0.26
+-- Host: 127.0.0.1
+-- Generation Time: Nov 20, 2023 at 03:34 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,14 +18,54 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `nina`
+-- Database: `db_ba3102`
 --
 
 DELIMITER $$
 --
 -- Procedures
 --
-DROP PROCEDURE IF EXISTS `SP_GetStudentAccount`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_DeleteAppeal` (IN `inputAppeal` INT)   BEGIN
+    DELETE FROM tbappeal WHERE appealid = inputAppeal;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_DeleteViolationReport` (IN `inputViolationID` INT)   BEGIN
+    DELETE FROM tbviolationreport WHERE violationid = inputViolationID;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetAdminAccount` (IN `inputAdminUsername` VARCHAR(255))   BEGIN
+SELECT tbadminaccount.adminid, tbadminaccount.empid, tbadminaccount.username, tbempinfo.firstname, tbempinfo.lastname, tbadminaccount.passwordencrypted FROM tbadminaccount INNER JOIN tbempinfo ON tbadminaccount.empid = tbempinfo.empid
+WHERE tbadminaccount.username = inputAdminUsername;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetAppeals` (IN `sortOption` VARCHAR(255))   BEGIN
+SELECT tbappeal.appealid,  tbviolationreport.violationid, tb_studinfo.studid, CONCAT(tb_studinfo.firstname, ' ',  tb_studinfo.lastname) AS name, tbviolationtypes.violationame, tbstudentdepartment.department, tb_studinfo.course, tbappeal.date AS appealdate, tbviolationtypes.violationame, tbviolationreport.violationdate, tbviolationreport.violationtime, CONCAT(tbempinfo.firstname, ' ', tbempinfo.lastname) AS staffname, tbviolationreport.remarks, tbappeal.appeal, tbviolationreport.evidence, tbviolationreport.status
+    FROM tbappeal
+    INNER JOIN tbviolationreport ON tbappeal.violationid = tbviolationreport.violationid
+    INNER JOIN tb_studinfo ON tbviolationreport.studid = tb_studinfo.studid
+    INNER JOIN tbviolationtypes ON tbviolationreport.violationtypeid = tbviolationtypes.violationtypeid
+    INNER JOIN tbstudentdepartment ON tb_studinfo.course = tbstudentdepartment.course
+    INNER JOIN tbempinfo ON tbviolationreport.empid = tbempinfo.empid
+    ORDER BY
+        CASE
+            WHEN sortOption = 'option1' THEN tbviolationtypes.violationame
+            WHEN sortOption = 'option2' THEN name
+            ELSE tbappeal.appealid
+        END;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetFirstOffense` (IN `p_ViolationTypeID` INT)   BEGIN
+    SELECT tbviolationtypes.firstoffense
+    FROM tbviolationtypes
+    WHERE tbviolationtypes.violationtypeid = p_ViolationTypeID;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetSecondOffense` (IN `p_ViolationTypeID` INT)   BEGIN
+    SELECT tbviolationtypes.secondoffense
+    FROM tbviolationtypes
+    WHERE tbviolationtypes.violationtypeid = p_ViolationTypeID;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetStudentAccount` (IN `id` INT)   BEGIN
     SELECT 
        tbstudentaccount.userid,
@@ -41,11 +81,44 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetStudentAccount` (IN `id` INT)
     WHERE tbstudentaccount.studid = id;
 END$$
 
-DROP PROCEDURE IF EXISTS `SP_StudentAppeal`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetStudentData` (IN `srCodeParam` INT)   BEGIN
+    SELECT CONCAT(tb_studinfo.firstname, ' ', tb_studinfo.lastname) AS name, tb_studinfo.course, tbstudentdepartment.department
+    FROM tb_studinfo
+    INNER JOIN tbstudentdepartment ON tb_studinfo.course = tbstudentdepartment.course
+    WHERE tb_studinfo.studid = srCodeParam;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetStudentInfoByStudID` (IN `inStudId` INT)   BEGIN
+    SELECT CONCAT(tb_studinfo.firstname, ' ', tb_studinfo.lastname) AS name, tb_studinfo.course, tbstudentdepartment.department
+    FROM tb_studinfo
+    INNER JOIN tbstudentdepartment ON tb_studinfo.course = tbstudentdepartment.course
+    WHERE tb_studinfo.studid = inStudId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetThirdOffense` (IN `p_ViolationTypeID` INT)   BEGIN
+    SELECT tbviolationtypes.thirdoffense
+    FROM tbviolationtypes
+    WHERE tbviolationtypes.violationtypeid = p_ViolationTypeID;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetViolationReport` (IN `p_SRCode` INT, IN `p_ViolationTypeID` INT)   BEGIN
+    SELECT *
+    FROM tbviolationreport
+    WHERE tbviolationreport.studid = p_SRCode AND tbviolationreport.violationtypeid = p_ViolationTypeID;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GetViolationTypes` ()   BEGIN
+    SELECT tbviolationtypes.violationtypeid, tbviolationtypes.violationame FROM tbviolationtypes;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertViolationReport` (IN `p_SRCode` INT, IN `p_StaffID` INT, IN `p_ViolationTypeID` INT, IN `p_ViolationDate` DATE, IN `p_ViolationTime` TIME, IN `p_Remarks` VARCHAR(255), IN `p_Evidence` VARCHAR(255), IN `p_Status` VARCHAR(255))   BEGIN
+    INSERT INTO tbviolationreport (tbviolationreport.studid, tbviolationreport.empid, tbviolationreport.violationtypeid, tbviolationreport.violationdate, tbviolationreport.violationtime, tbviolationreport.remarks, tbviolationreport.evidence, tbviolationreport.status)
+    VALUES (p_SRCode, p_StaffID, p_ViolationTypeID, p_ViolationDate, p_ViolationTime, p_Remarks, p_Evidence, p_Status);
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_StudentAppeal` (IN `id` INT, IN `date` DATE, IN `message` VARCHAR(255))   INSERT INTO tbappeal (violationid, date, appeal)
 VALUES (id, date, message)$$
 
-DROP PROCEDURE IF EXISTS `SP_StudentViolationCarousel`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_StudentViolationCarousel` (IN `id` INT)   SELECT 
 	tbviolationreport.violationid,
     tbviolationtypes.violationame,
@@ -62,7 +135,6 @@ INNER JOIN tb_studinfo ON tbviolationreport.studid = tb_studinfo.studid
 
 WHERE tb_studinfo.studid = id$$
 
-DROP PROCEDURE IF EXISTS `SP_StudentViolationTypeCounter`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_StudentViolationTypeCounter` (IN `id` INT)   SELECT
 	SUM(CASE WHEN ViolationLevel = 'Minor' THEN 1 ELSE 0 END) AS MinorViolations,
 	SUM(CASE WHEN ViolationLevel = 'Major' THEN 1 ELSE 0 END) AS MajorViolations
@@ -82,15 +154,19 @@ DELIMITER ;
 -- Table structure for table `tbadminaccount`
 --
 
-DROP TABLE IF EXISTS `tbadminaccount`;
-CREATE TABLE IF NOT EXISTS `tbadminaccount` (
-  `adminid` int NOT NULL AUTO_INCREMENT,
-  `empid` int NOT NULL,
-  `passwordencrypted` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `username` varchar(20) NOT NULL,
-  PRIMARY KEY (`adminid`),
-  KEY `empid_fk_adminaccount` (`empid`)
+CREATE TABLE `tbadminaccount` (
+  `adminid` int(11) NOT NULL,
+  `empid` int(11) NOT NULL,
+  `passwordencrypted` varchar(255) NOT NULL,
+  `username` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tbadminaccount`
+--
+
+INSERT INTO `tbadminaccount` (`adminid`, `empid`, `passwordencrypted`, `username`) VALUES
+(1, 1, '$2y$10$n0pZWJxXGQUkTZpOevB5/u48DIBglIqgp3zJk7CREuGtZ7fyjS3MO', 'aguila');
 
 -- --------------------------------------------------------
 
@@ -98,15 +174,12 @@ CREATE TABLE IF NOT EXISTS `tbadminaccount` (
 -- Table structure for table `tbappeal`
 --
 
-DROP TABLE IF EXISTS `tbappeal`;
-CREATE TABLE IF NOT EXISTS `tbappeal` (
-  `appealid` int NOT NULL AUTO_INCREMENT,
-  `violationid` int NOT NULL,
+CREATE TABLE `tbappeal` (
+  `appealid` int(11) NOT NULL,
+  `violationid` int(11) NOT NULL,
   `date` date NOT NULL,
-  `appeal` varchar(255) NOT NULL,
-  PRIMARY KEY (`appealid`),
-  KEY `violationid_fk_appeal` (`violationid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `appeal` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `tbappeal`
@@ -121,11 +194,9 @@ INSERT INTO `tbappeal` (`appealid`, `violationid`, `date`, `appeal`) VALUES
 -- Table structure for table `tbappstatus`
 --
 
-DROP TABLE IF EXISTS `tbappstatus`;
-CREATE TABLE IF NOT EXISTS `tbappstatus` (
-  `statusid` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `statusname` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  PRIMARY KEY (`statusname`)
+CREATE TABLE `tbappstatus` (
+  `statusid` varchar(10) NOT NULL,
+  `statusname` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -145,11 +216,9 @@ INSERT INTO `tbappstatus` (`statusid`, `statusname`) VALUES
 -- Table structure for table `tbdepartment`
 --
 
-DROP TABLE IF EXISTS `tbdepartment`;
-CREATE TABLE IF NOT EXISTS `tbdepartment` (
-  `deptid` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `deptname` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  PRIMARY KEY (`deptname`)
+CREATE TABLE `tbdepartment` (
+  `deptid` varchar(10) NOT NULL,
+  `deptname` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -182,14 +251,12 @@ INSERT INTO `tbdepartment` (`deptid`, `deptname`) VALUES
 -- Table structure for table `tbempinfo`
 --
 
-DROP TABLE IF EXISTS `tbempinfo`;
-CREATE TABLE IF NOT EXISTS `tbempinfo` (
-  `empid` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbempinfo` (
+  `empid` int(11) NOT NULL,
   `lastname` varchar(25) NOT NULL,
   `firstname` varchar(25) NOT NULL,
-  `department` varchar(30) NOT NULL,
-  PRIMARY KEY (`empid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `department` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `tbempinfo`
@@ -204,31 +271,27 @@ INSERT INTO `tbempinfo` (`empid`, `lastname`, `firstname`, `department`) VALUES
 -- Table structure for table `tbjobapplication`
 --
 
-DROP TABLE IF EXISTS `tbjobapplication`;
-CREATE TABLE IF NOT EXISTS `tbjobapplication` (
-  `appno` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `jobtitle` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `fname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `mname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `lname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+CREATE TABLE `tbjobapplication` (
+  `appno` varchar(15) NOT NULL,
+  `jobtitle` varchar(255) NOT NULL,
+  `fname` varchar(255) NOT NULL,
+  `mname` varchar(255) NOT NULL,
+  `lname` varchar(255) NOT NULL,
   `birthday` date NOT NULL,
   `sex` varchar(10) NOT NULL,
-  `contactno` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `emailadd` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `appadd` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `appeducation` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `appeligibility` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `appworkexp` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `fileresume` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `fileletter` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `filediploma` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `filecert` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `contactno` varchar(12) NOT NULL,
+  `emailadd` varchar(255) NOT NULL,
+  `appadd` varchar(255) NOT NULL,
+  `appeducation` varchar(255) NOT NULL,
+  `appeligibility` text NOT NULL,
+  `appworkexp` text NOT NULL,
+  `fileresume` varchar(90) NOT NULL,
+  `fileletter` varchar(90) NOT NULL,
+  `filediploma` varchar(90) NOT NULL,
+  `filecert` varchar(90) NOT NULL,
   `appdate` date NOT NULL,
-  `appstatus` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `statusdate` date DEFAULT NULL,
-  PRIMARY KEY (`appno`),
-  KEY `title` (`jobtitle`),
-  KEY `status` (`appstatus`)
+  `appstatus` varchar(200) DEFAULT NULL,
+  `statusdate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -245,22 +308,19 @@ INSERT INTO `tbjobapplication` (`appno`, `jobtitle`, `fname`, `mname`, `lname`, 
 -- Table structure for table `tbjobs`
 --
 
-DROP TABLE IF EXISTS `tbjobs`;
-CREATE TABLE IF NOT EXISTS `tbjobs` (
-  `jobid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `jobtitle` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `departmentname` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `quantity` int NOT NULL,
+CREATE TABLE `tbjobs` (
+  `jobid` varchar(255) NOT NULL,
+  `jobtitle` varchar(255) NOT NULL,
+  `departmentname` varchar(50) NOT NULL,
+  `quantity` int(11) NOT NULL,
   `dateposted` date NOT NULL,
   `education` varchar(255) DEFAULT NULL,
   `experience` text NOT NULL,
   `expertise` text NOT NULL,
   `competency` text NOT NULL,
   `eligibility` text NOT NULL,
-  `dutres` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `hiringstatus` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Active',
-  PRIMARY KEY (`jobtitle`),
-  KEY `Jobs` (`departmentname`)
+  `dutres` text DEFAULT NULL,
+  `hiringstatus` varchar(20) NOT NULL DEFAULT 'Active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -284,14 +344,11 @@ INSERT INTO `tbjobs` (`jobid`, `jobtitle`, `departmentname`, `quantity`, `datepo
 -- Table structure for table `tbstudentaccount`
 --
 
-DROP TABLE IF EXISTS `tbstudentaccount`;
-CREATE TABLE IF NOT EXISTS `tbstudentaccount` (
-  `userid` int NOT NULL AUTO_INCREMENT,
-  `studid` int NOT NULL,
-  `passwordencrypted` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  PRIMARY KEY (`userid`),
-  KEY `studid_fk_studentaccount` (`studid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `tbstudentaccount` (
+  `userid` int(11) NOT NULL,
+  `studid` int(11) NOT NULL,
+  `passwordencrypted` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `tbstudentaccount`
@@ -307,11 +364,9 @@ INSERT INTO `tbstudentaccount` (`userid`, `studid`, `passwordencrypted`) VALUES
 -- Table structure for table `tbstudentdepartment`
 --
 
-DROP TABLE IF EXISTS `tbstudentdepartment`;
-CREATE TABLE IF NOT EXISTS `tbstudentdepartment` (
+CREATE TABLE `tbstudentdepartment` (
   `course` varchar(255) NOT NULL,
-  `department` varchar(100) NOT NULL,
-  PRIMARY KEY (`course`)
+  `department` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -329,29 +384,24 @@ INSERT INTO `tbstudentdepartment` (`course`, `department`) VALUES
 -- Table structure for table `tbviolationreport`
 --
 
-DROP TABLE IF EXISTS `tbviolationreport`;
-CREATE TABLE IF NOT EXISTS `tbviolationreport` (
-  `violationid` int NOT NULL AUTO_INCREMENT,
-  `studid` int NOT NULL,
-  `empid` int NOT NULL,
-  `violationtypeid` int NOT NULL,
+CREATE TABLE `tbviolationreport` (
+  `violationid` int(11) NOT NULL,
+  `studid` int(11) NOT NULL,
+  `empid` int(11) NOT NULL,
+  `violationtypeid` int(11) NOT NULL,
   `violationdate` date NOT NULL,
   `violationtime` time NOT NULL,
   `remarks` varchar(255) NOT NULL,
   `evidence` varchar(255) NOT NULL,
-  `status` varchar(10) NOT NULL,
-  PRIMARY KEY (`violationid`),
-  KEY `studid_fk_violationreport` (`studid`),
-  KEY `empid_fk_violationreport` (`empid`),
-  KEY `violationtypeid_fk_violationreport` (`violationtypeid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `status` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `tbviolationreport`
 --
 
 INSERT INTO `tbviolationreport` (`violationid`, `studid`, `empid`, `violationtypeid`, `violationdate`, `violationtime`, `remarks`, `evidence`, `status`) VALUES
-(1, 14, 1, 17, '2023-11-07', '08:04:10', 'Three- to five-day suspension (3-5)', '6550d16d20d71.jpg', 'Done');
+(1, 14, 1, 2, '2023-11-07', '08:04:10', 'Three- to five-day suspension (3-5)', '6550d16d20d71.jpg', 'Done');
 
 -- --------------------------------------------------------
 
@@ -359,16 +409,14 @@ INSERT INTO `tbviolationreport` (`violationid`, `studid`, `empid`, `violationtyp
 -- Table structure for table `tbviolationtypes`
 --
 
-DROP TABLE IF EXISTS `tbviolationtypes`;
-CREATE TABLE IF NOT EXISTS `tbviolationtypes` (
-  `violationtypeid` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbviolationtypes` (
+  `violationtypeid` int(11) NOT NULL,
   `violationame` varchar(100) NOT NULL,
   `violationlevel` varchar(20) NOT NULL,
   `firstoffense` varchar(255) NOT NULL,
   `secondoffense` varchar(255) NOT NULL,
-  `thirdoffense` varchar(255) NOT NULL,
-  PRIMARY KEY (`violationtypeid`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `thirdoffense` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `tbviolationtypes`
@@ -401,15 +449,12 @@ INSERT INTO `tbviolationtypes` (`violationtypeid`, `violationame`, `violationlev
 -- Table structure for table `tb_studinfo`
 --
 
-DROP TABLE IF EXISTS `tb_studinfo`;
-CREATE TABLE IF NOT EXISTS `tb_studinfo` (
-  `studid` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_studinfo` (
+  `studid` int(11) NOT NULL,
   `lastname` varchar(25) NOT NULL,
   `firstname` varchar(25) NOT NULL,
-  `course` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  PRIMARY KEY (`studid`),
-  KEY `course_fk_studinfo` (`course`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `course` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `tb_studinfo`
@@ -420,6 +465,138 @@ INSERT INTO `tb_studinfo` (`studid`, `lastname`, `firstname`, `course`) VALUES
 (14, 'kent', 'clark', 'BS Computer Science');
 
 --
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `tbadminaccount`
+--
+ALTER TABLE `tbadminaccount`
+  ADD PRIMARY KEY (`adminid`),
+  ADD KEY `empid_fk_adminaccount` (`empid`);
+
+--
+-- Indexes for table `tbappeal`
+--
+ALTER TABLE `tbappeal`
+  ADD PRIMARY KEY (`appealid`),
+  ADD KEY `violationid_fk_appeal` (`violationid`);
+
+--
+-- Indexes for table `tbappstatus`
+--
+ALTER TABLE `tbappstatus`
+  ADD PRIMARY KEY (`statusname`);
+
+--
+-- Indexes for table `tbdepartment`
+--
+ALTER TABLE `tbdepartment`
+  ADD PRIMARY KEY (`deptname`);
+
+--
+-- Indexes for table `tbempinfo`
+--
+ALTER TABLE `tbempinfo`
+  ADD PRIMARY KEY (`empid`);
+
+--
+-- Indexes for table `tbjobapplication`
+--
+ALTER TABLE `tbjobapplication`
+  ADD PRIMARY KEY (`appno`),
+  ADD KEY `title` (`jobtitle`),
+  ADD KEY `status` (`appstatus`);
+
+--
+-- Indexes for table `tbjobs`
+--
+ALTER TABLE `tbjobs`
+  ADD PRIMARY KEY (`jobtitle`),
+  ADD KEY `Jobs` (`departmentname`);
+
+--
+-- Indexes for table `tbstudentaccount`
+--
+ALTER TABLE `tbstudentaccount`
+  ADD PRIMARY KEY (`userid`),
+  ADD KEY `studid_fk_studentaccount` (`studid`);
+
+--
+-- Indexes for table `tbstudentdepartment`
+--
+ALTER TABLE `tbstudentdepartment`
+  ADD PRIMARY KEY (`course`);
+
+--
+-- Indexes for table `tbviolationreport`
+--
+ALTER TABLE `tbviolationreport`
+  ADD PRIMARY KEY (`violationid`),
+  ADD KEY `studid_fk_violationreport` (`studid`),
+  ADD KEY `empid_fk_violationreport` (`empid`),
+  ADD KEY `violationtypeid_fk_violationreport` (`violationtypeid`);
+
+--
+-- Indexes for table `tbviolationtypes`
+--
+ALTER TABLE `tbviolationtypes`
+  ADD PRIMARY KEY (`violationtypeid`);
+
+--
+-- Indexes for table `tb_studinfo`
+--
+ALTER TABLE `tb_studinfo`
+  ADD PRIMARY KEY (`studid`),
+  ADD KEY `course_fk_studinfo` (`course`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tbadminaccount`
+--
+ALTER TABLE `tbadminaccount`
+  MODIFY `adminid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbappeal`
+--
+ALTER TABLE `tbappeal`
+  MODIFY `appealid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbempinfo`
+--
+ALTER TABLE `tbempinfo`
+  MODIFY `empid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbstudentaccount`
+--
+ALTER TABLE `tbstudentaccount`
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tbviolationreport`
+--
+ALTER TABLE `tbviolationreport`
+  MODIFY `violationid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbviolationtypes`
+--
+ALTER TABLE `tbviolationtypes`
+  MODIFY `violationtypeid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `tb_studinfo`
+--
+ALTER TABLE `tb_studinfo`
+  MODIFY `studid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -427,46 +604,46 @@ INSERT INTO `tb_studinfo` (`studid`, `lastname`, `firstname`, `course`) VALUES
 -- Constraints for table `tbadminaccount`
 --
 ALTER TABLE `tbadminaccount`
-  ADD CONSTRAINT `empid_fk_adminaccount` FOREIGN KEY (`empid`) REFERENCES `tbempinfo` (`empid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `empid_fk_adminaccount` FOREIGN KEY (`empid`) REFERENCES `tbempinfo` (`empid`);
 
 --
 -- Constraints for table `tbappeal`
 --
 ALTER TABLE `tbappeal`
-  ADD CONSTRAINT `violationid_fk_appeal` FOREIGN KEY (`violationid`) REFERENCES `tbviolationreport` (`violationid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `violationid_fk_appeal` FOREIGN KEY (`violationid`) REFERENCES `tbviolationreport` (`violationid`);
 
 --
 -- Constraints for table `tbjobapplication`
 --
 ALTER TABLE `tbjobapplication`
-  ADD CONSTRAINT `appstatus_fk_jobapplication` FOREIGN KEY (`appstatus`) REFERENCES `tbappstatus` (`statusname`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `jobtitle_fk_jobapplication` FOREIGN KEY (`jobtitle`) REFERENCES `tbjobs` (`jobtitle`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `appstatus_fk_jobapplication` FOREIGN KEY (`appstatus`) REFERENCES `tbappstatus` (`statusname`),
+  ADD CONSTRAINT `jobtitle_fk_jobapplication` FOREIGN KEY (`jobtitle`) REFERENCES `tbjobs` (`jobtitle`);
 
 --
 -- Constraints for table `tbjobs`
 --
 ALTER TABLE `tbjobs`
-  ADD CONSTRAINT `departmentname_fk_jobs` FOREIGN KEY (`departmentname`) REFERENCES `tbdepartment` (`deptname`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `departmentname_fk_jobs` FOREIGN KEY (`departmentname`) REFERENCES `tbdepartment` (`deptname`);
 
 --
 -- Constraints for table `tbstudentaccount`
 --
 ALTER TABLE `tbstudentaccount`
-  ADD CONSTRAINT `studid_fk_studentaccount` FOREIGN KEY (`studid`) REFERENCES `tb_studinfo` (`studid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `studid_fk_studentaccount` FOREIGN KEY (`studid`) REFERENCES `tb_studinfo` (`studid`);
 
 --
 -- Constraints for table `tbviolationreport`
 --
 ALTER TABLE `tbviolationreport`
-  ADD CONSTRAINT `empid_fk_violationreport` FOREIGN KEY (`empid`) REFERENCES `tbempinfo` (`empid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `studid_fk_violationreport` FOREIGN KEY (`studid`) REFERENCES `tb_studinfo` (`studid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `violationtypeid_fk_violationreport` FOREIGN KEY (`violationtypeid`) REFERENCES `tbviolationtypes` (`violationtypeid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `empid_fk_violationreport` FOREIGN KEY (`empid`) REFERENCES `tbempinfo` (`empid`),
+  ADD CONSTRAINT `studid_fk_violationreport` FOREIGN KEY (`studid`) REFERENCES `tb_studinfo` (`studid`),
+  ADD CONSTRAINT `violationtypeid_fk_violationreport` FOREIGN KEY (`violationtypeid`) REFERENCES `tbviolationtypes` (`violationtypeid`);
 
 --
 -- Constraints for table `tb_studinfo`
 --
 ALTER TABLE `tb_studinfo`
-  ADD CONSTRAINT `course_fk_studinfo` FOREIGN KEY (`course`) REFERENCES `tbstudentdepartment` (`course`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `course_fk_studinfo` FOREIGN KEY (`course`) REFERENCES `tbstudentdepartment` (`course`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -24,25 +24,32 @@ if (isset($_POST['id'])) {
             $reportResult = $reportStmt->get_result();
             $reportRowCount = $reportResult->num_rows;
 
+            // Store the row count in a variable
+            $rowCount = $reportRowCount;
+
+            // Free the result set for the violation report query
+            $reportStmt->free_result();
+            $reportStmt->close();
+
             // If no rows, use FirstOffense column; if 1 row, use SecondOffense column; if 2 or more rows, use ThirdOffense column
-            if ($reportRowCount == 0) {
+            if ($rowCount == 0) {
                 // If no violation report, use FirstOffense column from tbl_violationtypes
-                $stmt = $conn->prepare("CALL SP_GetFirstOffense(?)");
-            } elseif ($reportRowCount == 1) {
+                $offensestmt = $conn->prepare("CALL SP_GetFirstOffense(?)");
+            } elseif ($rowCount == 1) {
                 // If 1 row in violation report, use SecondOffense column from tbl_violationtypes
-                $stmt = $conn->prepare("CALL SP_GetSecondOffense(?)");
+                $offensestmt = $conn->prepare("CALL SP_GetSecondOffense(?)");
             } else {
                 // If 2 or more rows in violation report, use ThirdOffense column from tbl_violationtypes
-                $stmt = $conn->prepare("CALL SP_GetSecondOffense(?)");
+                $offensestmt = $conn->prepare("CALL SP_GetThirdOffense(?)");
             }
 
             // Execute the appropriate SQL query
-            $stmt->bind_param("i", $violationTypeID);
-            $stmt->execute();
-            $stmt->bind_result($punishment);
+            $offensestmt->bind_param("i", $violationTypeID);
+            $offensestmt->execute();
+            $offensestmt->bind_result($punishment);
 
             // Fetch the result
-            if ($stmt->fetch()) {
+            if ($offensestmt->fetch()) {
                 // Return the punishment
                 echo $punishment;
             } else {
@@ -50,8 +57,8 @@ if (isset($_POST['id'])) {
                 echo '';
             }
 
-            // Close the statement
-            $stmt->close();
+            // Close the statement for the main query
+            $offensestmt->close();
         } else {
             // If srCode is empty, return an empty string
             echo '';
@@ -59,11 +66,6 @@ if (isset($_POST['id'])) {
     } else {
         // If srCode is not set, return an empty string
         echo '';
-    }
-
-    // Close the statement for violation report query if it's not null
-    if ($reportStmt !== null) {
-        $reportStmt->close();
     }
 }
 

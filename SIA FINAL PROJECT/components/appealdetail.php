@@ -132,7 +132,7 @@
       var violationID = $("#apviolationid").text();
       closeAppealRequest();
       // Run the SQL deletion
-      acceptDeleteAppeal(appealID, violationID);
+      respondAppeal(appealID);
     });
 
     // Add click event listener
@@ -142,10 +142,10 @@
       var violationID = $("#apviolationid").text();
       closeAppealRequest();
       // Run the SQL deletion
-      denyDeleteAppeal(appealID);
+      respondAppeal(appealID);
     });
 
-    function denyDeleteAppeal(appealID) {
+    function respondAppeal(appealID) {
       $.ajax({
         type: "POST",
         url: "./php/deleteappeal.php",
@@ -167,41 +167,6 @@
               icon: 'error',
               title: 'Error',
               text: 'Encountered an error while denying appeal. Please try again later!',
-            });
-          }
-        },
-        error: function () {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Failed to communicate with the server',
-          });
-        },
-      });
-    }
-
-    function acceptDeleteAppeal(appealID, violationID) {
-      $.ajax({
-        type: "POST",
-        url: "./php/deleteappeal.php",
-        data: { appealID: appealID, violationID: violationID },
-        success: function (response) {
-          // Show SweetAlert2 notification based on the response
-          if (response.success) {
-
-            id = `ap${appealID}`;
-            document.getElementById(id).style.display = "none";
-
-            Swal.fire({
-              icon: 'success',
-              title: 'Appeal Accepted',
-              text: `Violation ${violationID} has now been deleted`,
-            });
-          } else {
-            Swal.fire({
-              icon: 'error',
-              title: 'Error Encountered',
-              text: 'Encountered an error while accepting appeal. Please try again later!',
             });
           }
         },
