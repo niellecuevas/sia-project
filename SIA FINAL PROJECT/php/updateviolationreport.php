@@ -15,7 +15,7 @@ $violationType = $data['violationType'];
 $status = $data['status'];
 
 // Update the database
-$sql = "UPDATE tbl_violationreport SET SRCode = '$srCode', ViolationDate = '$violationDate', ViolationTime = '$violationTime', ViolationTypeID= '$violationType', Remarks = '$remarks', Status = '$status' WHERE ViolationID = $violationID";
+$sql = "UPDATE tbviolationreport SET tbviolationreport.studid = '$srCode', tbviolationreport.violationdate = '$violationDate', tbviolationreport.violationtime = '$violationTime', tbviolationreport.violationtypeid = '$violationType', tbviolationreport.remarks = '$remarks', tbviolationreport.status = '$status' WHERE tbviolationreport.violationid = $violationID";
 
 if ($conn->query($sql) === TRUE) {
     // If the update is successful, you can send a success response
