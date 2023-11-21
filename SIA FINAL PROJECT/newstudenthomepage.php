@@ -146,7 +146,7 @@
                             <label for="time" class="lbl" id="time">Time:</label>
                             <input type="text" class="conductInfo" id="time" name="time" value="<?php echo $violation['ViolationTime']; ?>" readonly style="color: black;"><br><br>
                             <label for="remarks" class="lbl" id="remarks">Remarks:</label>
-                            <input type="text" class="conductInfo" id="remarks" name="remarks" value="<?php echo $violation['Remarks']; ?>" readonly style="color: black;"><br><br>
+                            <textarea class="conductInfo" id="remarks" name="remarks" readonly style="color: black; resize: none;"><?php echo $violation['Remarks']; ?></textarea><br><br>
                             <label for="remarks" class="lbl" id="remarks">Status:</label>
                             <input type="text" class="conductInfo" id="remarks" name="status" value="<?php echo $violation['Status']; ?>" readonly style="color: black;"><br><br>
                             

@@ -413,7 +413,7 @@ footer{
   left: 80%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  width: 200px;
+  max-width: 200px;
 }
 
 .conductInfo {
@@ -422,15 +422,19 @@ footer{
   color: #f1f1f0;
   font-size: 20px;
   padding-left: 50px;
-  width: 50%;
-  display: inline;
+  width: calc(100% - 60px); /* Adjust the width as needed */
+  display: block; /* Change from inline to block */
   text-align: left;
   margin-left: 10px;
+  margin-bottom: 10px; /* Add some bottom margin for spacing */
   outline: none;
+  resize: none; /* Disable textarea resizing */
+  overflow-wrap: break-word;
+  align-self: flex-start; /* Align with the top of the container */
 }
 
 .lbl {
-  display: inline-block;
+  display: block;
   align-self: left;
   width: 100px;
   display: inline-block;
