@@ -154,104 +154,6 @@ header{
 
 }
 
-
-
-@media (max-width: 576px){
-  .navbar .logo a {
-    font-size: 16px;
-    transition: scale 0.2 ease;
-  }
-
-  .navbar .logo img{
-    width: 35px;
-    transition: scale 0.2 ease;
-  }
-
-  .navbar .action-btn {
-    display: none;
-  }
-
-  /*.navbar .logout img{
-    width: 20px;
-    display: block;
-    filter: invert(1);
-  }*/
-
-  .navbar .toggle-btn{
-    visibility: visible;
-    display: inline;
-    filter: invert(0.9);
-  }
-
-  
-
-  h1 {
-    font-size: 22px;
-    transition: scale 0.2 ease;
-  }
-
-  .banner{
-    margin-top: 10px;
-  }
-
-  .whole-container .offense-container {
-    width: 100px;
-    height: 110px;
-    display:inline-block;
-    margin: auto;
-    margin-top: 10px;
-    margin-right: 40px;
-    position: relative;
-    transition: scale 0.2 ease;
-  }
-
-  .whole-container .offense-container .offense{
-    color: #fffbf2;
-    text-align: center;
-    font-size: 13px;
-  }
-  
-  
-  .whole-container .offense-container .num {
-    font-size: 25px;
-    text-align: center;
-    font-weight: bolder;
-    padding-top: 10px;
-  }
-
-  .slideshow-container {
-   
-    margin-top: 120px;
-  }
-  
-  .toggle-btn .tooltiptext {
-    visibility: hidden;
-    width: 90px;
-    background-color: #fff;
-    color: black;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-    top: 100%;
-    left: 50%;
-    margin-left: -50px;
-    font-size: 15px;
-  }
-  
-  
-  .toggle-btn:hover .tooltiptext {
-    visibility: visible;
-    transition: scale 0.2 ease;
-  }
-
-
-}
-
-
 .sticky {
   position: fixed;
   top: 0;
@@ -615,6 +517,131 @@ justify-content: center;
   visibility: visible;
   }
   }
+
+  
+
+@media (max-width: 576px){
+  .navbar .logo a {
+    font-size: 16px;
+    transition: scale 0.2 ease;
+  }
+
+  .navbar .logo img{
+    width: 35px;
+    transition: scale 0.2 ease;
+  }
+
+  .navbar .action-btn {
+    display: none;
+  }
+
+  /*.navbar .logout img{
+    width: 20px;
+    display: block;
+    filter: invert(1);
+  }*/
+
+  .navbar .toggle-btn{
+    visibility: visible;
+    display: inline;
+    filter: invert(0.9);
+  }
+
+  
+
+  h1 {
+    font-size: 22px;
+    transition: scale 0.2 ease;
+  }
+
+  .banner{
+    margin-top: 10px;
+  }
+
+  .whole-container .offense-container {
+    width: 100px;
+    height: 110px;
+    display:inline-block;
+    margin: auto;
+    margin-top: 10px;
+    margin-right: 40px;
+    position: relative;
+    transition: scale 0.2 ease;
+  }
+
+  .whole-container .offense-container .offense{
+    color: #fffbf2;
+    text-align: center;
+    font-size: 13px;
+  }
+  
+  
+  .whole-container .offense-container .num {
+    font-size: 25px;
+    text-align: center;
+    font-weight: bolder;
+    padding-top: 10px;
+  }
+
+  .slideshow-container {
+   
+    margin-top: 120px;
+  }
+  
+  .toggle-btn .tooltiptext {
+    visibility: hidden;
+    width: 90px;
+    background-color: #fff;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -50px;
+    font-size: 15px;
+  }
+  
+  
+  .toggle-btn:hover .tooltiptext {
+    visibility: visible;
+    transition: scale 0.2 ease;
+  }
+
+}
+
+@media (max-width: 412px){
+  
+  .whole-container .offense-container {
+    margin: auto;
+    margin-right: 70px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+  }
+
+  .slideshow-container{
+    margin-top: 10px;
+    margin: 0;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .swiper {
+    width: auto;
+  }
+
+  .footer-bottom{
+    visibility: visible;
+  }
+
+}
 
 
   
