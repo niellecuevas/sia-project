@@ -30,7 +30,7 @@
 
 
                 <!-- Form TextBoxes -->
-                <input type="text" placeholder="SR-Code" name="id" id="idInput" required/>
+                <input type="text" placeholder="StudID" name="id" id="idInput" required/>
                 <input type="password" placeholder="Password" name="password" required/>
 
                 <!-- Submit Button -->
