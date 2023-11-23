@@ -29,7 +29,7 @@
           <a href="./php/actlogout.php" class="action-btn">Logout</a>
           </div>
           <div class="toggle-btn">
-            <i class="fa-solid fa-bars"></i>
+          <a href="./php/actlogout.php" style="filter: invert(1); margin:auto;" ><i class="fa-solid fa-arrow-right-from-bracket"><span class="tooltiptext">Logout</span></i></a>
           </div>
         </div>
       </header>

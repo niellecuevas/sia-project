@@ -96,7 +96,7 @@ header{
 
 
 .navbar .toggle-btn {
-  display: none;
+  visibility: hidden;
   color: black;
   font-size: 1.5rem;
   cursor: pointer;
@@ -146,16 +146,13 @@ header{
     visibility: hidden;
   }
 
-
-}
-
-@media (max-width: 998px){
-  .navbar .action-btn {
+  .navbar .toggle-btn{
     display: none;
   }
 
-}
 
+
+}
 
 
 
@@ -170,11 +167,23 @@ header{
     transition: scale 0.2 ease;
   }
 
+  .navbar .action-btn {
+    display: none;
+  }
+
   /*.navbar .logout img{
     width: 20px;
     display: block;
     filter: invert(1);
   }*/
+
+  .navbar .toggle-btn{
+    visibility: visible;
+    display: inline;
+    filter: invert(0.9);
+  }
+
+  
 
   h1 {
     font-size: 22px;
@@ -188,11 +197,11 @@ header{
   .whole-container .offense-container {
     width: 100px;
     height: 110px;
-    display:flex;
+    display:inline-block;
     margin: auto;
-    margin-right: -55px;
-    margin-left: 20px;
-    position: absolute;
+    margin-top: 10px;
+    margin-right: 40px;
+    position: relative;
     transition: scale 0.2 ease;
   }
 
@@ -214,6 +223,31 @@ header{
    
     margin-top: 120px;
   }
+  
+  .toggle-btn .tooltiptext {
+    visibility: hidden;
+    width: 90px;
+    background-color: #fff;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -50px;
+    font-size: 15px;
+  }
+  
+  
+  .toggle-btn:hover .tooltiptext {
+    visibility: visible;
+    transition: scale 0.2 ease;
+  }
+
 
 }
 
