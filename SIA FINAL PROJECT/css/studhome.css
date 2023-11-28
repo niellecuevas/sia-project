@@ -360,8 +360,6 @@ footer{
   text-align: left;
   margin-left: 10px;
   outline: none;
-  resize: none; /* Disable textarea resizing if needed */
-  overflow-wrap: break-word;
 }
 
 .lbl {
