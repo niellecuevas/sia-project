@@ -66,7 +66,7 @@ function fetchAppeal($conn, $sortOption)
             echo "<td id='srcode'>" . $row['studid'] . "</td>";
             echo "<td id='name'>" . $row['name'] . "</td>";
             echo "<td id='violation'>" . $row['violationame'] . "</td>";
-            echo "<td id='violation'>" . $row['violationame'] . "</td>";
+            echo "<td id='appealdate'>" . $row['date'] . "</td>";
             echo "<td class='centered-cell'>";
             echo "<button class='btncss openAppealReq' id='openAppealReq'>Review</button>";
             echo "</td>";
