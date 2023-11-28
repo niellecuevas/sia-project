@@ -57,9 +57,6 @@ if (isset($_POST['submit'])) {
                 // Display an error message and exit if the extension is not allowed
                 echo "<script>alert('Use only jpg, jpeg, or png files')</script>";
                 exit();
-            } else if ($fileSize > 1000000) {
-                // Display an error message and exit if the file size is too large (1MB)
-                echo "<script>alert('File is too large')</script>";
             } else {
                 // Generate a unique image name by combining a unique ID with the file extension
                 $newImageName = uniqid();
