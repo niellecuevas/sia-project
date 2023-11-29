@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 29, 2023 at 06:09 AM
+-- Generation Time: Nov 29, 2023 at 01:36 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_9g`
+-- Database: `db_9g_new`
 --
 
 DELIMITER $$
@@ -220,12 +220,12 @@ INSERT INTO `addquantity` (`equipmentId`, `quantity`, `purchaseDate`, `equipment
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `username` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `empid` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `empid` (`empid`)
+  KEY `adminid_g9` (`empid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -561,10 +561,10 @@ INSERT INTO `login_logout_log` (`id`, `username`, `userRole`, `event_type`, `tim
 DROP TABLE IF EXISTS `menu`;
 CREATE TABLE IF NOT EXISTS `menu` (
   `food_id` int NOT NULL AUTO_INCREMENT,
-  `available_menu` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `food_desc` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `available_menu` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `food_desc` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `price` decimal(4,2) DEFAULT NULL,
-  `image` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`food_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -584,11 +584,8 @@ INSERT INTO `menu` (`food_id`, `available_menu`, `food_desc`, `price`, `image`) 
 DROP TABLE IF EXISTS `order_manager`;
 CREATE TABLE IF NOT EXISTS `order_manager` (
   `Order_Id` int NOT NULL AUTO_INCREMENT,
-  `Full_Name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Phone_No` bigint NOT NULL,
-  `Address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Pay_Mode` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `Full_Name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `status` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`Order_Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -596,8 +593,32 @@ CREATE TABLE IF NOT EXISTS `order_manager` (
 -- Dumping data for table `order_manager`
 --
 
-INSERT INTO `order_manager` (`Order_Id`, `Full_Name`, `Phone_No`, `Address`, `Pay_Mode`, `status`) VALUES
-(7, 'new customer', 123456, 'new address', 'COD', 'Pending');
+INSERT INTO `order_manager` (`Order_Id`, `Full_Name`, `status`) VALUES
+(7, 'new customer', 'Pending');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_table`
+--
+
+DROP TABLE IF EXISTS `order_table`;
+CREATE TABLE IF NOT EXISTS `order_table` (
+  `Order_Id` int NOT NULL,
+  `ordered_menu` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `price` int NOT NULL,
+  `quantity` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_table`
+--
+
+INSERT INTO `order_table` (`Order_Id`, `ordered_menu`, `price`, `quantity`) VALUES
+(3, 'Pancit Guisado', 60, 1),
+(4, 'Pancit Guisado', 60, 1),
+(5, 'Pancit Guisado', 60, 2),
+(6, 'Pancit Guisado', 60, 1);
 
 -- --------------------------------------------------------
 
@@ -774,7 +795,7 @@ CREATE TABLE IF NOT EXISTS `tbappeal` (
   `appeal` varchar(255) NOT NULL,
   PRIMARY KEY (`appealid`),
   KEY `violationid_fk_appeal` (`violationid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -1307,7 +1328,7 @@ CREATE TABLE IF NOT EXISTS `tbviolationreport` (
   KEY `studid_fk_violationreport` (`studid`),
   KEY `empid_fk_violationreport` (`empid`),
   KEY `violationtypeid_fk_violationreport` (`violationtypeid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -1413,9 +1434,9 @@ INSERT INTO `tb_client` (`clientID`, `studid`, `email`, `password`, `role`) VALU
 DROP TABLE IF EXISTS `tb_empinfo`;
 CREATE TABLE IF NOT EXISTS `tb_empinfo` (
   `empid` int NOT NULL AUTO_INCREMENT,
-  `lastname` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `firstname` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `department` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `lastname` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
+  `firstname` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
+  `department` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`empid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -1483,12 +1504,12 @@ INSERT INTO `tb_studinfo` (`studid`, `lastname`, `firstname`, `course`) VALUES
 DROP TABLE IF EXISTS `tb_users`;
 CREATE TABLE IF NOT EXISTS `tb_users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `username` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   `studid` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `studid` (`studid`)
+  KEY `studid_g9` (`studid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -1595,7 +1616,7 @@ ALTER TABLE `account_tbl`
 -- Constraints for table `admin`
 --
 ALTER TABLE `admin`
-  ADD CONSTRAINT `adminid_g9` FOREIGN KEY (`empid`) REFERENCES `tb_empinfo` (`empid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `adminid_g9` FOREIGN KEY (`empid`) REFERENCES `tbempinfo` (`empid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `instocks_details`
@@ -1694,7 +1715,7 @@ ALTER TABLE `tb_studinfo`
 -- Constraints for table `tb_users`
 --
 ALTER TABLE `tb_users`
-  ADD CONSTRAINT `userid_g9` FOREIGN KEY (`studid`) REFERENCES `tb_studinfo` (`studid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `studid_g9` FOREIGN KEY (`studid`) REFERENCES `tb_studinfo` (`studid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `visiting_infotbl`
